@@ -49,6 +49,31 @@ export default function Home() {
           </CardContent>
         </Card>
       </div>
+      <section className="max-w-5xl w-full mt-20 p-8 bg-white rounded-2xl border border-slate-100 shadow-sm text-slate-600">
+        <h2 className="text-2xl font-bold text-slate-800 mb-6">WinSam Toolbox: 일상의 편리함을 더하는 온라인 도구 모음</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 leading-relaxed text-sm">
+          <div className="space-y-4">
+            <p>
+              <strong>WinSam Toolbox</strong>는 복잡한 설치 없이 브라우저에서 즉시 실행 가능한 다양한 웹 도구를 제공합니다. 
+              개발자를 위한 JSON 포맷터부터 취업 준비생을 위한 실시간 글자수 세기, 웹 최적화를 위한 이미지 압축기까지 
+              일상과 업무에 꼭 필요한 기능을 한데 모았습니다.
+            </p>
+            <p>
+              저희는 사용자의 편의성을 최우선으로 생각하며, 모든 도구는 별도의 회원가입 없이 <strong>100% 무료</strong>로 이용하실 수 있습니다.
+            </p>
+          </div>
+          <div className="space-y-4">
+            <h3 className="font-bold text-slate-800 uppercase tracking-wider text-xs">개인정보 보호 우선 정책</h3>
+            <p>
+              사이트 내에서 처리되는 모든 데이터(텍스트, 이미지 등)는 서버로 전송되지 않고 사용자의 웹 브라우저 내에서만 처리됩니다. 
+              중요한 정보가 외부로 유출될 걱정 없이 안심하고 도구를 활용해 보세요.
+            </p>
+            <p className="text-xs text-slate-400">
+              * 본 서비스는 지속적인 업데이트를 통해 새로운 도구들을 추가해 나갈 예정입니다.
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
