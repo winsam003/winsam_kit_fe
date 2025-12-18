@@ -48,6 +48,78 @@ export default function Home() {
             </Link>
           </CardContent>
         </Card>
+
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <CardTitle>Base64 변환기</CardTitle>
+            <CardDescription>Base64 인코딩/디코딩</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/base64-converter">
+              <Button className="w-full">사용하기</Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <CardTitle>해시(Hash) 생성기</CardTitle>
+            <CardDescription>SHA-256 해시 생성</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/hash.generator">
+              <Button className="w-full">사용하기</Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <CardTitle>더미 데이터 생성기</CardTitle>
+            <CardDescription>로렘 입숨, 한글 입숨 등</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/lorem-ipsum">
+              <Button className="w-full">사용하기</Button>
+            </Link>
+          </CardContent>
+        </Card>
+        
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <CardTitle>PDF 페이지 추출기</CardTitle>
+            <CardDescription>PDF 페이지 추출기</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/pdf-viewer">
+              <Button className="w-full">사용하기</Button>
+            </Link>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <CardTitle>이미지 포맷 변환기</CardTitle>
+            <CardDescription>이미지 포맷 변환기</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/image-converter">
+              <Button className="w-full">사용하기</Button>
+            </Link>
+          </CardContent>
+        </Card>
+        
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardHeader>
+            <CardTitle>XML 뷰어 & 정렬기</CardTitle>
+            <CardDescription>XML 뷰어 & 정렬하기</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Link href="/xml-formatter">
+              <Button className="w-full">사용하기</Button>
+            </Link>
+          </CardContent>
+        </Card>
       </div>
       <section className="max-w-5xl w-full mt-20 p-8 bg-white rounded-2xl border border-slate-100 shadow-sm text-slate-600">
         <h2 className="text-2xl font-bold text-slate-800 mb-6">WinSam Toolbox: 일상의 편리함을 더하는 온라인 도구 모음</h2>
