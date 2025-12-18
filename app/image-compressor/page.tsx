@@ -166,6 +166,77 @@ export default function ImageCompressor() {
           </div>
         </div>
       )}
+
+      <div className="mt-16 space-y-10">
+        <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
+          <h2 className="text-2xl font-bold mb-4 text-slate-800 flex items-center gap-2">
+            이미지 압축이 왜 필요한가요? 🖼️
+          </h2>
+          <div className="text-slate-600 leading-relaxed space-y-4">
+            <p>
+              고화질 사진은 용량이 커서 웹사이트 로딩 속도를 늦추거나, 이메일 첨부 제한 용량을 초과하기 쉽습니다. 
+              <strong>이미지 일괄 압축 도구</strong>는 화질 저하를 최소화하면서 파일 크기를 최대 90%까지 줄여줍니다.
+            </p>
+            <p>
+              특히 블로그 운영자나 웹 개발자에게 <strong>이미지 최적화</strong>는 필수입니다. 
+              용량이 작은 이미지는 구글 검색 엔진 최적화(SEO)에 긍정적인 영향을 주며, 사용자들에게 쾌적한 브라우징 경험을 제공합니다.
+            </p>
+          </div>
+        </section>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="bg-slate-50 border-none shadow-none">
+            <CardContent className="pt-6">
+              <h3 className="font-bold text-lg mb-3 text-blue-600">⚡ 빠른 속도</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                Web Worker 기술을 사용하여 브라우저 내에서 여러 장의 이미지를 동시에 병렬 처리합니다. 
+                수십 장의 고용량 사진도 단 몇 초 만에 압축이 완료됩니다.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-50 border-none shadow-none">
+            <CardContent className="pt-6">
+              <h3 className="font-bold text-lg mb-3 text-green-600">📉 효율적인 용량</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                지능형 압축 알고리즘을 통해 사람의 눈으로 구별하기 힘든 수준에서 불필요한 메타데이터와 
+                색상 정보를 최적화하여 파일 크기를 획기적으로 줄입니다.
+              </p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-slate-50 border-none shadow-none">
+            <CardContent className="pt-6">
+              <h3 className="font-bold text-lg mb-3 text-orange-600">🔐 완전한 보안</h3>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                업로드한 이미지는 외부 서버로 전송되지 않습니다. 모든 작업이 <strong>사용자의 기기 내부</strong>에서 
+                이뤄지므로 소중한 사진 정보가 유출될 걱정이 전혀 없습니다.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+
+        <section className="p-8 bg-blue-50/30 rounded-2xl border border-blue-100">
+          <h2 className="text-xl font-bold mb-6 text-slate-800">지원하는 파일 형식 및 활용 팁</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+              <h4 className="font-semibold text-slate-700 mb-2">지원 형식</h4>
+              <ul className="list-disc list-inside text-sm text-slate-600 space-y-1">
+                <li><strong>JPG / JPEG</strong>: 사진 촬영 결과물 압축에 최적</li>
+                <li><strong>PNG</strong>: 투명 배경이 포함된 로고나 아이콘 최적화</li>
+                <li><strong>WEBP</strong>: 차세대 이미지 웹 표준 규격 지원</li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold text-slate-700 mb-2">활용 팁</h4>
+              <p className="text-sm text-slate-600 leading-relaxed">
+                압축 전후의 파일 크기를 실시간으로 비교해 보세요. 
+                절감률(% 표시)을 확인하여 저장 공간을 얼마나 확보했는지 한눈에 파악할 수 있습니다.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

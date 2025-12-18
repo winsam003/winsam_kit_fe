@@ -33,7 +33,7 @@ export default function WordCounter() {
         <Link href="/">
           <Button variant="ghost" size="sm" className="gap-1">
             <ChevronLeft className="w-4 h-4" />
-            전체 도구 목록
+            메인으로
           </Button>
         </Link>
       </div>
