@@ -23,6 +23,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="afterInteractive" // 페이지가 로드된 후 부드럽게 광고 스크립트 실행
         />
+        <meta name="google-adsense-account" content="ca-pub-8286025705631064" />
       </head>
       <body className="antialiased bg-slate-50">
         <header className="p-4 border-b bg-white font-bold flex items-center justify-center gap-2">
