@@ -24,6 +24,18 @@ export default function RootLayout({
           strategy="afterInteractive" // 페이지가 로드된 후 부드럽게 광고 스크립트 실행
         />
         <meta name="google-adsense-account" content="ca-pub-8286025705631064" />
+
+        <meta
+          name="naver-site-verification"
+          content="d1ea989134507bf340edeb2b2023d5b14b55534e"
+        />
+        
+        <meta 
+          name="naver-site-verification" 
+          content="8b1b18aafcee1dc9b2566d0485845c09eb102599" 
+        />
+
+
       </head>
       <body className="antialiased bg-slate-50">
         <header className="p-4 border-b bg-white font-bold flex items-center justify-center gap-2">
