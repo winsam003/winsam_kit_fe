@@ -32,6 +32,11 @@ export default function Home() {
               href="/json-formatter" 
             />
             <ToolCard 
+              title="내 아이피 확인" 
+              desc="내 공인 아이피 확인" 
+              href="/my-ip" 
+            />
+            <ToolCard 
               title="XML 뷰어 & 정렬기" 
               desc="XML 계층 구조 확인 및 정렬" 
               href="/xml-formatter" 
