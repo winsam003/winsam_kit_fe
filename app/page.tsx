@@ -86,6 +86,11 @@ export default function Home() {
               desc="PDF에서 특정 페이지만 별도 저장" 
               href="/pdf-viewer" 
             />
+            <ToolCard 
+              title="PDF 페이지 회전" 
+              desc="PDF에서 페이지 회전" 
+              href="/pdf-rotate" 
+            />
           </div>
         </section>
 
