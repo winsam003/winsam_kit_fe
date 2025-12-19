@@ -57,7 +57,7 @@ export default function RootLayout({
         </main>
 
         <footer className="p-10 border-t bg-white text-center text-sm text-gray-500">
-          © 2025 winsam 툴 사이트!
+            © 2025 WinSam Toolbox. All rights reserved.
         </footer>
 
         <ScrollButtons />
