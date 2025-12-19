@@ -38,6 +38,10 @@ export default function RootLayout({
           content="8b1b18aafcee1dc9b2566d0485845c09eb102599" 
         />
 
+        <meta 
+          name="google-site-verification" 
+          content="RNkeSZzWbR8T4Pp_OTNspdHciimBargpK1SBOpatEyY" 
+        />
 
       </head>
       <body className="antialiased bg-slate-50">
