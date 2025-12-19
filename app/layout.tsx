@@ -3,6 +3,7 @@ import "./globals.css";
 import ScrollButtons from "@/components/custom-ui/ScrollButtons";
 import Image from "next/image";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata: Metadata = {
   title: "WinSam Toolbox - 무료 온라인 툴박스 | 글자수 세기, 이미지 압축, JSON 정렬",
@@ -45,6 +46,7 @@ export default function RootLayout({
 
       </head>
       <body className="antialiased bg-slate-50">
+        <Analytics />
         <header className="p-4 border-b bg-white font-bold flex items-center justify-center gap-2">
           {/* 2. 로고 이미지 추가 */}
           <Image 
