@@ -25,16 +25,6 @@ export default function RootLayout({
         />
         <meta name="google-adsense-account" content="ca-pub-8286025705631064" />
 
-        <meta
-          name="naver-site-verification"
-          content="d1ea989134507bf340edeb2b2023d5b14b55534e"
-        />
-        
-        <meta 
-          name="naver-site-verification" 
-          content="8b1b18aafcee1dc9b2566d0485845c09eb102599" 
-        />
-
         <meta 
           name="naver-site-verification" 
           content="8b1b18aafcee1dc9b2566d0485845c09eb102599" 
