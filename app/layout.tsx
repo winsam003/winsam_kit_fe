@@ -35,6 +35,11 @@ export default function RootLayout({
           content="8b1b18aafcee1dc9b2566d0485845c09eb102599" 
         />
 
+        <meta 
+          name="naver-site-verification" 
+          content="8b1b18aafcee1dc9b2566d0485845c09eb102599" 
+        />
+
 
       </head>
       <body className="antialiased bg-slate-50">
