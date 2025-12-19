@@ -5,8 +5,16 @@ import Image from "next/image";
 import Script from "next/script";
 
 export const metadata: Metadata = {
-  title: "나만의 만능 툴 박스 | 무료 온라인 도구",
-  description: "글자수 세기, 이미지 변환 등 모든 도구를 한 곳에서 확인하세요.",
+  title: "WinSam Toolbox - 무료 온라인 툴박스 | 글자수 세기, 이미지 압축, JSON 정렬",
+  description: "회원가입 없이 100% 무료로 사용하는 온라인 도구 모음. 글자수 세기, 이미지 압축, JSON 정렬, PDF 추출 등 업무와 일상에 필요한 모든 툴을 제공합니다.",
+  keywords: ["온라인 툴박스", "글자수 세기", "이미지 압축", "JSON 정렬", "Base64 변환", "무료 웹 도구"],
+  openGraph: {
+    title: "WinSam Toolbox - 무료 온라인 툴박스",
+    description: "업무 효율을 높여주는 무료 온라인 도구 모음",
+    url: "https://winsam.xyz",
+    siteName: "WinSam Toolbox",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
