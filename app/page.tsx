@@ -37,6 +37,16 @@ export default function Home() {
               href="/my-ip" 
             />
             <ToolCard 
+              title="HTML 테이블 빌더" 
+              desc="엑셀 표를 복사해 넣으면 HTML 코드로 즉시 변환합니다" 
+              href="/html-table-builder" 
+            />
+            <ToolCard 
+              title="HTML 정렬기" 
+              desc="복잡하게 꼬인 HTML 코드를 가독성 있게 정리합니다." 
+              href="/html-formatter" 
+            />
+            <ToolCard 
               title="XML 뷰어 & 정렬기" 
               desc="XML 계층 구조 확인 및 정렬" 
               href="/xml-formatter" 
@@ -55,6 +65,11 @@ export default function Home() {
               title="더미 데이터 생성" 
               desc="개발용 로렘 입숨 텍스트 생성" 
               href="/lorem-ipsum" 
+            />
+            <ToolCard 
+              title="URL 인코더/디코더" 
+              desc="URL에 포함된 특수문자와 한글을 안전하게 변환합니다" 
+              href="/url-converter" 
             />
           </div>
         </section>
