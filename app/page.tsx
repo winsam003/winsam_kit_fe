@@ -106,6 +106,11 @@ export default function Home() {
               desc="PDF에서 페이지 회전" 
               href="/pdf-rotate" 
             />
+            <ToolCard 
+              title="파일 이름 일괄 변경" 
+              desc="여러 파일의 이름을 규칙에 따라 일괄 변경" 
+              href="/file-rename" 
+            />
           </div>
         </section>
 
