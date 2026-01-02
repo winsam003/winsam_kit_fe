@@ -2,7 +2,18 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, Code2, Copy, Check, Trash2, AlignLeft, Info } from "lucide-react";
+import {
+  ChevronLeft,
+  Code2,
+  Copy,
+  Check,
+  Trash2,
+  AlignLeft,
+  BadgeCheck,
+  ShieldCheck,
+  Lock,
+  EyeOff,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -19,7 +30,7 @@ export default function XmlFormatter() {
       let formatted = "";
       let indent = "";
       const tab = "  "; // 2칸 들여쓰기
-      
+
       // 줄바꿈 및 불필요한 공백 제거 후 태그별로 분리
       const nodes = input.replace(/>\s*</g, "><").split(/(?=<)/g);
 
@@ -30,7 +41,7 @@ export default function XmlFormatter() {
         } else if (node.startsWith("<") && !node.includes("/>") && !node.startsWith("<?") && !node.startsWith("<!")) {
           formatted += indent + node + "\n";
           if (!node.includes("</")) {
-             indent += tab;
+            indent += tab;
           }
         } else {
           formatted += indent + node + "\n";
@@ -74,7 +85,15 @@ export default function XmlFormatter() {
         <Card className="shadow-sm">
           <CardHeader className="flex flex-row items-center justify-between py-3 px-4 border-b">
             <CardTitle className="text-xs font-bold uppercase text-slate-400">XML Input</CardTitle>
-            <Button variant="ghost" size="sm" onClick={() => {setInput(""); setOutput("");}} className="h-7 text-xs text-red-400 hover:text-red-600">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setInput("");
+                setOutput("");
+              }}
+              className="h-7 text-xs text-red-400 hover:text-red-600"
+            >
               <Trash2 className="w-4 h-4 mr-1" /> 비우기
             </Button>
           </CardHeader>
@@ -97,7 +116,13 @@ export default function XmlFormatter() {
         <Card className="shadow-sm bg-slate-50/50">
           <CardHeader className="flex flex-row items-center justify-between py-3 px-4 border-b">
             <CardTitle className="text-xs font-bold uppercase text-orange-600">Formatted Result</CardTitle>
-            <Button variant="outline" size="sm" onClick={handleCopy} disabled={!output} className="h-7 text-xs bg-white">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleCopy}
+              disabled={!output}
+              className="h-7 text-xs bg-white"
+            >
               {copied ? <Check className="w-4 h-4 text-green-500 mr-1" /> : <Copy className="w-4 h-4 mr-1" />}
               복사
             </Button>
@@ -110,24 +135,109 @@ export default function XmlFormatter() {
         </Card>
       </div>
 
-      {/* --- SEO 및 승인용 섹션 --- */}
-      <Card className="border-none shadow-none bg-orange-50/50 p-8">
-        <h2 className="text-xl font-bold text-slate-800 mb-4 tracking-tight">XML 데이터 정렬이 필요한 이유</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm text-slate-600 leading-relaxed">
-          <div className="space-y-3">
-            <p>
-              XML은 데이터 전송과 설정을 위해 널리 쓰이지만, 기계가 읽기 좋게 최적화된(Minified) XML은 사람이 구조를 파악하기 매우 힘듭니다. 
-              <strong>WinSam XML 포맷터</strong>는 계층 구조(Hierarchy)를 분석하여 표준 들여쓰기를 적용함으로써 가독성을 극대화합니다.
+      {/* --- SEO 및 정보 섹션 (XML 전문 가이드) --- */}
+      <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
+        {/* 1. XML의 정의와 중요성 */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
+            <span className="w-8 h-8 bg-orange-600 text-white rounded-lg flex items-center justify-center text-base font-mono">
+              {"</>"}
+            </span>
+            XML 데이터 정렬(Pretty Print)이 왜 필수적인가요?
+          </h2>
+          <p className="leading-relaxed text-lg text-slate-600">
+            XML(Extensible Markup Language)은 데이터를 저장하고 전달하기 위해 고안된 텍스트 기반의 마크업 언어입니다.
+            기계 간의 데이터 교환을 위해 최적화된 XML은 보통 공백과 줄바꿈이 제거된 <strong>Minified(압축)</strong>{" "}
+            상태로 제공되곤 합니다. 하지만 개발자가 설정을 수정하거나 API 응답 구조를 파악해야 할 때는 계층
+            구조(Hierarchy)가 시각적으로 드러나는 <strong>정렬된 형태</strong>가 반드시 필요합니다.
+          </p>
+        </div>
+
+        {/* 2. 상세 활용 사례 그리드 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3 hover:border-orange-300 transition-colors">
+            <div className="flex items-center gap-2 font-bold text-orange-600 text-lg">
+              <BadgeCheck className="w-5 h-5" />
+              <h3>설정 파일 디버깅</h3>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-500">
+              안드로이드의 <code className="bg-orange-50 px-1 font-mono text-orange-700">AndroidManifest.xml</code>이나
+              Java Spring 프레임워크의 설정 파일들은 복잡한 트리 구조를 가지고 있습니다. 표준 2칸 또는 4칸 들여쓰기를
+              적용하면 노드의 부모-자식 관계를 명확히 파악하여 오타나 설정 오류를 즉시 잡아낼 수 있습니다.
             </p>
           </div>
-          <div className="space-y-3">
-            <p>
-              저희 도구는 브라우저 내에서 텍스트를 처리하므로, 사용자의 소중한 데이터가 외부 서버로 전송되지 않습니다. 
-              API 응답, Android 프로젝트 설정, SVG 파일 분석 등 다양한 용도로 안전하게 활용해 보세요.
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3 hover:border-orange-300 transition-colors">
+            <div className="flex items-center gap-2 font-bold text-orange-600 text-lg">
+              <BadgeCheck className="w-5 h-5" />
+              <h3>SVG 및 벡터 데이터 분석</h3>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-500">
+              최신 웹 디자인에서 필수적인 SVG 이미지 파일은 사실 XML 형식의 텍스트 데이터입니다. WinSam XML 포맷터를
+              사용하면 복잡한 경로(Path) 데이터와 도형 속성들을 정교하게 확인하고 직접 수정할 수 있는 환경을 제공합니다.
             </p>
           </div>
         </div>
-      </Card>
+
+        {/* 3. XML vs JSON 기술 섹션 */}
+        <div className="space-y-6 bg-slate-900 text-slate-300 p-8 rounded-3xl shadow-xl">
+          <h3 className="text-xl font-bold text-white">XML 구조의 기술적 특징</h3>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 shrink-0" />
+              <p>
+                <span className="text-white font-semibold">사용자 정의 태그:</span> HTML과 달리 사용자가 직접 태그
+                이름을 정의할 수 있어 높은 확장성을 제공합니다.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 shrink-0" />
+              <p>
+                <span className="text-white font-semibold">데이터 계층화:</span> 모든 노드는 반드시 루트 요소를 가지며,
+                엄격한 여닫는 태그 규칙을 통해 데이터의 무결성을 보장합니다.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 shrink-0" />
+              <p>
+                <span className="text-white font-semibold">속성(Attribute) 활용:</span> 요소 내부에 메타데이터를 포함할
+                수 있어 JSON보다 상세한 정보 표현이 가능합니다.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-orange-500 rounded-full mt-2 shrink-0" />
+              <p>
+                <span className="text-white font-semibold">네임스페이스 지원:</span> 서로 다른 XML 스키마 간의 태그
+                충돌을 방지하는 네임스페이스 기술을 지원합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. 보안 강조 섹션 (업그레이드 버전) */}
+        <div className="p-8 bg-orange-50/50 rounded-2xl border border-orange-100 flex flex-col md:flex-row gap-8 items-center">
+          <div className="space-y-4 flex-1">
+            <h3 className="font-bold text-orange-900 text-xl flex items-center gap-2">
+              <ShieldCheck className="w-6 h-6 text-orange-600" />
+              안전한 로컬 클라이언트 사이드 변환
+            </h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              API 인증 키, 개인정보 등이 포함될 수 있는 XML 데이터의 보안을 위해 저희는{" "}
+              <strong>Zero-Server Policy</strong>를 준수합니다. 입력하신 코드는 서버로 전송되지 않으며, 오직 웹 브라우저
+              메모리 내에서만 정렬 로직이 실행됩니다. 대기업의 내부 API 응답이나 금융권 설정 파일도 유출 걱정 없이
+              안심하고 정렬하세요.
+            </p>
+            <div className="flex gap-2">
+              <span className="flex items-center gap-1 text-[10px] font-bold text-orange-700 bg-orange-100 px-2 py-1 rounded">
+                <Lock className="w-3 h-3" /> NO_API_CALL
+              </span>
+              <span className="flex items-center gap-1 text-[10px] font-bold text-orange-700 bg-orange-100 px-2 py-1 rounded">
+                <EyeOff className="w-3 h-3" /> NO_LOGGING
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

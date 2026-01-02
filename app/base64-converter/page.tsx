@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { ChevronLeft, Copy, Check, Trash2, ArrowLeftRight, Upload } from "lucide-react";
+import { ChevronLeft, Copy, Check, Trash2, ArrowLeftRight, BadgeCheck, Lock, EyeOff, ShieldCheck } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,9 +16,9 @@ export default function Base64Converter() {
   // 텍스트 -> Base64 변환
   const encodeBase64 = () => {
     try {
-      const encoded = btoa(encodeURIComponent(textInput).replace(/%([0-9A-F]{2})/g, (match, p1) => 
-        String.fromCharCode(parseInt(p1, 16))
-      ));
+      const encoded = btoa(
+        encodeURIComponent(textInput).replace(/%([0-9A-F]{2})/g, (match, p1) => String.fromCharCode(parseInt(p1, 16)))
+      );
       setBase64Output(encoded);
     } catch (e) {
       alert("변환 중 오류가 발생했습니다.");
@@ -28,9 +28,9 @@ export default function Base64Converter() {
   // Base64 -> 텍스트 변환
   const decodeBase64 = () => {
     try {
-      const decoded = decodeURIComponent(Array.prototype.map.call(atob(textInput), (c) => 
-        '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
-      ).join(''));
+      const decoded = decodeURIComponent(
+        Array.prototype.map.call(atob(textInput), (c) => "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2)).join("")
+      );
       setBase64Output(decoded);
     } catch (e) {
       alert("올바른 Base64 형식이 아닙니다.");
@@ -66,7 +66,15 @@ export default function Base64Converter() {
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0">
             <CardTitle className="text-sm font-medium">입력 데이터</CardTitle>
-            <Button variant="ghost" size="sm" onClick={() => {setTextInput(""); setBase64Output("");}} className="text-slate-500 hover:text-red-500">
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => {
+                setTextInput("");
+                setBase64Output("");
+              }}
+              className="text-slate-500 hover:text-red-500"
+            >
               <Trash2 className="w-4 h-4 mr-1" /> 비우기
             </Button>
           </CardHeader>
@@ -77,13 +85,13 @@ export default function Base64Converter() {
               value={textInput}
               onChange={(e) => setTextInput(e.target.value)}
             />
-            
+
             <TabsContent value="encode" className="mt-0">
               <Button onClick={encodeBase64} className="w-full gap-2">
                 <ArrowLeftRight className="w-4 h-4" /> 인코딩 (Encode)
               </Button>
             </TabsContent>
-            
+
             <TabsContent value="decode" className="mt-0">
               <Button onClick={decodeBase64} variant="secondary" className="w-full gap-2">
                 <ArrowLeftRight className="w-4 h-4" /> 디코딩 (Decode)
@@ -109,30 +117,124 @@ export default function Base64Converter() {
       </Card>
 
       {/* --- 설명글 섹션 (구글 승인용) --- */}
-      <div className="mt-12 space-y-8">
-        <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
-          <h2 className="text-xl font-bold mb-4 text-slate-800">Base64 변환이란 무엇인가요?</h2>
-          <div className="text-slate-600 text-sm leading-relaxed space-y-3">
-            <p>
-              <strong>Base64</strong>는 8비트 이진 데이터를 문자 코드에 영향을 받지 않는 공통 64개 ASCII 문자로 바꾸는 인코딩 방식입니다. 
-              주로 이메일 첨부 파일 전송, HTML 내부 이미지 삽입, API 통신 시 바이너리 데이터를 안전하게 주고받기 위해 사용됩니다.
-            </p>
-            <p>
-              인코딩(Encoding)은 일반 텍스트를 Base64 코드로 바꾸는 작업이며, 디코딩(Decoding)은 반대로 Base64 코드를 사람이 읽을 수 있는 원래의 텍스트로 되돌리는 작업입니다.
+      {/* --- SEO 및 정보 섹션 (Base64 전문 가이드) --- */}
+      <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
+        {/* 1. Base64의 정의와 원리 */}
+        <div className="space-y-4">
+          <h2 className="text-2xl font-black text-slate-900 flex items-center gap-2">
+            <span className="w-8 h-8 bg-blue-600 text-white rounded-lg flex items-center justify-center text-xs font-mono">
+              64
+            </span>
+            Base64 인코딩이란 무엇이며 왜 사용하나요?
+          </h2>
+          <p className="leading-relaxed text-lg text-slate-600">
+            <strong>Base64(베이스 육십사)</strong>는 8비트 이진 데이터(Binary Data)를 ASCII 문자 집합에 속하는 64개의
+            안전한 문자만 사용하여 표현하는 인코딩 방식입니다. 웹이나 이메일 환경에서는 텍스트가 아닌 바이너리
+            데이터(이미지, 실행 파일 등)를 그대로 전송할 경우 시스템 간의 해석 차이로 데이터가 깨지는 문제가 발생할 수
+            있습니다. Base64는 이러한 데이터를 모든 시스템이 공통으로 인식할 수 있는 문자로 변환하여{" "}
+            <strong>데이터의 무결성을 보장</strong>합니다.
+          </p>
+        </div>
+
+        {/* 2. 기술 상세 그리드 */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3 hover:border-blue-300 transition-colors">
+            <div className="flex items-center gap-2 font-bold text-blue-600 text-lg">
+              <BadgeCheck className="w-5 h-5" />
+              <h3>데이터 안정성 확보</h3>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-500">
+              네트워크 프로토콜 중 일부는 제어 문자를 포함한 바이너리 데이터를 처리할 때 예기치 않은 동작을 일으킵니다.
+              Base64는 이를 영문 대소문자, 숫자, <code className="bg-slate-100 px-1">+</code>,{" "}
+              <code className="bg-slate-100 px-1">/</code> 기호로만 치환하여 어떤 시스템에서도 안전하게 통신할 수 있게
+              합니다.
             </p>
           </div>
-        </section>
-
-        <Card className="bg-blue-50/50 border-none shadow-none">
-          <CardContent className="pt-6">
-            <h3 className="font-bold mb-2">🔒 로컬 환경 데이터 처리 안내</h3>
-            <p className="text-sm text-slate-600">
-              입력하신 모든 민감 정보는 서버로 전송되지 않고 브라우저에서 즉시 처리됩니다. 
-              비밀번호나 API 토큰 등을 변환할 때도 외부 유출 걱정 없이 안전하게 활용하실 수 있습니다.
+          <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3 hover:border-blue-300 transition-colors">
+            <div className="flex items-center gap-2 font-bold text-blue-600 text-lg">
+              <BadgeCheck className="w-5 h-5" />
+              <h3>Data URI Scheme 활용</h3>
+            </div>
+            <p className="text-sm leading-relaxed text-slate-500">
+              웹 개발 시 작은 아이콘이나 이미지를 별도의 파일 요청 없이 HTML이나 CSS 내부에 직접 삽입할 때 사용됩니다.
+              <code className="bg-slate-100 px-1">data:image/png;base64,...</code> 형식을 사용하면 HTTP 요청 횟수를 줄여
+              초기 렌더링 속도를 개선하는 데 도움을 줍니다.
             </p>
-          </CardContent>
-        </Card>
-      </div>
+          </div>
+        </div>
+
+        {/* 3. Base64 작동 원리 (이미지 태그 활용 지점) */}
+        <div className="space-y-6 bg-slate-900 text-slate-300 p-8 rounded-3xl shadow-xl">
+          <h3 className="text-xl font-bold text-white">Base64 인코딩의 기술적 메커니즘</h3>
+          [Image of Base64 encoding process diagram showing 8-bit binary to 6-bit index conversion]
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 shrink-0" />
+              <p>
+                <span className="text-white font-semibold">6비트 단위 분할:</span> 8비트(1바이트)씩 처리되는 데이터를
+                6비트씩 끊어서 64진법 숫자로 매핑합니다.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 shrink-0" />
+              <p>
+                <span className="text-white font-semibold">패딩(Padding) 처리:</span> 데이터 길이가 3바이트 배수가 아닐
+                경우 끝에 <code className="text-blue-400">=</code> 문자를 붙여 길이를 맞춥니다.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 shrink-0" />
+              <p>
+                <span className="text-white font-semibold">용량 증가 현상:</span> 6비트로 변환하는 과정에서 원본
+                데이터보다 약 33% 정도 용량이 커지는 특징이 있습니다.
+              </p>
+            </div>
+            <div className="flex items-start gap-3">
+              <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-2 shrink-0" />
+              <p>
+                <span className="text-white font-semibold">URL Safe 변환:</span> URL 파라미터로 사용할 때는{" "}
+                <code className="text-blue-400">+</code>와 <code className="text-blue-400">/</code>를 각각{" "}
+                <code className="text-blue-400">-</code>와 <code className="text-blue-400">_</code>로 변환하여
+                사용하기도 합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. 보안 강조 (매우 길게) */}
+        <div className="p-8 bg-blue-50/50 rounded-2xl border border-blue-100 space-y-4">
+          <h3 className="font-bold text-blue-900 text-xl flex items-center gap-2">
+            <ShieldCheck className="w-6 h-6 text-blue-600" />
+            개발자를 위한 무결성 및 보안 고지
+          </h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <p className="text-sm text-slate-600 leading-relaxed">
+              Base64는 암호화(Encryption)가 아닌 <strong>인코딩(Encoding)</strong>입니다. 누구나 디코딩 도구를 통해
+              원본을 볼 수 있으므로 비밀번호와 같은 민감한 정보를 저장하는 용도로 사용해서는 안 됩니다. WinSam Toolbox는
+              이러한 특성을 고려하여, 사용자가 변환하는 <strong>API 토큰, 인증 헤더 값, 소스코드</strong> 등이 서버에
+              로그로 남지 않도록 설계되었습니다.
+            </p>
+            <div className="bg-white p-4 rounded-xl border border-blue-100 flex flex-col justify-center">
+              <div className="flex items-center gap-2 text-blue-700 font-bold mb-2">
+                <Lock className="w-4 h-4" /> Client-Side Logic Only
+              </div>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                여러분의 데이터는 저희 서버를 스치지도 않습니다. 모든 변환 과정은 브라우저 내 자바스크립트 엔진(V8
+                등)에서 즉시 처리됩니다. 네트워크 단절 상태에서도 변환이 가능한 <strong>완전한 로컬 도구</strong>임을
+                보장합니다.
+              </p>
+            </div>
+          </div>
+          <div className="flex gap-2 pt-2">
+            <span className="flex items-center gap-1 text-[10px] font-bold text-blue-700 bg-blue-100 px-2 py-1 rounded">
+              <EyeOff className="w-3 h-3" /> NO_SERVER_SIDE_LOGS
+            </span>
+            <span className="flex items-center gap-1 text-[10px] font-bold text-blue-700 bg-blue-100 px-2 py-1 rounded">
+              <BadgeCheck className="w-3 h-3" /> SECURITY_AUDIT_READY
+            </span>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -1,12 +1,11 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import { Laptop, Briefcase, ChevronRight } from "lucide-react";
+import { Laptop, Briefcase, ChevronRight, ShieldCheck, Zap, Heart, FileCode, Image, Type, Globe } from "lucide-react";
 
 export default function Home() {
   return (
     <div className="p-6 md:p-10 space-y-12 flex flex-col items-center bg-slate-50/30 min-h-screen">
-      
       {/* 툴 제목 섹션 */}
       <section className="text-center space-y-3 py-10">
         <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900">
@@ -18,7 +17,6 @@ export default function Home() {
       </section>
 
       <div className="w-full max-w-5xl space-y-16">
-        
         {/* 카테고리 1: 웹 개발 도구 */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
@@ -26,50 +24,26 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-slate-800">웹 개발 도구</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <ToolCard 
-              title="제이슨 데이터 정렬" 
-              desc="JSON 포맷팅 및 문법 검사" 
-              href="/json-formatter" 
+            <ToolCard title="제이슨 데이터 정렬" desc="JSON 포맷팅 및 문법 검사" href="/json-formatter" />
+            <ToolCard title="내 아이피 확인" desc="내 공인 아이피 확인" href="/my-ip" />
+            <ToolCard
+              title="HTML 테이블 빌더"
+              desc="엑셀 표를 복사해 넣으면 HTML 코드로 즉시 변환합니다"
+              href="/html-table-builder"
             />
-            <ToolCard 
-              title="내 아이피 확인" 
-              desc="내 공인 아이피 확인" 
-              href="/my-ip" 
+            <ToolCard
+              title="HTML 정렬기"
+              desc="복잡하게 꼬인 HTML 코드를 가독성 있게 정리합니다."
+              href="/html-formatter"
             />
-            <ToolCard 
-              title="HTML 테이블 빌더" 
-              desc="엑셀 표를 복사해 넣으면 HTML 코드로 즉시 변환합니다" 
-              href="/html-table-builder" 
-            />
-            <ToolCard 
-              title="HTML 정렬기" 
-              desc="복잡하게 꼬인 HTML 코드를 가독성 있게 정리합니다." 
-              href="/html-formatter" 
-            />
-            <ToolCard 
-              title="XML 뷰어 & 정렬기" 
-              desc="XML 계층 구조 확인 및 정렬" 
-              href="/xml-formatter" 
-            />
-            <ToolCard 
-              title="Base64 변환기" 
-              desc="텍스트 및 이미지 인코딩/디코딩" 
-              href="/base64-converter" 
-            />
-            <ToolCard 
-              title="해시 생성기" 
-              desc="SHA-256 등 보안 해시 생성" 
-              href="/hash-generator" 
-            />
-            <ToolCard 
-              title="더미 데이터 생성" 
-              desc="개발용 로렘 입숨 텍스트 생성" 
-              href="/lorem-ipsum" 
-            />
-            <ToolCard 
-              title="URL 인코더/디코더" 
-              desc="URL에 포함된 특수문자와 한글을 안전하게 변환합니다" 
-              href="/url-converter" 
+            <ToolCard title="XML 뷰어 & 정렬기" desc="XML 계층 구조 확인 및 정렬" href="/xml-formatter" />
+            <ToolCard title="Base64 변환기" desc="텍스트 및 이미지 인코딩/디코딩" href="/base64-converter" />
+            <ToolCard title="해시 생성기" desc="SHA-256 등 보안 해시 생성" href="/hash-generator" />
+            <ToolCard title="더미 데이터 생성" desc="개발용 로렘 입숨 텍스트 생성" href="/lorem-ipsum" />
+            <ToolCard
+              title="URL 인코더/디코더"
+              desc="URL에 포함된 특수문자와 한글을 안전하게 변환합니다"
+              href="/url-converter"
             />
           </div>
         </section>
@@ -81,55 +55,135 @@ export default function Home() {
             <h2 className="text-2xl font-bold text-slate-800">직장인 & 일상 도구</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <ToolCard 
-              title="글자수 세기" 
-              desc="자소서, 블로그 실시간 글자수 확인" 
-              href="/word-counter" 
-            />
-            <ToolCard 
-              title="이미지 압축" 
-              desc="화질 저하 없이 용량 다이어트" 
-              href="/image-compressor" 
-            />
-            <ToolCard 
-              title="이미지 포맷 변환" 
-              desc="JPG, PNG, WebP 등 포맷 변경" 
-              href="/image-converter" 
-            />
-            <ToolCard 
-              title="PDF 페이지 추출" 
-              desc="PDF에서 특정 페이지만 별도 저장" 
-              href="/pdf-viewer" 
-            />
-            <ToolCard 
-              title="PDF 페이지 회전" 
-              desc="PDF에서 페이지 회전" 
-              href="/pdf-rotate" 
-            />
-            <ToolCard 
-              title="파일 이름 일괄 변경" 
-              desc="여러 파일의 이름을 규칙에 따라 일괄 변경" 
-              href="/file-rename" 
-            />
+            <ToolCard title="글자수 세기" desc="자소서, 블로그 실시간 글자수 확인" href="/word-counter" />
+            <ToolCard title="이미지 압축" desc="화질 저하 없이 용량 다이어트" href="/image-compressor" />
+            <ToolCard title="이미지 포맷 변환" desc="JPG, PNG, WebP 등 포맷 변경" href="/image-converter" />
+            <ToolCard title="PDF 페이지 추출" desc="PDF에서 특정 페이지만 별도 저장" href="/pdf-viewer" />
+            <ToolCard title="PDF 페이지 회전" desc="PDF에서 페이지 회전" href="/pdf-rotate" />
+            <ToolCard title="파일 이름 일괄 변경" desc="여러 파일의 이름을 규칙에 따라 일괄 변경" href="/file-rename" />
           </div>
         </section>
-
       </div>
 
-      {/* 안내 섹션 */}
-      <section className="max-w-5xl w-full mt-10 p-8 bg-white rounded-3xl border border-slate-100 shadow-sm text-slate-600">
-        <h2 className="text-2xl font-bold text-slate-800 mb-6">WinSam Toolbox: 일상의 편리함을 더하는 곳</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 leading-relaxed text-sm">
+      {/* --- 메인 페이지 하단 SEO 전문 가이드 섹션 --- */}
+      <section className="max-w-5xl w-full mt-20 mb-20 space-y-16">
+        {/* 1. 사이트 소개 및 비전 */}
+        <div className="text-center space-y-6">
+          <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
+            WinSam Toolbox: 디지털 생산성을 극대화하는 올인원 플랫폼
+          </h2>
+          <p className="text-lg text-slate-500 max-w-3xl mx-auto leading-relaxed">
+            복잡한 설치 과정이나 번거로운 회원가입 없이, 웹 브라우저만 있다면 누구나 즉시 사용할 수 있는<br></br>
+            <strong>무료 온라인 도구 모음</strong>입니다. 개발, 디자인, 사무 행정 등 다양한 분야에서 반복되는 단순
+            작업을 효율적으로 개선하기 위해 탄생했습니다.
+          </p>
+        </div>
+
+        {/* 2. 핵심 가치 그리드 (텍스트 밀도 향상) */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
-            <p>
-              <strong>WinSam Toolbox</strong>는 별도의 설치나 회원가입 없이 모든 도구를 <strong>100% 무료</strong>로 제공합니다. 업무와 일상에서 반복되는 번거로운 작업을 단 몇 번의 클릭으로 해결해 보세요.
+            <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center">
+              <ShieldCheck className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-800">보안 중심의 로컬 처리</h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              WinSam Toolbox의 모든 도구는 <strong>클라이언트 사이드 렌더링(CSR)</strong> 기술을 기반으로 작동합니다.
+              사용자가 입력하는 텍스트, 코드, 이미지는 외부 서버로 절대 전송되지 않으며 오직 사용자의 컴퓨터 내에서만
+              처리됩니다. 이러한 '서버리스' 방식은 데이터 유출 가능성을 원천 차단하여 기업용 보안 문서도 안심하고 처리할
+              수 있게 합니다.
             </p>
           </div>
-          <div className="space-y-4 border-l border-slate-100 pl-0 md:pl-10">
-            <h3 className="font-bold text-slate-800 uppercase tracking-wider text-xs">개인정보 보호 우선</h3>
-            <p>
-              입력하시는 모든 데이터와 이미지는 사용자의 브라우저 내에서만 처리되며, 서버로 절대 전송되지 않습니다. 보안 걱정 없이 안심하고 사용하세요.
+          <div className="space-y-4">
+            <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center">
+              <Zap className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-800">압도적인 처리 속도</h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              불필요한 네트워크 통신을 최소화하고 최신 JavaScript 엔진의 성능을 100% 활용합니다. 대용량 파일 이름 변경,
+              이미지 포맷 변환, 복잡한 JSON 데이터 정렬 등 무거운 작업도 지연 시간 없이 즉각적인 피드백을 제공하여
+              최상의 사용자 경험을 보장합니다.
             </p>
+          </div>
+          <div className="space-y-4">
+            <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center">
+              <Heart className="w-6 h-6" />
+            </div>
+            <h3 className="text-xl font-bold text-slate-800">완전 무료 및 접근성</h3>
+            <p className="text-sm text-slate-600 leading-relaxed">
+              우리는 도구가 필요한 모든 사람에게 평등한 기회를 제공해야 한다고 믿습니다. WinSam의 모든 기능은 기부나
+              유료 결제 없이 영구적으로 무료로 제공됩니다. 또한 웹 표준(Web Standards)을 준수하여 다양한 디바이스와
+              브라우저 환경에서 동일한 성능을 발휘합니다.
+            </p>
+          </div>
+        </div>
+
+        {/* 3. 제공 도구 카테고리 상세 설명 (구글 키워드 확보용) */}
+        <div className="p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 space-y-10">
+          <div className="space-y-4">
+            <h3 className="text-2xl font-bold text-slate-900">주요 서비스 카테고리</h3>
+            <p className="text-sm text-slate-500">
+              각 분야의 전문가들이 가장 많이 필요로 하는 도구들을 엄선하여 제공합니다.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
+            <div className="space-y-2">
+              <h4 className="font-bold text-slate-800 flex items-center gap-2">
+                <FileCode className="w-4 h-4 text-indigo-500" /> 개발 및 데이터 최적화
+              </h4>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                JSON, XML, HTML 소스코드 정렬기(Formatter)와 더불어 Base64 인코더, SHA-256 해시 생성기 등 백엔드 및
+                프론트엔드 개발 시 필수적인 데이터 변환 도구를 지원합니다.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h4 className="font-bold text-slate-800 flex items-center gap-2">
+                <Image className="w-4 h-4 text-emerald-500" /> 이미지 및 미디어 관리
+              </h4>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                파일 이름 일괄 변경(Bulk Rename)부터 차세대 이미지 포맷 WebP 변환까지, 웹 성능 최적화와 파일 정리를 위한
+                고성능 미디어 처리 툴을 제공합니다.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h4 className="font-bold text-slate-800 flex items-center gap-2">
+                <Type className="w-4 h-4 text-amber-500" /> 텍스트 및 콘텐츠 제작
+              </h4>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                글자수 세기, 로렘 입숨 생성기, URL 인코딩 등 블로그 운영자나 마케터, 취업 준비생들을 위한 실질적인
+                글쓰기 보조 도구들을 활용할 수 있습니다.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h4 className="font-bold text-slate-800 flex items-center gap-2">
+                <Globe className="w-4 h-4 text-blue-500" /> 네트워크 및 유틸리티
+              </h4>
+              <p className="text-xs text-slate-500 leading-relaxed">
+                자신의 공인 IP 주소 확인, PDF 페이지 관리 등 일상적인 웹 서핑과 PC 관리 과정에서 빈번하게 발생하는
+                문제들을 빠르게 해결합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        {/* 4. 푸터 전 마지막 안내 (FAQ 스타일) */}
+        <div className="bg-blue-600 rounded-[2.5rem] p-10 text-white space-y-6">
+          <h3 className="text-2xl font-bold">자주 묻는 질문 (FAQ)</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-blue-100">
+            <div className="space-y-2">
+              <h4 className="text-white font-bold">Q: 왜 회원가입이 없나요?</h4>
+              <p className="text-sm leading-relaxed">
+                우리는 도구의 본질이 '즉시성'에 있다고 생각합니다. 계정 생성이라는 장벽을 제거하여 누구나 필요할 때 바로
+                도구를 사용할 수 있는 환경을 추구합니다.
+              </p>
+            </div>
+            <div className="space-y-2">
+              <h4 className="text-white font-bold">Q: 모바일에서도 사용 가능한가요?</h4>
+              <p className="text-sm leading-relaxed">
+                네, WinSam Toolbox는 <strong>반응형 웹 디자인</strong>으로 제작되었습니다. 스마트폰, 태블릿, 데스크톱 등
+                모든 기기에서 최적화된 화면으로 이용 가능합니다.
+              </p>
+            </div>
           </div>
         </div>
       </section>

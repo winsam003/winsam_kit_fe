@@ -3,11 +3,13 @@ import "./globals.css";
 import ScrollButtons from "@/components/custom-ui/ScrollButtons";
 import Image from "next/image";
 import Script from "next/script";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "WinSam Toolbox - 무료 온라인 툴박스 | 글자수 세기, 이미지 압축, JSON 정렬",
-  description: "회원가입 없이 100% 무료로 사용하는 온라인 도구 모음. 글자수 세기, 이미지 압축, JSON 정렬, PDF 추출 등 업무와 일상에 필요한 모든 툴을 제공합니다.",
+  description:
+    "회원가입 없이 100% 무료로 사용하는 온라인 도구 모음. 글자수 세기, 이미지 압축, JSON 정렬, PDF 추출 등 업무와 일상에 필요한 모든 툴을 제공합니다.",
   keywords: ["온라인 툴박스", "글자수 세기", "이미지 압축", "JSON 정렬", "Base64 변환", "무료 웹 도구"],
   openGraph: {
     title: "WinSam Toolbox - 무료 온라인 툴박스",
@@ -18,11 +20,7 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
       <head>
@@ -34,36 +32,39 @@ export default function RootLayout({
         />
         <meta name="google-adsense-account" content="ca-pub-8286025705631064" />
 
-        <meta 
-          name="naver-site-verification" 
-          content="8b1b18aafcee1dc9b2566d0485845c09eb102599" 
-        />
+        <meta name="naver-site-verification" content="8b1b18aafcee1dc9b2566d0485845c09eb102599" />
 
-        <meta 
-          name="google-site-verification" 
-          content="RNkeSZzWbR8T4Pp_OTNspdHciimBargpK1SBOpatEyY" 
-        />
-
+        <meta name="google-site-verification" content="RNkeSZzWbR8T4Pp_OTNspdHciimBargpK1SBOpatEyY" />
       </head>
-      <body className="antialiased bg-slate-50">
+      <body className="antialiased bg-slate-50" suppressHydrationWarning={true}>
         <Analytics />
         <header className="p-4 border-b bg-white font-bold flex items-center justify-center gap-2">
           {/* 2. 로고 이미지 추가 */}
-          <Image 
-            src="/favicon.ico" 
-            alt="로고" 
-            width={34} 
-            height={34} 
-          />
+          <Image src="/favicon.ico" alt="로고" width={34} height={34} />
           ToolBox
         </header>
-        
-        <main className="min-h-screen">
-          {children}
-        </main>
 
-        <footer className="p-10 border-t bg-white text-center text-sm text-gray-500">
-            © 2025 WinSam Toolbox. All rights reserved.
+        <main className="min-h-screen">{children}</main>
+
+        <footer className="p-10 border-t bg-white text-center space-y-4">
+          <div className="flex justify-center gap-6 text-sm font-medium text-slate-600">
+            <Link href="/privacy" className="hover:text-blue-600 transition-colors">
+              개인정보처리방침
+            </Link>
+            <Link href="/terms" className="hover:text-blue-600 transition-colors">
+              이용약관
+            </Link>
+            {/* 나중에 이메일 문의용으로 활용 가능 */}
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSfeaJDRwz5O4Svn77LTWjtAGakGzKDKCITVrNpB4QZdy6gLww/viewform?usp=header"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-blue-600 transition-colors"
+            >
+              문의하기
+            </a>
+          </div>
+          <p className="text-xs text-gray-400">© 2026 WinSam Toolbox. All rights reserved.</p>
         </footer>
 
         <ScrollButtons />
