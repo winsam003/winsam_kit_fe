@@ -73,9 +73,7 @@ export default function BlogDetailPage() {
           <button
             onClick={() => navigator.clipboard.writeText(window.location.href)}
             className="p-2 hover:bg-slate-100 rounded-full transition-colors text-slate-400"
-          >
-            <Share2 className="w-5 h-5" />
-          </button>
+          ></button>
         </div>
       </nav>
 
