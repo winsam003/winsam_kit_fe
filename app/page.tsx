@@ -1,12 +1,58 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import Link from "next/link";
-import { Laptop, Briefcase, ChevronRight, ShieldCheck, Zap, Heart, FileCode, Image, Type, Globe } from "lucide-react";
+import {
+  Laptop,
+  Briefcase,
+  ChevronRight,
+  ShieldCheck,
+  Zap,
+  Heart,
+  FileCode,
+  Image as ImageIcon,
+  Type,
+  Globe,
+  BookOpen,
+  ArrowRight,
+} from "lucide-react";
+import { useEffect, useState } from "react";
+import { db } from "@/lib/firebase";
+import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+
+interface Post {
+  id: string;
+  title: string;
+  slug: string;
+  createdAt: any;
+  isAdmin?: string;
+  content?: string;
+}
 
 export default function Home() {
+  const [latestPosts, setLatestPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const fetchLatestPosts = async () => {
+      try {
+        const q = query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(5));
+        const querySnapshot = await getDocs(q);
+        const posts = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        })) as Post[];
+        setLatestPosts(posts);
+      } catch (error) {
+        console.error("Error fetching posts:", error);
+      }
+    };
+    fetchLatestPosts();
+  }, []);
+
   return (
     <div className="p-6 md:p-10 space-y-12 flex flex-col items-center bg-slate-50/30 min-h-screen">
-      {/* 툴 제목 섹션 */}
+      {/* 1. 히어로 섹션 */}
       <section className="text-center space-y-3 py-10">
         <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900">
           무료 온라인 <span className="text-blue-600">툴박스</span>
@@ -17,7 +63,7 @@ export default function Home() {
       </section>
 
       <div className="w-full max-w-5xl space-y-16">
-        {/* 카테고리 1: 웹 개발 도구 */}
+        {/* 2. 웹 개발 도구 */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
             <Laptop className="w-6 h-6 text-blue-600" />
@@ -48,7 +94,7 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 카테고리 2: 직장인 & 일상 도구 */}
+        {/* 3. 직장인 & 일상 도구 */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
             <Briefcase className="w-6 h-6 text-emerald-600" />
@@ -63,23 +109,81 @@ export default function Home() {
             <ToolCard title="파일 이름 일괄 변경" desc="여러 파일의 이름을 규칙에 따라 일괄 변경" href="/file-rename" />
           </div>
         </section>
+
+        {/* 4. 블로그 인사이트 리스트 (세로형 정렬) */}
+        <section className="space-y-8">
+          <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+            <div className="flex items-center gap-2">
+              <div className="w-1.5 h-6 bg-blue-600 rounded-full" />
+              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">최신 인사이트</h2>
+            </div>
+            <Link href="/blog" className="text-sm font-semibold text-blue-600 hover:underline flex items-center gap-1">
+              전체보기 <ArrowRight className="w-4 h-4" />
+            </Link>
+          </div>
+          <div className="flex flex-col gap-4">
+            {latestPosts.length > 0 ? (
+              latestPosts.map((post) => (
+                <Link
+                  key={post.id}
+                  href={`/blog/${post.slug}`}
+                  className="group flex items-center justify-between p-6 bg-white border border-slate-100 rounded-[1.5rem] transition-all duration-300 hover:border-blue-200 hover:shadow-lg hover:shadow-blue-50/50"
+                >
+                  <div className="flex flex-col md:flex-row md:items-center gap-4 flex-1">
+                    <div className="hidden md:flex flex-col items-center justify-center min-w-[70px] py-2 bg-slate-50 rounded-xl group-hover:bg-blue-50 transition-colors">
+                      <span className="text-[10px] font-bold text-slate-400 group-hover:text-blue-400">
+                        {post.createdAt?.toDate
+                          ? post.createdAt.toDate().toLocaleString("en-US", { month: "short" })
+                          : "NEW"}
+                      </span>
+                      <span className="text-xl font-black text-slate-700 group-hover:text-blue-600">
+                        {post.createdAt?.toDate ? post.createdAt.toDate().getDate() : "!!"}
+                      </span>
+                    </div>
+                    <div className="space-y-1">
+                      <div className="flex items-center gap-2">
+                        {post.isAdmin === "Y" && (
+                          <span className="text-[9px] font-black bg-slate-900 text-white px-2 py-0.5 rounded-md tracking-wider">
+                            OFFICIAL
+                          </span>
+                        )}
+                        <h3 className="text-lg font-bold text-slate-800 group-hover:text-blue-600 transition-colors leading-snug">
+                          {post.title}
+                        </h3>
+                      </div>
+                      <p className="text-sm text-slate-400 line-clamp-1">
+                        {post.content?.replace(/[#*`]/g, "").substring(0, 100) + "..."}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="ml-4 p-3 bg-slate-50 rounded-full text-slate-300 group-hover:bg-blue-600 group-hover:text-white transition-all">
+                    <ChevronRight className="w-5 h-5" />
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <div className="py-20 text-center bg-white rounded-[2rem] border border-dashed border-slate-200">
+                <p className="text-slate-400 font-medium">등록된 글이 아직 없습니다.</p>
+              </div>
+            )}
+          </div>
+        </section>
       </div>
 
-      {/* --- 메인 페이지 하단 SEO 전문 가이드 섹션 --- */}
+      {/* 5. SEO 전문 가이드 (애드센스용 텍스트 전체 복구) */}
       <section className="max-w-5xl w-full mt-20 mb-20 space-y-16">
-        {/* 1. 사이트 소개 및 비전 */}
         <div className="text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
             WinSam Toolbox: 디지털 생산성을 극대화하는 올인원 플랫폼
           </h2>
           <p className="text-lg text-slate-500 max-w-3xl mx-auto leading-relaxed">
-            복잡한 설치 과정이나 번거로운 회원가입 없이, 웹 브라우저만 있다면 누구나 즉시 사용할 수 있는<br></br>
+            복잡한 설치 과정이나 번거로운 회원가입 없이, 웹 브라우저만 있다면 누구나 즉시 사용할 수 있는
+            <br />
             <strong>무료 온라인 도구 모음</strong>입니다. 개발, 디자인, 사무 행정 등 다양한 분야에서 반복되는 단순
             작업을 효율적으로 개선하기 위해 탄생했습니다.
           </p>
         </div>
 
-        {/* 2. 핵심 가치 그리드 (텍스트 밀도 향상) */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-4">
             <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center">
@@ -117,7 +221,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 3. 제공 도구 카테고리 상세 설명 (구글 키워드 확보용) */}
         <div className="p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 space-y-10">
           <div className="space-y-4">
             <h3 className="text-2xl font-bold text-slate-900">주요 서비스 카테고리</h3>
@@ -125,24 +228,23 @@ export default function Home() {
               각 분야의 전문가들이 가장 많이 필요로 하는 도구들을 엄선하여 제공합니다.
             </p>
           </div>
-
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
             <div className="space-y-2">
               <h4 className="font-bold text-slate-800 flex items-center gap-2">
                 <FileCode className="w-4 h-4 text-indigo-500" /> 개발 및 데이터 최적화
               </h4>
               <p className="text-xs text-slate-500 leading-relaxed">
-                JSON, XML, HTML 소스코드 정렬기(Formatter)와 더불어 Base64 인코더, SHA-256 해시 생성기 등 백엔드 및
-                프론트엔드 개발 시 필수적인 데이터 변환 도구를 지원합니다.
+                JSON, XML, HTML 소스코드 정렬기와 Base64 인코더, SHA-256 해시 생성기 등 백엔드 및 프론트엔드 개발 시
+                필수적인 데이터 변환 도구를 지원합니다.
               </p>
             </div>
             <div className="space-y-2">
               <h4 className="font-bold text-slate-800 flex items-center gap-2">
-                <Image className="w-4 h-4 text-emerald-500" /> 이미지 및 미디어 관리
+                <ImageIcon className="w-4 h-4 text-emerald-500" /> 이미지 및 미디어 관리
               </h4>
               <p className="text-xs text-slate-500 leading-relaxed">
-                파일 이름 일괄 변경(Bulk Rename)부터 차세대 이미지 포맷 WebP 변환까지, 웹 성능 최적화와 파일 정리를 위한
-                고성능 미디어 처리 툴을 제공합니다.
+                파일 이름 일괄 변경부터 차세대 이미지 포맷 WebP 변환까지, 웹 성능 최적화와 파일 정리를 위한 고성능
+                미디어 처리 툴을 제공합니다.
               </p>
             </div>
             <div className="space-y-2">
@@ -166,14 +268,13 @@ export default function Home() {
           </div>
         </div>
 
-        {/* 4. 푸터 전 마지막 안내 (FAQ 스타일) */}
         <div className="bg-blue-600 rounded-[2.5rem] p-10 text-white space-y-6">
           <h3 className="text-2xl font-bold">자주 묻는 질문 (FAQ)</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-blue-100">
             <div className="space-y-2">
               <h4 className="text-white font-bold">Q: 왜 회원가입이 없나요?</h4>
               <p className="text-sm leading-relaxed">
-                우리는 도구의 본질이 '즉시성'에 있다고 생각합니다. 계정 생성이라는 장벽을 제거하여 누구나 필요할 때 바로
+                우리는 도구가 본질이 '즉시성'에 있다고 생각합니다. 계정 생성이라는 장벽을 제거하여 누구나 필요할 때 바로
                 도구를 사용할 수 있는 환경을 추구합니다.
               </p>
             </div>
@@ -191,10 +292,9 @@ export default function Home() {
   );
 }
 
-// shadcn 기반 재사용 카드 컴포넌트
 function ToolCard({ title, desc, href }: { title: string; desc: string; href: string }) {
   return (
-    <Card className="hover:shadow-xl transition-all duration-300 border-slate-200 group flex flex-col">
+    <Card className="hover:shadow-xl transition-all duration-300 border-slate-200 group flex flex-col h-full">
       <CardHeader className="flex-1">
         <CardTitle className="group-hover:text-blue-600 transition-colors">{title}</CardTitle>
         <CardDescription className="pt-2">{desc}</CardDescription>
