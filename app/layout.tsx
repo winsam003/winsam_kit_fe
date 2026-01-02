@@ -5,6 +5,7 @@ import Image from "next/image";
 import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import Link from "next/link";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export const metadata: Metadata = {
   title: "WinSam Toolbox - 무료 온라인 툴박스 | 글자수 세기, 이미지 압축, JSON 정렬",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           strategy="afterInteractive" // 페이지가 로드된 후 부드럽게 광고 스크립트 실행
         />
+        <Script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async />
         <meta name="google-adsense-account" content="ca-pub-8286025705631064" />
 
         <meta name="naver-site-verification" content="8b1b18aafcee1dc9b2566d0485845c09eb102599" />
@@ -44,7 +46,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           ToolBox
         </header>
 
-        <main className="min-h-screen">{children}</main>
+        {/* 핵심 수정 부분: 컨테이너 추가 */}
+        <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-start gap-4">
+          {/* 1. 메인 본문 (왼쪽) */}
+          <main className="w-full flex-1 min-h-screen">{children}</main>
+
+          {/* 2. 사이드바 광고 (오른쪽) */}
+          <aside className="hidden lg:block w-[160px] shrink-0 sticky top-24 pt-6">
+            <AdfitBanner unitId="DAN-IgYCG7rmtBGYHMD8" />
+            <p className="text-[10px] text-slate-300 text-center mt-2 uppercase tracking-widest font-bold">
+              Advertisement
+            </p>
+          </aside>
+        </div>
 
         <footer className="p-10 border-t bg-white text-center space-y-4">
           <div className="flex justify-center gap-6 text-sm font-medium text-slate-600">
