@@ -3,19 +3,28 @@
 import { useState } from "react";
 import { db } from "@/lib/firebase";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import { Lock, Type, FileText, Send, User } from "lucide-react";
+import { Lock, Type, FileText, Send, User, ChevronLeft, PenLine } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function AdminWritePage() {
+  const router = useRouter();
   const [password, setPassword] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  const [nickname, setNickname] = useState("WinSam 관리자"); // 기본값 설정
+  const [nickname, setNickname] = useState("WinSam 관리자");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (password !== "4540") {
+    if (password !== process.env.NEXT_PUBLIC_ADMIN_PASSWORD) {
       alert("관리자 비밀번호가 틀렸습니다.");
+      return;
+    }
+
+    if (!title.trim() || !content.trim()) {
+      alert("제목과 내용을 입력해주세요.");
       return;
     }
 
@@ -25,75 +34,123 @@ export default function AdminWritePage() {
         title,
         content,
         nickname,
-        isAdmin: "Y", // 관리자 컬럼 추가
+        isAdmin: "Y",
         createdAt: serverTimestamp(),
         slug:
           title
             .toLowerCase()
-            .replace(/ /g, "-")
-            .replace(/[^\w-]+/g, "") +
+            .trim()
+            .replace(/[^\w\s-]/g, "") // 특수문자 제거
+            .replace(/[\s_-]+/g, "-") // 공백/언더바를 하이픈으로
+            .replace(/^-+|-+$/g, "") + // 앞뒤 하이픈 제거
           "-" +
-          Math.random().toString(36).substring(2, 7), // 슬러그 중복 방지
+          Math.random().toString(36).substring(2, 7),
       });
       alert("관리자 포스팅이 등록되었습니다!");
-      setTitle("");
-      setContent("");
+      router.push("/admin/blog"); // 등록 후 관리 목록으로 이동
     } catch (error) {
+      console.error("등록 실패:", error);
       alert("등록 실패!");
     } finally {
       setIsSubmitting(false);
     }
   };
 
-  // UI는 아래 UserWritePage와 유사하게 구성하되 '관리자 전용'임을 명시
   return (
-    /* 기존 UI 코드와 동일하되 헤더만 "WinSam Admin Editor"로 변경 */
     <div className="min-h-screen bg-slate-50 py-12 px-4">
-      <div className="max-w-3xl mx-auto">
-        <div className="mb-8 text-center">
-          <h1 className="text-3xl font-black text-slate-900 flex items-center justify-center gap-2">
-            <div className="w-10 h-10 bg-emerald-600 rounded-xl flex items-center justify-center shadow-lg">
+      <div className="max-w-3xl mx-auto space-y-6">
+        {/* 뒤로가기 버튼 영역 */}
+        <div className="flex justify-start">
+          <Link href="/admin/blog">
+            <Button variant="ghost" size="sm" className="gap-1 text-slate-500 hover:text-emerald-600 transition-colors">
+              <ChevronLeft className="w-4 h-4" /> 관리 목록으로
+            </Button>
+          </Link>
+        </div>
+
+        {/* 헤더 섹션 */}
+        <div className="mb-8 text-center space-y-4">
+          <div className="flex items-center justify-center gap-3">
+            <div className="w-12 h-12 bg-slate-900 rounded-2xl flex items-center justify-center shadow-xl shadow-slate-200">
               <Lock className="text-white w-6 h-6" />
             </div>
-            Admin Editor
-          </h1>
+            <h1 className="text-3xl font-black text-slate-900 tracking-tighter">Admin Editor.</h1>
+          </div>
+          <p className="text-slate-400 font-medium">관리자 전용 공식 인사이트 작성 공간입니다.</p>
         </div>
+
         <form
           onSubmit={handleSubmit}
-          className="bg-white rounded-[2rem] shadow-xl p-8 space-y-6 border border-emerald-100"
+          className="bg-white rounded-[2.5rem] shadow-xl shadow-slate-200/50 p-8 md:p-12 space-y-8 border border-white"
         >
-          {/* 비밀번호 입력창 (관리자 전용) */}
-          <div className="space-y-2">
-            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1 flex items-center gap-1">
-              <Lock className="w-3 h-3" /> Admin Key
+          {/* 비밀번호 입력창 */}
+          <div className="space-y-3">
+            <label className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] ml-1 flex items-center gap-2">
+              <Lock className="w-3.5 h-3.5 text-emerald-500" /> Admin Access Key
             </label>
             <input
               type="password"
-              placeholder="••••••••"
+              placeholder="관리자 암호를 입력하세요"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-5 py-4 bg-slate-50 border-none rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none"
+              className="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-emerald-500 focus:bg-white transition-all outline-none font-mono"
+              required
             />
           </div>
-          {/* 나머지 제목, 본문 입력창은 동일 */}
-          <input
-            type="text"
-            placeholder="글 제목"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-            className="w-full px-5 py-4 bg-slate-50 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none"
-          />
-          <textarea
-            rows={10}
-            placeholder="내용"
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            className="w-full px-5 py-5 bg-slate-50 rounded-2xl focus:ring-2 focus:ring-emerald-500 outline-none"
-          />
-          <button type="submit" className="w-full py-5 rounded-2xl font-bold text-white bg-emerald-600">
-            등록하기
-          </button>
+
+          <div className="space-y-6">
+            {/* 제목 입력 */}
+            <div className="space-y-3">
+              <label className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] ml-1">Title</label>
+              <input
+                type="text"
+                placeholder="인사이트의 제목을 입력하세요"
+                value={title}
+                onChange={(e) => setTitle(e.target.value)}
+                className="w-full px-6 py-4 bg-slate-50 border-2 border-transparent rounded-2xl focus:border-emerald-500 focus:bg-white transition-all outline-none text-lg font-bold"
+                required
+              />
+            </div>
+
+            {/* 본문 입력 */}
+            <div className="space-y-3">
+              <label className="text-xs font-black text-slate-400 uppercase tracking-[0.2em] ml-1">
+                Content (Markdown)
+              </label>
+              <textarea
+                rows={12}
+                placeholder="마크다운 문법을 사용하여 내용을 작성하세요..."
+                value={content}
+                onChange={(e) => setContent(e.target.value)}
+                className="w-full px-6 py-6 bg-slate-50 border-2 border-transparent rounded-3xl focus:border-emerald-500 focus:bg-white transition-all outline-none resize-none leading-relaxed"
+                required
+              />
+            </div>
+          </div>
+
+          {/* 등록 버튼 */}
+          <Button
+            type="submit"
+            disabled={isSubmitting}
+            className="w-full py-8 rounded-[1.5rem] font-black text-xl bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-100 transition-all active:scale-[0.98]"
+          >
+            {isSubmitting ? (
+              <div className="flex items-center gap-2">
+                <div className="w-5 h-5 border-3 border-white/30 border-t-white rounded-full animate-spin"></div>
+                <span>업로드 중...</span>
+              </div>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Send className="w-5 h-5" />
+                <span>공식 포스트 등록</span>
+              </div>
+            )}
+          </Button>
         </form>
+
+        <p className="text-center text-slate-300 text-xs font-medium">
+          작성된 글은 WinSam Insights 목록 최상단에 OFFICIAL 배지와 함께 노출됩니다.
+        </p>
       </div>
     </div>
   );
