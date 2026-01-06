@@ -66,11 +66,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             {/* 1. 실제 페이지 콘텐츠 */}
             {children}
 
-            {/* 2. 메인 하단 광고 (본문 너비에 맞춤) */}
-            <div className="flex justify-center py-12">
-              <AdfitBanner unitId="DAN-UEfYymEu5Dbb6VvG" width="728" height="90" />
-            </div>
-
             {/* 3. FAQ 섹션 (본문 너비에 맞춤) */}
             <div className="bg-blue-600 rounded-[2.5rem] p-8 md:p-12 text-white space-y-6 mb-20">
               <h3 className="text-2xl font-bold">자주 묻는 질문 (FAQ)</h3>

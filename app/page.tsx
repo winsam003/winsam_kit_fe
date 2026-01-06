@@ -84,7 +84,10 @@ export default function Home() {
             />
           </div>
         </section>
-
+        {/* 2. 메인 하단 광고 (본문 너비에 맞춤) */}
+        <div className="flex justify-center py-12">
+          <AdfitBanner unitId="DAN-UEfYymEu5Dbb6VvG" width="728" height="90" />
+        </div>
         {/* 3. 직장인 & 일상 도구 */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
