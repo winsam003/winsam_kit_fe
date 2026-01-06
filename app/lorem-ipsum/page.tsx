@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
 import { Switch } from "@/components/ui/switch";
 import { Label } from "@/components/ui/label";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function LoremIpsumGenerator() {
   const [paragraphs, setParagraphs] = useState(3);
@@ -89,7 +90,10 @@ export default function LoremIpsumGenerator() {
           </Button>
         </CardContent>
       </Card>
-
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
       {result && (
         <Card className="relative animate-in fade-in slide-in-from-bottom-4">
           <CardHeader className="flex flex-row items-center justify-between pb-2 border-b">

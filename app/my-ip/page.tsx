@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ChevronLeft, Globe, Copy, Check, RefreshCw, MapPin, Monitor, Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function MyIPChecker() {
   const [ipData, setIpData] = useState<any>(null);
@@ -57,7 +58,6 @@ export default function MyIPChecker() {
           새로고침
         </Button>
       </div>
-
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* 메인 IP 카드 */}
         <Card className="md:col-span-3 bg-indigo-600 text-white shadow-xl overflow-hidden relative">
@@ -75,9 +75,12 @@ export default function MyIPChecker() {
               {copied ? <Check className="w-4 h-4 mr-2" /> : <Copy className="w-4 h-4 mr-2" />}
               {copied ? "복사 완료" : "IP 주소 복사"}
             </Button>
+            {/* --- [중단 광고 영역] --- */}
+            <div className="flex justify-center my-6">
+              <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+            </div>
           </CardContent>
         </Card>
-
         {/* 상세 정보 카드들 */}
         <Card className="flex items-center p-4 gap-4 shadow-sm border-slate-100">
           <div className="p-3 bg-slate-100 rounded-full text-slate-600">

@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function XmlFormatter() {
   const [input, setInput] = useState("");
@@ -134,7 +135,10 @@ export default function XmlFormatter() {
           </CardContent>
         </Card>
       </div>
-
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
       {/* --- SEO 및 정보 섹션 (XML 전문 가이드) --- */}
       <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
         {/* 1. XML의 정의와 중요성 */}

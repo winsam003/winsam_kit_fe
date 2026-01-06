@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function Base64Converter() {
   const [textInput, setTextInput] = useState("");
@@ -100,7 +101,10 @@ export default function Base64Converter() {
           </CardContent>
         </Card>
       </Tabs>
-
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
       <Card className="bg-slate-50 relative">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <CardTitle className="text-sm font-medium text-blue-600">결과값</CardTitle>

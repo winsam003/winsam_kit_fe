@@ -7,6 +7,7 @@ import { ChevronLeft, Table as TableIcon, Copy, Check, Trash2, FileCode, UploadC
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function HtmlTableBuilder() {
   const [htmlCode, setHtmlCode] = useState("");
@@ -98,6 +99,10 @@ export default function HtmlTableBuilder() {
             </Button>
           </label>
         </CardContent>
+        {/* --- [중단 광고 영역] --- */}
+        <div className="flex justify-center my-6">
+          <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+        </div>
       </Card>
 
       {htmlCode && (

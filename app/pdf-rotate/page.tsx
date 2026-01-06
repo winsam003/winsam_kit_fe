@@ -6,10 +6,11 @@ import { PDFDocument, degrees } from "pdf-lib";
 import { ChevronLeft, RotateCw, FileDown, Trash2, FileText, AlertCircle, UploadCloud } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function PdfRotate() {
   const [pdfFile, setPdfFile] = useState<File | null>(null);
-  const [rotation, setRotation] = useState(0); 
+  const [rotation, setRotation] = useState(0);
   const [isProcessing, setIsProcessing] = useState(false);
   const [isDragging, setIsDragging] = useState(false);
 
@@ -96,7 +97,7 @@ export default function PdfRotate() {
         </div>
       </div>
 
-      <Card 
+      <Card
         onDragOver={onDragOver}
         onDragLeave={onDragLeave}
         onDrop={onDrop}
@@ -128,14 +129,19 @@ export default function PdfRotate() {
                   </div>
                   <span className="font-medium text-sm truncate">{pdfFile.name}</span>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => setPdfFile(null)} className="hover:bg-red-50 hover:text-red-600 rounded-full">
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  onClick={() => setPdfFile(null)}
+                  className="hover:bg-red-50 hover:text-red-600 rounded-full"
+                >
                   <Trash2 className="w-4 h-4" />
                 </Button>
               </div>
 
               <div className="flex flex-col items-center gap-8 py-4">
                 {/* 회전 미리보기 카드 */}
-                <div 
+                <div
                   className="w-48 h-64 bg-white border-4 border-slate-100 rounded-xl shadow-2xl flex items-center justify-center transition-transform duration-500 ease-in-out"
                   style={{ transform: `rotate(${rotation}deg)` }}
                 >
@@ -147,10 +153,15 @@ export default function PdfRotate() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 w-full">
-                  <Button variant="outline" size="lg" onClick={() => setRotation((prev) => (prev + 90) % 360)} className="h-12 border-slate-200">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    onClick={() => setRotation((prev) => (prev + 90) % 360)}
+                    className="h-12 border-slate-200"
+                  >
                     <RotateCw className="w-4 h-4 mr-2" /> 90° 회전
                   </Button>
-                  <Button 
+                  <Button
                     size="lg"
                     className="h-12 bg-red-600 hover:bg-red-700"
                     onClick={rotateAndDownload}
@@ -165,51 +176,60 @@ export default function PdfRotate() {
           )}
         </CardContent>
       </Card>
-
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
       {/* --- 상세 설명 섹션 --- */}
       <div className="mt-12 space-y-10 text-slate-600 pb-20">
-        
         <section className="space-y-4">
           <h2 className="text-2xl font-bold text-slate-800 tracking-tight">PDF 페이지 회전이 필요한 순간</h2>
           <p className="leading-relaxed">
-            사무 업무를 보다 보면 스캐너의 방향 설정 오류나 모바일 기기에서의 촬영 방향 차이로 인해 <strong>PDF 문서가 거꾸로 되어 있거나 옆으로 누워 있는 경우</strong>를 자주 접하게 됩니다. 특히 관공서 제출용 서류나 법적 증빙 자료의 경우, 가독성을 위해 반드시 정방향으로 교정해야 합니다. WinSam PDF 회전기는 별도의 무거운 뷰어나 유료 편집 프로그램 없이도 클릭 몇 번으로 문서를 완벽하게 교정해 줍니다.
+            사무 업무를 보다 보면 스캐너의 방향 설정 오류나 모바일 기기에서의 촬영 방향 차이로 인해{" "}
+            <strong>PDF 문서가 거꾸로 되어 있거나 옆으로 누워 있는 경우</strong>를 자주 접하게 됩니다. 특히 관공서
+            제출용 서류나 법적 증빙 자료의 경우, 가독성을 위해 반드시 정방향으로 교정해야 합니다. WinSam PDF 회전기는
+            별도의 무거운 뷰어나 유료 편집 프로그램 없이도 클릭 몇 번으로 문서를 완벽하게 교정해 줍니다.
           </p>
         </section>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <section className="space-y-3 p-6 bg-white rounded-xl border border-slate-100 shadow-sm">
             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-              <span className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs">1</span>
+              <span className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs">
+                1
+              </span>
               모든 페이지 일괄 회전
             </h3>
             <p className="text-sm leading-relaxed">
-              파일 내의 모든 페이지를 동일한 각도로 회전시킵니다. 수십 장의 보고서가 모두 옆으로 누워있을 때 일일이 수정할 필요 없이 단 한 번의 클릭으로 전체 문서를 바로잡을 수 있어 업무 시간을 획기적으로 단축합니다.
+              파일 내의 모든 페이지를 동일한 각도로 회전시킵니다. 수십 장의 보고서가 모두 옆으로 누워있을 때 일일이
+              수정할 필요 없이 단 한 번의 클릭으로 전체 문서를 바로잡을 수 있어 업무 시간을 획기적으로 단축합니다.
             </p>
           </section>
 
           <section className="space-y-3 p-6 bg-white rounded-xl border border-slate-100 shadow-sm">
             <h3 className="font-bold text-slate-800 flex items-center gap-2">
-              <span className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs">2</span>
+              <span className="w-6 h-6 bg-red-100 text-red-600 rounded-full flex items-center justify-center text-xs">
+                2
+              </span>
               초고속 로컬 프로세싱
             </h3>
             <p className="text-sm leading-relaxed">
-              클라우드 기반 서비스와 달리 파일을 서버로 전송하고 다시 다운로드하는 대기 시간이 없습니다. 웹 브라우저의 자체 연산 능력을 활용하여 파일을 드롭하는 즉시 회전 처리가 완료되므로 대용량 파일도 끊김 없이 작업 가능합니다.
+              클라우드 기반 서비스와 달리 파일을 서버로 전송하고 다시 다운로드하는 대기 시간이 없습니다. 웹 브라우저의
+              자체 연산 능력을 활용하여 파일을 드롭하는 즉시 회전 처리가 완료되므로 대용량 파일도 끊김 없이 작업
+              가능합니다.
             </p>
           </section>
         </div>
-
-        
 
         <section className="space-y-4 border-t pt-10">
           <h2 className="text-2xl font-bold text-slate-800 tracking-tight">보안과 개인정보 보호</h2>
           <div className="bg-slate-50 p-6 rounded-2xl border border-slate-200">
             <p className="text-sm leading-relaxed mb-4">
-              많은 온라인 PDF 도구들이 파일을 서버에 업로드하도록 요구합니다. 이 과정에서 중요한 계약서, 개인 식별 정보, 기업 비밀 등이 외부 서버에 임시로 저장될 위험이 있습니다.
+              많은 온라인 PDF 도구들이 파일을 서버에 업로드하도록 요구합니다. 이 과정에서 중요한 계약서, 개인 식별 정보,
+              기업 비밀 등이 외부 서버에 임시로 저장될 위험이 있습니다.
             </p>
             <ul className="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs font-medium text-slate-500">
-              <li className="flex items-center gap-2 bg-white p-3 rounded-lg shadow-sm italic">
-                ✅ No Server Uploads
-              </li>
+              <li className="flex items-center gap-2 bg-white p-3 rounded-lg shadow-sm italic">✅ No Server Uploads</li>
               <li className="flex items-center gap-2 bg-white p-3 rounded-lg shadow-sm italic">
                 ✅ 100% Client-side Logic
               </li>
@@ -225,11 +245,17 @@ export default function PdfRotate() {
           <div className="space-y-6">
             <div className="space-y-2">
               <h4 className="font-bold text-slate-700">Q. 회전 후 PDF 화질이 떨어지나요?</h4>
-              <p className="text-sm">아니요. PDF의 렌더링 레이어 정보를 직접 수정하는 방식이므로, 원본의 화질이나 텍스트 정보(OCR)를 전혀 손상시키지 않고 방향만 변경합니다.</p>
+              <p className="text-sm">
+                아니요. PDF의 렌더링 레이어 정보를 직접 수정하는 방식이므로, 원본의 화질이나 텍스트 정보(OCR)를 전혀
+                손상시키지 않고 방향만 변경합니다.
+              </p>
             </div>
             <div className="space-y-2">
               <h4 className="font-bold text-slate-700">Q. 암호가 걸린 PDF도 가능한가요?</h4>
-              <p className="text-sm">현재 보안상의 이유로 암호가 걸리지 않은 표준 PDF 파일만 지원합니다. 암호를 먼저 해제하신 후 이용해 주세요.</p>
+              <p className="text-sm">
+                현재 보안상의 이유로 암호가 걸리지 않은 표준 PDF 파일만 지원합니다. 암호를 먼저 해제하신 후 이용해
+                주세요.
+              </p>
             </div>
           </div>
         </section>

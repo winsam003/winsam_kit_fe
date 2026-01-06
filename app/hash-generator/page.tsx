@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function HashGenerator() {
   const [input, setInput] = useState("");
@@ -76,7 +77,10 @@ export default function HashGenerator() {
           />
         </CardContent>
       </Card>
-
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
       <Card className="border-blue-100 bg-blue-50/30 relative">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
           <div className="flex items-center gap-2">

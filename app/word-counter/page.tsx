@@ -8,6 +8,7 @@ import { ChevronLeft, Trash2, Copy, Check, ShieldCheck, Lock, BadgeCheck } from 
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function WordCounter() {
   const [text, setText] = useState("");
@@ -67,7 +68,10 @@ export default function WordCounter() {
           </CardContent>
         </Card>
       </div>
-
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
       <Card className="relative shadow-md">
         <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4 border-b mb-4">
           <CardTitle className="text-lg">텍스트 입력</CardTitle>

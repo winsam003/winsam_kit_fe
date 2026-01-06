@@ -8,6 +8,7 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { Calendar, User, ArrowLeft, Share2, Clock } from "lucide-react";
 import Link from "next/link";
+import AdfitBanner from "@/components/AdfitBanner";
 
 interface Post {
   title: string;
@@ -135,7 +136,10 @@ export default function BlogDetailPage() {
           </ReactMarkdown>
         </div>
       </main>
-
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
       <footer className="max-w-3xl mx-auto px-6 mt-20">
         <div className="p-10 bg-slate-50 rounded-[2rem] border border-slate-100 text-center">
           <h3 className="text-lg md:text-xl font-medium text-slate-700 italic leading-relaxed">

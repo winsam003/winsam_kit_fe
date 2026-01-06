@@ -6,6 +6,7 @@ import { ChevronLeft, Link2, Copy, Check, RefreshCw, AlertCircle } from "lucide-
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function UrlConverter() {
   const [input, setInput] = useState("");
@@ -86,7 +87,10 @@ export default function UrlConverter() {
             </div>
           </CardContent>
         </Card>
-
+        {/* --- [중단 광고 영역] --- */}
+        <div className="flex justify-center my-6">
+          <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+        </div>
         {/* 결과 섹션 */}
         <Card className="border-slate-200 shadow-sm bg-slate-50/50">
           <CardContent className="p-6 space-y-4">

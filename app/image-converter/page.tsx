@@ -17,6 +17,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import AdfitBanner from "@/components/AdfitBanner";
 
 interface ImageData {
   file: File;
@@ -158,6 +159,10 @@ export default function ImageConverter() {
         <p className="text-slate-600 font-medium">이미지 파일들을 여기에 끌어다 놓거나 클릭하세요</p>
         <p className="text-xs text-slate-400 mt-2">최대 10개까지 동시 처리가 가능합니다.</p>
       </Card>
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
 
       {images.length > 0 && (
         <div className="space-y-4">

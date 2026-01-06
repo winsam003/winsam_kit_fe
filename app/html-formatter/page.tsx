@@ -20,6 +20,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function HtmlFormatter() {
   const [input, setInput] = useState("");
@@ -170,7 +171,10 @@ export default function HtmlFormatter() {
           </TabsContent>
         </Tabs>
       </div>
-
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
       <section className="mt-12 space-y-8">
         {/* 사용 팁 & 주요 기능 */}
         <div className="p-8 bg-white rounded-2xl border border-slate-200 shadow-sm space-y-6">

@@ -19,6 +19,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import AdfitBanner from "@/components/AdfitBanner";
 
 export default function FileRenameTool() {
   const [files, setFiles] = useState<File[]>([]);
@@ -123,7 +124,10 @@ export default function FileRenameTool() {
           </div>
         </CardContent>
       </Card>
-
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
       {/* 파일 리스트 부분 */}
       {files.length > 0 && (
         <Card className="border-slate-200 shadow-xl">

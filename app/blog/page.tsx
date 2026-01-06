@@ -207,7 +207,10 @@ export default function BlogListPage() {
             </div>
           )}
         </div>
-
+        {/* --- [중단 광고 영역] --- */}
+        <div className="flex justify-center my-6">
+          <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+        </div>
         {/* 더 보기 버튼 섹션 */}
         {hasMore && (
           <div className="mt-16 text-center">
