@@ -85,10 +85,6 @@ export default function Home() {
           </div>
         </section>
 
-        <div className="flex justify-center pt-4">
-          <AdfitBanner unitId="DAN-RkBgiiSiYAZnCxZM" width="728" height="90" />
-        </div>
-
         {/* 3. 직장인 & 일상 도구 */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
