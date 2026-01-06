@@ -115,9 +115,6 @@ export default function Home() {
             <ToolCard title="파일 이름 일괄 변경" desc="여러 파일의 이름을 규칙에 따라 일괄 변경" href="/file-rename" />
           </div>
         </section>
-        <div className="flex justify-center my-6">
-          <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="250" height="250" />
-        </div>
         {/* 4. 블로그 인사이트 리스트 (세로형 정렬) */}
         <section className="space-y-8">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -176,6 +173,11 @@ export default function Home() {
             )}
           </div>
         </section>
+      </div>
+
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
       </div>
 
       {/* 5. SEO 전문 가이드 (애드센스용 텍스트 전체 복구) */}
