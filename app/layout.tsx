@@ -46,6 +46,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           ToolBox
         </header>
 
+        {/* --- [상단 광고 영역] --- */}
+        <div className="flex justify-center pt-4">
+          <AdfitBanner unitId="DAN-1yUAoORabCnnrf2E" width="728" height="90" />
+        </div>
+
         {/* 핵심 수정 부분: 컨테이너 추가 */}
         <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-start gap-4">
           {/* 1. 메인 본문 (왼쪽) */}
@@ -53,11 +58,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* 2. 사이드바 광고 (오른쪽) */}
           <aside className="hidden lg:block w-[160px] shrink-0 sticky top-24 pt-6">
-            <AdfitBanner unitId="DAN-IgYCG7rmtBGYHMD8" />
-            <p className="text-[10px] text-slate-300 text-center mt-2 uppercase tracking-widest font-bold">
-              Advertisement
-            </p>
+            <AdfitBanner unitId="DAN-IgYCG7rmtBGYHMD8" width="160" height="600" />
           </aside>
+        </div>
+
+        {/* --- [메인 하단 광고 영역] --- */}
+        <div className="flex justify-center py-8">
+          <AdfitBanner unitId="DAN-UEfYymEu5Dbb6VvG" width="728" height="90" />
         </div>
 
         <footer className="p-10 border-t bg-white text-center space-y-4">
