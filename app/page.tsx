@@ -20,6 +20,7 @@ import {
 import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
 import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
+import AdfitBanner from "@/components/AdfitBanner";
 
 interface Post {
   id: string;
@@ -61,6 +62,11 @@ export default function Home() {
           복잡한 설치 없이 브라우저에서 바로 사용하는 스마트한 도구 모음
         </p>
       </section>
+
+      {/* --- [상단 광고 영역] --- */}
+      <div className="flex justify-center pt-4">
+        <AdfitBanner unitId="DAN-1yUAoORabCnnrf2E" width="728" height="90" />
+      </div>
 
       <div className="w-full max-w-5xl space-y-16">
         {/* 2. 웹 개발 도구 */}
@@ -109,7 +115,9 @@ export default function Home() {
             <ToolCard title="파일 이름 일괄 변경" desc="여러 파일의 이름을 규칙에 따라 일괄 변경" href="/file-rename" />
           </div>
         </section>
-
+        <div className="flex justify-center my-6">
+          <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="250" height="250" />
+        </div>
         {/* 4. 블로그 인사이트 리스트 (세로형 정렬) */}
         <section className="space-y-8">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
@@ -267,7 +275,10 @@ export default function Home() {
             </div>
           </div>
         </div>
-
+        {/* --- [메인 하단 광고 영역] --- */}
+        <div className="flex justify-center py-8">
+          <AdfitBanner unitId="DAN-UEfYymEu5Dbb6VvG" width="728" height="90" />
+        </div>
         <div className="bg-blue-600 rounded-[2.5rem] p-10 text-white space-y-6">
           <h3 className="text-2xl font-bold">자주 묻는 질문 (FAQ)</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-blue-100">
