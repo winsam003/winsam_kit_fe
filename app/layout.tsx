@@ -6,6 +6,7 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import Link from "next/link";
 import AdfitBanner from "@/components/AdfitBanner";
+import AdfitInitializer from "@/components/AdfitInitializer";
 
 export const metadata: Metadata = {
   title: "WinSam Toolbox - 무료 온라인 툴박스 | 글자수 세기, 이미지 압축, JSON 정렬",
@@ -25,27 +26,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <head>
-        <Script
+        <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8286025705631064"
           crossOrigin="anonymous"
-          strategy="afterInteractive" // 페이지가 로드된 후 부드럽게 광고 스크립트 실행
-        />
-        {/* <Script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async /> */}
+        ></script>
+        <Script src="//t1.daumcdn.net/kas/static/ba.min.js" strategy="lazyOnload" />
         <meta name="google-adsense-account" content="ca-pub-8286025705631064" />
-
         <meta name="naver-site-verification" content="8b1b18aafcee1dc9b2566d0485845c09eb102599" />
-
         <meta name="google-site-verification" content="RNkeSZzWbR8T4Pp_OTNspdHciimBargpK1SBOpatEyY" />
       </head>
       <body className="antialiased bg-slate-50" suppressHydrationWarning={true}>
         <Analytics />
+
         <header className="p-4 border-b bg-white font-bold flex items-center justify-center gap-2">
-          {/* 2. 로고 이미지 추가 */}
           <Image src="/favicon.ico" alt="로고" width={34} height={34} />
           ToolBox
         </header>
-        {/* 1. 히어로 섹션 */}
+
         <section className="text-center space-y-3 py-10">
           <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900">
             무료 온라인 <span className="text-blue-600">툴박스</span>
@@ -55,17 +53,47 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </p>
         </section>
 
-        {/* --- [상단 광고 영역] --- */}
-        <div className="flex justify-center pt-4">
-          <AdfitBanner unitId="DAN-1yUAoORabCnnrf2E" width="728" height="90" />
+        {/* 상단 광고 - 중앙 정렬 컨테이너 적용 */}
+        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+          <div className="flex justify-center pt-4">
+            <AdfitBanner unitId="DAN-1yUAoORabCnnrf2E" width="728" height="90" />
+          </div>
         </div>
 
-        {/* 핵심 수정 부분: 컨테이너 추가 */}
-        <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-start gap-4">
-          {/* 1. 메인 본문 (왼쪽) */}
-          <main className="w-full flex-1 min-h-screen">{children}</main>
+        {/* 메인 레이아웃 컨테이너 */}
+        <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-start gap-4 px-4 md:px-6 mt-8">
+          <main className="w-full flex-1 min-h-screen">
+            {/* 1. 실제 페이지 콘텐츠 */}
+            {children}
 
-          {/* 2. 사이드바 광고 (오른쪽) */}
+            {/* 2. 메인 하단 광고 (본문 너비에 맞춤) */}
+            <div className="flex justify-center py-12">
+              <AdfitBanner unitId="DAN-UEfYymEu5Dbb6VvG" width="728" height="90" />
+            </div>
+
+            {/* 3. FAQ 섹션 (본문 너비에 맞춤) */}
+            <div className="bg-blue-600 rounded-[2.5rem] p-8 md:p-12 text-white space-y-6 mb-20">
+              <h3 className="text-2xl font-bold">자주 묻는 질문 (FAQ)</h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-blue-100">
+                <div className="space-y-2">
+                  <h4 className="text-white font-bold">Q: 왜 회원가입이 없나요?</h4>
+                  <p className="text-sm leading-relaxed">
+                    우리는 도구가 본질이 '즉시성'에 있다고 생각합니다. 계정 생성이라는 장벽을 제거하여 누구나 필요할 때
+                    바로 도구를 사용할 수 있는 환경을 추구합니다.
+                  </p>
+                </div>
+                <div className="space-y-2">
+                  <h4 className="text-white font-bold">Q: 모바일에서도 사용 가능한가요?</h4>
+                  <p className="text-sm leading-relaxed">
+                    네, WinSam Toolbox는 <strong>반응형 웹 디자인</strong>으로 제작되었습니다. 스마트폰, 태블릿,
+                    데스크톱 등 모든 기기에서 최적화된 화면으로 이용 가능합니다.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </main>
+
+          {/* 오른쪽 사이드바 광고 */}
           <aside className="hidden lg:block w-[160px] shrink-0 sticky top-24 pt-6">
             <AdfitBanner unitId="DAN-IgYCG7rmtBGYHMD8" width="160" height="600" />
           </aside>
@@ -79,7 +107,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/terms" className="hover:text-blue-600 transition-colors">
               이용약관
             </Link>
-            {/* 나중에 이메일 문의용으로 활용 가능 */}
             <a
               href="https://docs.google.com/forms/d/e/1FAIpQLSfeaJDRwz5O4Svn77LTWjtAGakGzKDKCITVrNpB4QZdy6gLww/viewform?usp=header"
               target="_blank"

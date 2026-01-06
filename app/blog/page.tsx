@@ -6,6 +6,7 @@ import { collection, query, orderBy, getDocs, limit, startAfter, QueryDocumentSn
 import Link from "next/link";
 import { Calendar, User, ChevronRight, BookOpen, ChevronLeft, Plus, PenLine } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import AdfitBanner from "@/components/AdfitBanner";
 
 interface Post {
   id: string;
@@ -229,7 +230,6 @@ export default function BlogListPage() {
             </Button>
           </div>
         )}
-
         {!hasMore && posts.length > 0 && (
           <div className="mt-20 flex flex-col items-center gap-4">
             <div className="w-12 h-1px bg-slate-200"></div>

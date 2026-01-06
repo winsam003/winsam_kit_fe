@@ -262,29 +262,6 @@ export default function Home() {
             </div>
           </div>
         </div>
-        {/* --- [메인 하단 광고 영역] --- */}
-        <div className="flex justify-center py-8">
-          <AdfitBanner unitId="DAN-UEfYymEu5Dbb6VvG" width="728" height="90" />
-        </div>
-        <div className="bg-blue-600 rounded-[2.5rem] p-10 text-white space-y-6">
-          <h3 className="text-2xl font-bold">자주 묻는 질문 (FAQ)</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-blue-100">
-            <div className="space-y-2">
-              <h4 className="text-white font-bold">Q: 왜 회원가입이 없나요?</h4>
-              <p className="text-sm leading-relaxed">
-                우리는 도구가 본질이 '즉시성'에 있다고 생각합니다. 계정 생성이라는 장벽을 제거하여 누구나 필요할 때 바로
-                도구를 사용할 수 있는 환경을 추구합니다.
-              </p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="text-white font-bold">Q: 모바일에서도 사용 가능한가요?</h4>
-              <p className="text-sm leading-relaxed">
-                네, WinSam Toolbox는 <strong>반응형 웹 디자인</strong>으로 제작되었습니다. 스마트폰, 태블릿, 데스크톱 등
-                모든 기기에서 최적화된 화면으로 이용 가능합니다.
-              </p>
-            </div>
-          </div>
-        </div>
       </section>
     </div>
   );
