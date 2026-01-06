@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 
 declare global {
   interface Window {
@@ -8,43 +9,56 @@ declare global {
   }
 }
 
-interface AdfitBannerProps {
-  unitId: string;
-  width: string; // 너비 추가
-  height: string; // 높이 추가
-}
-
-export default function AdfitBanner({ unitId, width, height }: AdfitBannerProps) {
-  const adRef = useRef<boolean>(false);
+export default function AdfitBanner({ unitId, width, height }: { unitId: string; width: string; height: string }) {
+  const pathname = usePathname();
+  const adRef = useRef<HTMLModElement>(null);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    // 윈도우 객체에 adfit이 로드되었는지 확인하고 실행
-    const displayAd = () => {
-      if (window.adfit) {
-        console.log(unitId, "광고 display 실행");
-        window.adfit.display();
+    setMounted(true);
+
+    const callAdfit = () => {
+      // 1. adfit이 있고, 현재 광고 태그가 DOM에 존재하는지 확인
+      if (window.adfit && typeof window.adfit.display === "function" && adRef.current) {
+        // 2. 중요: 뒤로가기 시 이미 그려진 상태를 초기화해야 다시 그려줌
+        adRef.current.innerHTML = "";
+        adRef.current.removeAttribute("data-ad-status");
+
+        try {
+          window.adfit.display();
+        } catch (e) {
+          console.error("Adfit display error:", e);
+        }
       }
     };
 
-    // 스크립트 중복 로드 방지 및 로드 완료 후 실행
-    if (!document.querySelector('script[src*="daumcdn.net/kas/static/ba.min.js"]')) {
-      const script = document.createElement("script");
-      script.src = "//t1.daumcdn.net/kas/static/ba.min.js";
+    // 3. 스크립트 관리
+    const scriptUrl = "//t1.daumcdn.net/kas/static/ba.min.js";
+    let script = document.querySelector(`script[src*="${scriptUrl}"]`) as HTMLScriptElement;
+
+    if (!script) {
+      script = document.createElement("script");
+      script.src = scriptUrl;
       script.async = true;
-      script.onload = displayAd; // 스크립트 로드 완료되면 실행
+      script.onload = () => setTimeout(callAdfit, 500);
       document.body.appendChild(script);
     } else {
-      displayAd(); // 이미 스크립트가 있다면 바로 실행
+      // 이미 스크립트가 있다면 DOM이 완전히 그려질 시간을 조금 준 뒤 호출
+      const timer = setTimeout(callAdfit, 500);
+      return () => clearTimeout(timer);
     }
+  }, [pathname, unitId]); // ★ 경로가 바뀔 때마다 무조건 다시 실행
 
-    return () => {
-      adRef.current = true;
-    };
-  }, [unitId]); // unitId가 바뀌면 재실행
+  if (!mounted) return <div style={{ minHeight: `${height}px` }} />;
 
   return (
-    <div className="flex justify-center w-full overflow-hidden" style={{ minHeight: `${height}px` }}>
+    <div
+      key={`${pathname}-${unitId}`} // ★ 경로가 바뀌면 컴포넌트를 아예 새로 태어나게 함
+      className="flex justify-center w-full overflow-hidden"
+      style={{ minHeight: `${height}px` }}
+    >
       <ins
+        ref={adRef}
         className="kakao_ad_area"
         style={{ display: "none" }}
         data-ad-unit={unitId}

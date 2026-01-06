@@ -31,7 +31,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           strategy="afterInteractive" // 페이지가 로드된 후 부드럽게 광고 스크립트 실행
         />
-        <Script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async />
+        {/* <Script type="text/javascript" src="//t1.daumcdn.net/kas/static/ba.min.js" async /> */}
         <meta name="google-adsense-account" content="ca-pub-8286025705631064" />
 
         <meta name="naver-site-verification" content="8b1b18aafcee1dc9b2566d0485845c09eb102599" />
@@ -45,6 +45,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Image src="/favicon.ico" alt="로고" width={34} height={34} />
           ToolBox
         </header>
+        {/* 1. 히어로 섹션 */}
+        <section className="text-center space-y-3 py-10">
+          <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900">
+            무료 온라인 <span className="text-blue-600">툴박스</span>
+          </h1>
+          <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto">
+            복잡한 설치 없이 브라우저에서 바로 사용하는 스마트한 도구 모음
+          </p>
+        </section>
+
+        {/* --- [상단 광고 영역] --- */}
+        <div className="flex justify-center pt-4">
+          <AdfitBanner unitId="DAN-1yUAoORabCnnrf2E" width="728" height="90" />
+        </div>
 
         {/* 핵심 수정 부분: 컨테이너 추가 */}
         <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-start gap-4">

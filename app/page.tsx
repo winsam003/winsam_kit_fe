@@ -53,21 +53,6 @@ export default function Home() {
 
   return (
     <div className="p-6 md:p-10 space-y-12 flex flex-col items-center bg-slate-50/30 min-h-screen">
-      {/* 1. 히어로 섹션 */}
-      <section className="text-center space-y-3 py-10">
-        <h1 className="text-4xl md:text-5xl font-black tracking-tight text-slate-900">
-          무료 온라인 <span className="text-blue-600">툴박스</span>
-        </h1>
-        <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto">
-          복잡한 설치 없이 브라우저에서 바로 사용하는 스마트한 도구 모음
-        </p>
-      </section>
-
-      {/* --- [상단 광고 영역] --- */}
-      <div className="flex justify-center pt-4">
-        <AdfitBanner unitId="DAN-1yUAoORabCnnrf2E" width="728" height="90" />
-      </div>
-
       <div className="w-full max-w-5xl space-y-16">
         {/* 2. 웹 개발 도구 */}
         <section className="space-y-6">
@@ -99,6 +84,10 @@ export default function Home() {
             />
           </div>
         </section>
+
+        <div className="flex justify-center pt-4">
+          <AdfitBanner unitId="DAN-RkBgiiSiYAZnCxZM" width="728" height="90" />
+        </div>
 
         {/* 3. 직장인 & 일상 도구 */}
         <section className="space-y-6">
