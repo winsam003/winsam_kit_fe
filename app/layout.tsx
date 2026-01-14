@@ -94,40 +94,47 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </aside>
         </div>
 
-        <footer className="p-10 border-t bg-white text-center space-y-8">
-          <div className="flex flex-col items-center gap-6">
-            {/* 강조된 문의하기 버튼 섹션 */}
-            <div className="flex flex-col items-center gap-3">
-              <p className="text-sm font-bold text-slate-500">도구가 더 필요하신가요?</p>
+        <footer className="mt-20 border-t bg-white">
+          {/* 기능 제안 유도 섹션 */}
+          <div className="max-w-[1280px] mx-auto px-4 md:px-6 py-12">
+            <div className="bg-blue-50/50 rounded-[2rem] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 border border-blue-100 shadow-sm">
+              <div className="space-y-2 text-center md:text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-[10px] font-black uppercase tracking-wider mb-2">
+                  User Feedback
+                </div>
+                <h3 className="text-2xl font-black text-slate-900 tracking-tight">도구가 더 필요하신가요?</h3>
+                <p className="text-slate-600 font-medium leading-relaxed">
+                  아이디어를 제안해 주세요. 검토 후 즉시 개발하여 업데이트해 드립니다.
+                </p>
+              </div>
+
+              {/* 강조된 버튼: 블루 -> 네이비 호버 */}
               <a
                 href="https://docs.google.com/forms/d/e/1FAIpQLSfeaJDRwz5O4Svn77LTWjtAGakGzKDKCITVrNpB4QZdy6gLww/viewform?usp=header"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group relative inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-full font-black text-lg shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-xl hover:-translate-y-1 transition-all active:scale-95"
+                className="w-full md:w-auto px-10 py-5 bg-blue-600 text-white rounded-[1.2rem] font-black text-lg shadow-xl shadow-blue-200 hover:bg-slate-900 hover:shadow-blue-100 transition-all duration-300 flex items-center justify-center gap-3 group"
               >
-                <span className="relative flex h-3 w-3">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-100 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
-                </span>
                 새로운 기능 제안하기
+                <span className="text-blue-200 group-hover:text-white group-hover:translate-x-1 transition-all">→</span>
               </a>
-            </div>
-
-            {/* 보조 링크들 */}
-            <div className="flex justify-center gap-8 text-sm font-medium text-slate-400 mt-4">
-              <Link href="/privacy" className="hover:text-slate-900 transition-colors">
-                개인정보처리방침
-              </Link>
-              <div className="w-px h-4 bg-slate-200 self-center" />
-              <Link href="/terms" className="hover:text-slate-900 transition-colors">
-                이용약관
-              </Link>
             </div>
           </div>
 
-          <div className="space-y-1">
-            <p className="text-[10px] text-slate-300 tracking-widest uppercase font-bold">Safe & Private Toolbox</p>
-            <p className="text-xs text-slate-400">© 2026 WinSam Toolbox. All rights reserved.</p>
+          {/* 하단 정보 섹션 */}
+          <div className="border-t border-slate-50 py-10 text-center space-y-4">
+            <div className="flex justify-center gap-8 text-[13px] font-bold text-slate-400">
+              <Link href="/privacy" className="hover:text-blue-600 transition-colors">
+                개인정보처리방침
+              </Link>
+              <Link href="/terms" className="hover:text-blue-600 transition-colors">
+                이용약관
+              </Link>
+            </div>
+            <div className="space-y-1">
+              <p className="text-[10px] text-slate-200 tracking-[0.3em] font-black uppercase">WinSam Toolbox System</p>
+              <p className="text-[11px] text-slate-400 font-medium">© 2026 WinSam Toolbox. All rights reserved.</p>
+            </div>
           </div>
         </footer>
 
