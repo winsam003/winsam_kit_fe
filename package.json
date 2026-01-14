@@ -9,6 +9,9 @@
     "lint": "eslint",
     "postbuild": "next-sitemap"
   },
+  "config": {
+    "npm_config_legacy_peer_deps": "true"
+  },
   "dependencies": {
     "@radix-ui/react-label": "^2.1.8",
     "@radix-ui/react-select": "^2.2.6",
