@@ -94,24 +94,41 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </aside>
         </div>
 
-        <footer className="p-10 border-t bg-white text-center space-y-4">
-          <div className="flex justify-center gap-6 text-sm font-medium text-slate-600">
-            <Link href="/privacy" className="hover:text-blue-600 transition-colors">
-              개인정보처리방침
-            </Link>
-            <Link href="/terms" className="hover:text-blue-600 transition-colors">
-              이용약관
-            </Link>
-            <a
-              href="https://docs.google.com/forms/d/e/1FAIpQLSfeaJDRwz5O4Svn77LTWjtAGakGzKDKCITVrNpB4QZdy6gLww/viewform?usp=header"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-blue-600 transition-colors"
-            >
-              문의하기
-            </a>
+        <footer className="p-10 border-t bg-white text-center space-y-8">
+          <div className="flex flex-col items-center gap-6">
+            {/* 강조된 문의하기 버튼 섹션 */}
+            <div className="flex flex-col items-center gap-3">
+              <p className="text-sm font-bold text-slate-500">도구가 더 필요하신가요?</p>
+              <a
+                href="https://docs.google.com/forms/d/e/1FAIpQLSfeaJDRwz5O4Svn77LTWjtAGakGzKDKCITVrNpB4QZdy6gLww/viewform?usp=header"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative inline-flex items-center gap-2 px-8 py-4 bg-blue-600 text-white rounded-full font-black text-lg shadow-lg shadow-blue-200 hover:bg-blue-700 hover:shadow-xl hover:-translate-y-1 transition-all active:scale-95"
+              >
+                <span className="relative flex h-3 w-3">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-100 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3 w-3 bg-white"></span>
+                </span>
+                새로운 기능 제안하기
+              </a>
+            </div>
+
+            {/* 보조 링크들 */}
+            <div className="flex justify-center gap-8 text-sm font-medium text-slate-400 mt-4">
+              <Link href="/privacy" className="hover:text-slate-900 transition-colors">
+                개인정보처리방침
+              </Link>
+              <div className="w-px h-4 bg-slate-200 self-center" />
+              <Link href="/terms" className="hover:text-slate-900 transition-colors">
+                이용약관
+              </Link>
+            </div>
           </div>
-          <p className="text-xs text-gray-400">© 2026 WinSam Toolbox. All rights reserved.</p>
+
+          <div className="space-y-1">
+            <p className="text-[10px] text-slate-300 tracking-widest uppercase font-bold">Safe & Private Toolbox</p>
+            <p className="text-xs text-slate-400">© 2026 WinSam Toolbox. All rights reserved.</p>
+          </div>
         </footer>
 
         <ScrollButtons />
