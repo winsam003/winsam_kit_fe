@@ -62,6 +62,11 @@ export default function Home() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <ToolCard title="제이슨 데이터 정렬" desc="JSON 포맷팅 및 문법 검사" href="/json-formatter" />
+            <ToolCard
+              title="텍스트 비교 도구"
+              desc="두 텍스트 사이의 차이점을 라인 단위로 비교합니다."
+              href="/diff-checker"
+            />
             <ToolCard title="내 아이피 확인" desc="내 공인 아이피 확인" href="/my-ip" />
             <ToolCard
               title="HTML 테이블 빌더"
