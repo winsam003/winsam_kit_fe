@@ -106,6 +106,30 @@ export default function Home() {
             <ToolCard title="PDF 페이지 추출" desc="PDF에서 특정 페이지만 별도 저장" href="/pdf-viewer" />
             <ToolCard title="PDF 페이지 회전" desc="PDF에서 페이지 회전" href="/pdf-rotate" />
             <ToolCard title="파일 이름 일괄 변경" desc="여러 파일의 이름을 규칙에 따라 일괄 변경" href="/file-rename" />
+            <ToolCard
+              title="리그오브레전드 팀분석"
+              desc="소환사 전적 및 팀 시너지 분석"
+              href="https://lol.winsam.xyz"
+              target="_blank"
+            />
+            <ToolCard
+              title="로또 명당 찾기"
+              desc="내 주변 당첨 확률 높은 명당 지도"
+              href="https://lotto-good-place.winsam.xyz"
+              target="_blank"
+            />
+            <ToolCard
+              title="뜨개질 도안 찾기"
+              desc="코바늘/대바늘 무료 도안 검색"
+              href="https://crochet.winsam.xyz"
+              target="_blank"
+            />
+            <ToolCard
+              title="Yes or Yes"
+              desc="하나만 선택해 어서 yes or yes"
+              href="https://yesoryes.winsam.xyz/make"
+              target="_blank"
+            />
           </div>
         </section>
         {/* 4. 블로그 인사이트 리스트 (세로형 정렬) */}
@@ -275,7 +299,20 @@ export default function Home() {
   );
 }
 
-function ToolCard({ title, desc, href }: { title: string; desc: string; href: string }) {
+function ToolCard({
+  title,
+  desc,
+  href,
+  target
+}: {
+  title: string;
+  desc: string;
+  href: string;
+  target?: string;
+}) {
+  // 버튼 클릭 시 새창/현재창 이동을 처리하는 공통 로직
+  const isExternal = target === "_blank";
+
   return (
     <Card className="hover:shadow-xl transition-all duration-300 border-slate-200 group flex flex-col h-full">
       <CardHeader className="flex-1">
@@ -283,11 +320,20 @@ function ToolCard({ title, desc, href }: { title: string; desc: string; href: st
         <CardDescription className="pt-2">{desc}</CardDescription>
       </CardHeader>
       <CardContent className="pt-0">
-        <Link href={href}>
-          <Button className="w-full bg-slate-900 hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
-            사용하기 <ChevronRight className="w-4 h-4" />
-          </Button>
-        </Link>
+        {/* 외부 링크면 <a>, 내부 링크면 <Link> 사용 */}
+        {isExternal ? (
+          <a href={href} target="_blank" rel="noopener noreferrer">
+            <Button className="w-full bg-slate-900 hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
+              사용하기 <ChevronRight className="w-4 h-4" />
+            </Button>
+          </a>
+        ) : (
+          <Link href={href}>
+            <Button className="w-full bg-slate-900 hover:bg-blue-600 transition-colors flex items-center justify-center gap-2">
+              사용하기 <ChevronRight className="w-4 h-4" />
+            </Button>
+          </Link>
+        )}
       </CardContent>
     </Card>
   );
