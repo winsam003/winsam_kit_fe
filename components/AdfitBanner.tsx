@@ -8,6 +8,8 @@ interface AdfitBannerProps {
   height: string;
 }
 
+const SHOW_ADS = false;
+
 export default function AdfitBanner({ unitId, width, height }: AdfitBannerProps) {
   const adContainerRef = useRef<HTMLDivElement>(null);
 
@@ -44,6 +46,8 @@ export default function AdfitBanner({ unitId, width, height }: AdfitBannerProps)
       }
     };
   }, [unitId]); // unitId가 변경될 때마다(혹은 마운트될 때마다) 실행
+
+  if (!SHOW_ADS) return null;
 
   return <div ref={adContainerRef} className="flex justify-center w-full" style={{ minHeight: `${height}px` }} />;
 }

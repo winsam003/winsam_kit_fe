@@ -90,9 +90,9 @@ export default function Home() {
           </div>
         </section>
         {/* 2. 메인 하단 광고 (본문 너비에 맞춤) */}
-        {/* <div className="flex justify-center py-12">
+        <div className="flex justify-center py-12">
           <AdfitBanner unitId="DAN-UEfYymEu5Dbb6VvG" width="728" height="90" />
-        </div> */}
+        </div>
         {/* 2. 직장인 & 일상 도구 (단일 툴 위주로 정리) */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
@@ -203,9 +203,9 @@ export default function Home() {
       </div>
 
       {/* --- [중단 광고 영역] --- */}
-      {/* <div className="flex justify-center my-6">
+      <div className="flex justify-center my-6">
         <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
-      </div> */}
+      </div>
 
       {/* 5. SEO 전문 가이드 (애드센스용 텍스트 전체 복구) */}
       <section className="max-w-5xl w-full mt-20 mb-20 space-y-16">

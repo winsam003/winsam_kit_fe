@@ -55,11 +55,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </section>
 
         {/* 상단 광고 - 중앙 정렬 컨테이너 적용 */}
-        {/* <div className="max-w-[1280px] mx-auto px-4 md:px-6">
+        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
           <div className="flex justify-center pt-4">
             <AdfitBanner unitId="DAN-1yUAoORabCnnrf2E" width="728" height="90" />
           </div>
-        </div> */}
+        </div>
 
         {/* 메인 레이아웃 컨테이너 */}
         <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-start gap-4 px-4 md:px-6 mt-8">
@@ -90,9 +90,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </main>
 
           {/* 오른쪽 사이드바 광고 */}
-          {/* <aside className="hidden lg:block w-[160px] shrink-0 sticky top-24 pt-6">
+          <aside className="hidden lg:block w-[160px] shrink-0 sticky top-24 pt-6">
             <AdfitBanner unitId="DAN-IgYCG7rmtBGYHMD8" width="160" height="600" />
-          </aside> */}
+          </aside>
         </div>
 
         <footer className="mt-20 border-t bg-white">
