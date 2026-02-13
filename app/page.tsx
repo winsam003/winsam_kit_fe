@@ -93,7 +93,7 @@ export default function Home() {
         {/* <div className="flex justify-center py-12">
           <AdfitBanner unitId="DAN-UEfYymEu5Dbb6VvG" width="728" height="90" />
         </div> */}
-        {/* 3. 직장인 & 일상 도구 */}
+        {/* 2. 직장인 & 일상 도구 (단일 툴 위주로 정리) */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
             <Briefcase className="w-6 h-6 text-emerald-600" />
@@ -106,27 +106,37 @@ export default function Home() {
             <ToolCard title="PDF 페이지 추출" desc="PDF에서 특정 페이지만 별도 저장" href="/pdf-viewer" />
             <ToolCard title="PDF 페이지 회전" desc="PDF에서 페이지 회전" href="/pdf-rotate" />
             <ToolCard title="파일 이름 일괄 변경" desc="여러 파일의 이름을 규칙에 따라 일괄 변경" href="/file-rename" />
+          </div>
+        </section>
+
+        {/* 3. WinSam 패밀리 서비스 (새로 만든 사이트들) */}
+        <section className="space-y-6">
+          <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
+            <Zap className="w-6 h-6 text-amber-500" />
+            <h2 className="text-2xl font-bold text-slate-800">WinSam 패밀리 서비스</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <ToolCard
               title="리그오브레전드 팀분석"
-              desc="소환사 전적 및 팀 시너지 분석"
+              desc="소환사 전적 및 팀 시너지 분석 전문 플랫폼"
               href="https://lol.winsam.xyz"
               target="_blank"
             />
             <ToolCard
               title="로또 명당 찾기"
-              desc="내 주변 당첨 확률 높은 명당 지도"
+              desc="전국 1등 배출 점포 기반 로또 명당 지도"
               href="https://lotto-good-place.winsam.xyz"
               target="_blank"
             />
             <ToolCard
               title="뜨개질 도안 찾기"
-              desc="코바늘/대바늘 무료 도안 검색"
+              desc="코바늘/대바늘 무료 도안 검색 및 커뮤니티"
               href="https://crochet.winsam.xyz"
               target="_blank"
             />
             <ToolCard
               title="Yes or Yes"
-              desc="하나만 선택해 어서 yes or yes"
+              desc="결정 장애를 해결해주는 심플 선택 도구"
               href="https://yesoryes.winsam.xyz/make"
               target="_blank"
             />
