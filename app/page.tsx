@@ -118,7 +118,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <ToolCard
               title="리그오브레전드 팀분석"
-              desc="소환사 전적 및 팀 시너지 분석 전문 플랫폼"
+              desc="소환사 전적 및 팀 시너지 분석 플랫폼"
               href="https://lol.winsam.xyz"
               target="_blank"
             />
@@ -136,7 +136,7 @@ export default function Home() {
             />
             <ToolCard
               title="Yes or Yes"
-              desc="결정 장애를 해결해주는 심플 선택 도구"
+              desc="하나만 선택해 어서 yes or yes"
               href="https://yesoryes.winsam.xyz/make"
               target="_blank"
             />
