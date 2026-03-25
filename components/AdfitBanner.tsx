@@ -8,7 +8,7 @@ interface AdfitBannerProps {
   height: string;
 }
 
-const SHOW_ADS = false;
+const SHOW_ADS = true;
 
 export default function AdfitBanner({ unitId, width, height }: AdfitBannerProps) {
   const adContainerRef = useRef<HTMLDivElement>(null);

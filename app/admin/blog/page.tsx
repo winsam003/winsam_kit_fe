@@ -112,7 +112,9 @@ export default function BlogListPage() {
         alert("성공적으로 삭제되었습니다.");
         setPosts(posts.filter((p) => p.id !== postId));
       } catch (error) {
+        console.log(error);
         alert("삭제 중 오류가 발생했습니다.");
+
       }
     } else if (password !== null) {
       alert("비밀번호가 올바르지 않습니다.");
@@ -180,11 +182,10 @@ export default function BlogListPage() {
 
                   <Link
                     href={`/blog/${post.slug}`}
-                    className={`block rounded-[2.5rem] p-8 border transition-all duration-500 ${
-                      isAdmin
+                    className={`block rounded-[2.5rem] p-8 border transition-all duration-500 ${isAdmin
                         ? "bg-white border-emerald-100 shadow-sm shadow-emerald-50"
                         : "bg-white border-slate-100 shadow-sm"
-                    } hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-200/60`}
+                      } hover:-translate-y-2 hover:shadow-2xl hover:shadow-slate-200/60`}
                   >
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
                       <div className="space-y-4 flex-1 md:pr-10">
