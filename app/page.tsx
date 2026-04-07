@@ -80,6 +80,11 @@ export default function Home() {
             />
             <ToolCard title="XML 뷰어 & 정렬기" desc="XML 계층 구조 확인 및 정렬" href="/xml-formatter" />
             <ToolCard title="Base64 변환기" desc="텍스트 및 이미지 인코딩/디코딩" href="/base64-converter" />
+            <ToolCard
+              title="이미지 ↔ Base64"
+              desc="이미지를 코드로 변환하거나 복원하기"
+              href="/image-base64-converter"
+            />
             <ToolCard title="해시 생성기" desc="SHA-256 등 보안 해시 생성" href="/hash-generator" />
             <ToolCard title="더미 데이터 생성" desc="개발용 로렘 입숨 텍스트 생성" href="/lorem-ipsum" />
             <ToolCard
@@ -309,17 +314,7 @@ export default function Home() {
   );
 }
 
-function ToolCard({
-  title,
-  desc,
-  href,
-  target
-}: {
-  title: string;
-  desc: string;
-  href: string;
-  target?: string;
-}) {
+function ToolCard({ title, desc, href, target }: { title: string; desc: string; href: string; target?: string }) {
   // 버튼 클릭 시 새창/현재창 이동을 처리하는 공통 로직
   const isExternal = target === "_blank";
 
