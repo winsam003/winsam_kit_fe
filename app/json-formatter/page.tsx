@@ -1,8 +1,9 @@
 "use client";
 
-import { useState } from "react";
+// useEffect를 추가로 import 합니다.
+import { useState, useEffect } from "react";
 import Link from "next/link";
-import { ChevronLeft, Copy, Check, Trash2 } from "lucide-react";
+import { ChevronLeft, Copy, Check, Trash2, Maximize2, Minimize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,6 +14,31 @@ export default function JsonFormatter() {
   const [output, setOutput] = useState("");
   const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+
+  // 크게보기(전체화면) 상태 관리
+  const [isInputFull, setIsInputFull] = useState(false);
+  const [isOutputFull, setIsOutputFull] = useState(false);
+
+  // --- [ESC 키 입력 감지 로직 추가] ---
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsInputFull(false);
+        setIsOutputFull(false);
+      }
+    };
+
+    // 전체 화면 상태일 때만 글로벌 이벤트 리스너를 등록합니다.
+    if (isInputFull || isOutputFull) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    // 컴포넌트 언마운트 시 또는 상태 변경 시 이벤트 리스너 정리(Clean-up)
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isInputFull, isOutputFull]);
+  // ------------------------------------
 
   const formatJson = () => {
     try {
@@ -35,8 +61,6 @@ export default function JsonFormatter() {
 
   return (
     <div className="max-w-7xl mx-auto p-6 space-y-6">
-      {" "}
-      {/* 전체 너비도 살짝 키움 */}
       <div className="flex items-center gap-4">
         <Link href="/">
           <Button variant="ghost" size="sm" className="gap-1">
@@ -46,11 +70,34 @@ export default function JsonFormatter() {
         </Link>
       </div>
       <h1 className="text-3xl font-bold">JSON 데이터 정렬기</h1>
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {/* Input 영역 */}
-        <Card>
+        {/* --- Input 영역 --- */}
+        <Card
+          className={
+            isInputFull ? "fixed inset-4 z-50 flex flex-col bg-white shadow-2xl border-2 border-primary" : "relative"
+          }
+        >
           <CardHeader className="flex flex-row items-center justify-between space-y-0">
-            <CardTitle>Input</CardTitle>
+            <div className="flex items-center gap-2">
+              <CardTitle>Input</CardTitle>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsInputFull(!isInputFull)}
+                className="h-7 px-2 text-xs gap-1"
+              >
+                {isInputFull ? (
+                  <>
+                    <Minimize2 className="w-3 h-3" /> 작게보기
+                  </>
+                ) : (
+                  <>
+                    <Maximize2 className="w-3 h-3" /> 크게보기
+                  </>
+                )}
+              </Button>
+            </div>
             <Button
               variant="ghost"
               size="sm"
@@ -60,10 +107,11 @@ export default function JsonFormatter() {
               <Trash2 className="w-4 h-4 mr-1" /> 비우기
             </Button>
           </CardHeader>
-          <CardContent>
+          <CardContent className={isInputFull ? "flex-1 p-4 pt-0" : ""}>
             <Textarea
-              // h-[600px]로 고정하고 내부 스크롤 활성화
-              className="font-mono h-[600px] resize-none overflow-y-auto p-4"
+              className={`font-mono resize-none overflow-y-auto p-4 ${
+                isInputFull ? "w-full h-[calc(100vh-120px)]" : "h-[600px]"
+              }`}
               placeholder="여기에 JSON을 붙여넣으세요..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
@@ -71,10 +119,32 @@ export default function JsonFormatter() {
           </CardContent>
         </Card>
 
-        {/* Output 영역 */}
-        <Card className="relative">
+        {/* --- Output 영역 --- */}
+        <Card
+          className={
+            isOutputFull ? "fixed inset-4 z-50 flex flex-col bg-white shadow-2xl border-2 border-primary" : "relative"
+          }
+        >
           <CardHeader className="flex flex-row items-center justify-between space-y-0">
-            <CardTitle>Output</CardTitle>
+            <div className="flex items-center gap-2">
+              <CardTitle>Output</CardTitle>
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => setIsOutputFull(!isOutputFull)}
+                className="h-7 px-2 text-xs gap-1"
+              >
+                {isOutputFull ? (
+                  <>
+                    <Minimize2 className="w-3 h-3" /> 작게보기
+                  </>
+                ) : (
+                  <>
+                    <Maximize2 className="w-3 h-3" /> 크게보기
+                  </>
+                )}
+              </Button>
+            </div>
             {output && (
               <Button
                 variant="outline"
@@ -87,25 +157,24 @@ export default function JsonFormatter() {
               </Button>
             )}
           </CardHeader>
-          <CardContent>
+          <CardContent className={isOutputFull ? "flex-1 p-4 pt-0" : ""}>
             <Textarea
-              // 아웃풋도 동일하게 높이 고정 및 스크롤 적용
-              className="font-mono h-[600px] bg-slate-50 resize-none overflow-y-auto p-4 cursor-default text-blue-600"
+              className={`font-mono bg-slate-50 resize-none overflow-y-auto p-4 cursor-default text-blue-600 ${
+                isOutputFull ? "w-full h-[calc(100vh-120px)]" : "h-[600px]"
+              }`}
               readOnly
               value={output}
             />
           </CardContent>
         </Card>
       </div>
+
       {error && (
         <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-600 text-center font-medium">
           {error}
         </div>
       )}
-      {/* --- [중단 광고 영역] --- */}
-      <div className="flex justify-center my-6">
-        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
-      </div>
+
       <div className="flex justify-center pt-4">
         <Button
           size="lg"
@@ -115,6 +184,13 @@ export default function JsonFormatter() {
           데이터 예쁘게 정렬하기
         </Button>
       </div>
+
+      {/* --- [중단 광고 영역] --- */}
+      <div className="flex justify-center my-6">
+        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
+      </div>
+
+      {/* 설명 및 FAQ 영역 (전체화면 시 가려짐) */}
       <div className="mt-12 space-y-8">
         <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
           <h2 className="text-2xl font-bold mb-4 text-slate-800">JSON 데이터 정렬기란 무엇인가요?</h2>
