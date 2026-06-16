@@ -63,7 +63,7 @@ export default function BlogListPage() {
         collection(db, "posts"),
         orderBy("createdAt", "desc"),
         startAfter(lastVisible),
-        limit(POSTS_PER_PAGE)
+        limit(POSTS_PER_PAGE),
       );
 
       const querySnapshot = await getDocs(nextQ);
@@ -128,10 +128,10 @@ export default function BlogListPage() {
         {/* 페이지 헤더 */}
         <div className="mb-12 px-2">
           <h1 className="text-4xl font-black text-slate-900 mb-4 tracking-tighter">
-            WinSam Insights<span className="text-emerald-500">.</span>
+            게시글<span className="text-emerald-500">.</span>
           </h1>
           <p className="text-slate-500 font-medium leading-relaxed max-w-2xl">
-            효율적인 작업을 위한 팁과 새로운 도구 소식을 만나보세요. 사용자 여러분의 소중한 경험 공유를 환영합니다.
+            사용자 여러분의 소중한 경험 공유를 환영합니다.
           </p>
         </div>
 

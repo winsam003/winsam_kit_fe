@@ -152,7 +152,7 @@ export default function Home() {
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-6 bg-blue-600 rounded-full" />
-              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">최신 인사이트</h2>
+              <h2 className="text-2xl font-bold text-slate-900 tracking-tight">최신 게시글</h2>
             </div>
             <Link href="/blog" className="text-sm font-semibold text-blue-600 hover:underline flex items-center gap-1">
               전체보기 <ArrowRight className="w-4 h-4" />
@@ -213,7 +213,7 @@ export default function Home() {
       </div>
 
       {/* 5. SEO 전문 가이드 (애드센스용 텍스트 전체 복구) */}
-      <section className="max-w-5xl w-full mt-20 mb-20 space-y-16">
+      {/* <section className="max-w-5xl w-full mt-20 mb-20 space-y-16">
         <div className="text-center space-y-6">
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
             WinSam Toolbox: 디지털 생산성을 극대화하는 올인원 플랫폼
@@ -309,7 +309,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
