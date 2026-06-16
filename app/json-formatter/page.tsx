@@ -19,7 +19,28 @@ export default function JsonFormatter() {
   const [isInputFull, setIsInputFull] = useState(false);
   const [isOutputFull, setIsOutputFull] = useState(false);
 
-  // --- [ESC 키 입력 감지 로직 추가] ---
+  // --- [💡 실시간 JSON 정렬 로직 추가] ---
+  useEffect(() => {
+    // 인풋 창이 비어있으면 아웃풋과 에러도 깔끔하게 비워줌
+    if (!input.trim()) {
+      setOutput("");
+      setError("");
+      return;
+    }
+
+    try {
+      const jsonObj = JSON.parse(input);
+      const formatted = JSON.stringify(jsonObj, null, 2);
+      setOutput(formatted);
+      setError(""); // 파싱 성공 시 에러 초기화
+    } catch (e) {
+      setError("올바른 JSON 형식이 아닙니다.");
+      setOutput(""); // 파싱 실패 시 이전 결과물 비움
+    }
+  }, [input]); // input 값이 변경될 때마다 자동 실행
+  // ------------------------------------
+
+  // --- [ESC 키 입력 감지 로직] ---
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -28,29 +49,15 @@ export default function JsonFormatter() {
       }
     };
 
-    // 전체 화면 상태일 때만 글로벌 이벤트 리스너를 등록합니다.
     if (isInputFull || isOutputFull) {
       window.addEventListener("keydown", handleKeyDown);
     }
 
-    // 컴포넌트 언마운트 시 또는 상태 변경 시 이벤트 리스너 정리(Clean-up)
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [isInputFull, isOutputFull]);
   // ------------------------------------
-
-  const formatJson = () => {
-    try {
-      setError("");
-      const jsonObj = JSON.parse(input);
-      const formatted = JSON.stringify(jsonObj, null, 2);
-      setOutput(formatted);
-    } catch (e) {
-      setError("올바른 JSON 형식이 아닙니다.");
-      setOutput("");
-    }
-  };
 
   const handleCopy = async () => {
     if (!output) return;
@@ -175,22 +182,15 @@ export default function JsonFormatter() {
         </div>
       )}
 
-      <div className="flex justify-center pt-4">
-        <Button
-          size="lg"
-          onClick={formatJson}
-          className="w-full md:w-80 h-14 text-lg shadow-xl hover:scale-105 transition-transform"
-        >
-          데이터 예쁘게 정렬하기
-        </Button>
-      </div>
+      {/* 💡 버튼이 있던 자리는 빈 패딩이나 간격으로 처리하여 깔끔하게 정리했습니다. */}
+      <div className="pt-4" />
 
       {/* --- [중단 광고 영역] --- */}
       <div className="flex justify-center my-6">
         <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
       </div>
 
-      {/* 설명 및 FAQ 영역 (전체화면 시 가려짐) */}
+      {/* 설명 및 FAQ 영역 */}
       <div className="mt-12 space-y-8">
         <section className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm">
           <h2 className="text-2xl font-bold mb-4 text-slate-800">JSON 데이터 정렬기란 무엇인가요?</h2>
