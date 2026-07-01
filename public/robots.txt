@@ -1,9 +1,18 @@
 # *
 User-agent: *
 Allow: /
+Disallow: /admin/
+Disallow: /write
+
+# Yeti
+User-agent: Yeti
+Allow: /
+Disallow: /admin/
+Disallow: /write
 
 # Host
 Host: https://winsam.xyz
 
 # Sitemaps
 Sitemap: https://winsam.xyz/sitemap.xml
+Sitemap: https://winsam.xyz/blog-sitemap.xml

@@ -6,20 +6,40 @@ import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import Link from "next/link";
 import AdfitBanner from "@/components/AdfitBanner";
-import AdfitInitializer from "@/components/AdfitInitializer";
+import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
-  // 호객 멘트 제거, 담백하게 변경
-  title: "WinSam Tools - 일상과 업무를 돕는 소소한 웹 도구",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "무료 온라인 웹 도구 모음 | WinSam Tools",
+    template: "%s | WinSam Tools",
+  },
   description:
-    "제가 쓰려고 만든 잡다한 유틸리티 모음입니다. 글자수 세기, 이미지 변환 등 가끔 필요한 기능들을 브라우저에서 편하게 사용하세요.",
-  keywords: ["웹 도구", "글자수 세기", "이미지 압축", "JSON 포맷터", "유틸리티"],
+    "글자수 세기, 이미지 압축·변환, PDF 편집, JSON·XML 정렬 등 일상과 업무에 필요한 무료 온라인 도구 모음입니다.",
+  alternates: { canonical: "/", types: { "application/rss+xml": `${SITE_URL}/rss.xml` } },
+  applicationName: SITE_NAME,
+  category: "technology",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, "max-image-preview": "large", "max-snippet": -1 },
+  },
+  verification: {
+    google: "RNkeSZzWbR8T4Pp_OTNspdHciimBargpK1SBOpatEyY",
+    other: { "naver-site-verification": "8b1b18aafcee1dc9b2566d0485845c09eb102599" },
+  },
   openGraph: {
-    title: "WinSam Tools - 웹 도구 모음",
-    description: "가끔 필요한데 찾으면 없는 도구들, 모아뒀습니다.",
-    url: "https://winsam.xyz",
-    siteName: "WinSam Tools",
+    title: "무료 온라인 웹 도구 모음 | WinSam Tools",
+    description: "설치 없이 바로 사용하는 이미지, PDF, 텍스트, 개발용 무료 웹 도구 모음입니다.",
+    url: "/",
+    siteName: SITE_NAME,
+    locale: "ko_KR",
     type: "website",
+  },
+  twitter: {
+    card: "summary",
+    title: "무료 온라인 웹 도구 모음 | WinSam Tools",
+    description: "설치 없이 바로 사용하는 이미지, PDF, 텍스트, 개발용 무료 웹 도구 모음입니다.",
   },
 };
 
@@ -35,8 +55,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <Script src="//t1.daumcdn.net/kas/static/ba.min.js" strategy="lazyOnload" />
         <meta name="google-adsense-account" content="ca-pub-8286025705631064" />
-        <meta name="naver-site-verification" content="8b1b18aafcee1dc9b2566d0485845c09eb102599" />
-        <meta name="google-site-verification" content="RNkeSZzWbR8T4Pp_OTNspdHciimBargpK1SBOpatEyY" />
       </head>
       <body className="antialiased bg-stone-50" suppressHydrationWarning={true}>
         <Analytics />
@@ -52,9 +70,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             href="/"
             className="group block text-center space-y-3 px-10 py-8 rounded-[2rem] transition-all duration-300 hover:bg-white hover:shadow-sm hover:-translate-y-0.5 active:scale-95 active:shadow-none cursor-pointer"
           >
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-stone-800 group-hover:text-stone-950 transition-colors">
+            <div className="text-3xl md:text-4xl font-bold tracking-tight text-stone-800 group-hover:text-stone-950 transition-colors">
               WinSam Tools
-            </h1>
+            </div>
             <p className="text-stone-500 text-base md:text-lg max-w-xl mx-auto group-hover:text-stone-600 transition-colors">
               일상과 업무를 돕는 소소한 웹 도구
             </p>
@@ -107,7 +125,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <div className="space-y-2 text-center md:text-left">
                 <h3 className="text-xl font-bold text-stone-800 tracking-tight">추가했으면 하는 기능이 있나요?</h3>
                 <p className="text-stone-500 text-sm leading-relaxed">
-                  "이런 거 있으면 편하겠다" 싶은 게 있다면 편하게 남겨주세요. 주말에 뚝딱 만들어보겠습니다.
+                  &quot;이런 거 있으면 편하겠다&quot; 싶은 게 있다면 편하게 남겨주세요. 주말에 뚝딱 만들어보겠습니다.
                 </p>
               </div>
 
@@ -139,6 +157,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </footer>
 
         <ScrollButtons />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebSite",
+              "@id": `${SITE_URL}/#website`,
+              url: SITE_URL,
+              name: SITE_NAME,
+              description: "일상과 업무에 필요한 무료 온라인 웹 도구 모음",
+              inLanguage: "ko-KR",
+            }).replace(/</g, "\\u003c"),
+          }}
+        />
       </body>
     </html>
   );

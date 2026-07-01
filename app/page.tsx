@@ -53,6 +53,7 @@ export default function Home() {
 
   return (
     <div className="p-6 md:p-10 space-y-12 flex flex-col items-center bg-slate-50/30 min-h-screen">
+      <h1 className="sr-only">무료 온라인 웹 도구 모음</h1>
       <div className="w-full max-w-5xl space-y-16">
         {/* 2. 웹 개발 도구 */}
         <section className="space-y-6">
