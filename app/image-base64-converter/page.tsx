@@ -192,7 +192,7 @@ export default function ImageBase64Converter() {
         <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
       </div>
 
-      {/* --- SEO 및 정보 섹션 --- */}
+      {/* --- 상세 활용 가이드 --- */}
       <section className="mt-20 space-y-12 border-t pt-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="space-y-3">

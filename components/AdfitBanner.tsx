@@ -8,15 +8,23 @@ interface AdfitBannerProps {
   height: string;
 }
 
-const SHOW_ADS = true;
+const SHOW_ADS = process.env.NEXT_PUBLIC_SHOW_ADFIT === "true";
 
 export default function AdfitBanner({ unitId, width, height }: AdfitBannerProps) {
+  if (!SHOW_ADS) return null;
+
+  return <ActiveAdfitBanner unitId={unitId} width={width} height={height} />;
+}
+
+function ActiveAdfitBanner({ unitId, width, height }: AdfitBannerProps) {
   const adContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const container = adContainerRef.current;
+
     // 1. 기존에 생성된 광고 스크립트나 태그가 있다면 초기화
-    if (adContainerRef.current) {
-      adContainerRef.current.innerHTML = "";
+    if (container) {
+      container.innerHTML = "";
     }
 
     // 2. ins 태그 생성
@@ -34,20 +42,18 @@ export default function AdfitBanner({ unitId, width, height }: AdfitBannerProps)
     script.async = true;
 
     // 4. 컨테이너에 삽입
-    if (adContainerRef.current) {
-      adContainerRef.current.appendChild(ins);
-      adContainerRef.current.appendChild(script);
+    if (container) {
+      container.appendChild(ins);
+      container.appendChild(script);
     }
 
     // 5. 클린업: 페이지를 떠날 때 광고 영역 비우기
     return () => {
-      if (adContainerRef.current) {
-        adContainerRef.current.innerHTML = "";
+      if (container) {
+        container.innerHTML = "";
       }
     };
-  }, [unitId]); // unitId가 변경될 때마다(혹은 마운트될 때마다) 실행
-
-  if (!SHOW_ADS) return null;
+  }, [height, unitId, width]);
 
   return <div ref={adContainerRef} className="flex justify-center w-full" style={{ minHeight: `${height}px` }} />;
 }

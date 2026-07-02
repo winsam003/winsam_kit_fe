@@ -167,7 +167,7 @@ export default function FileRenameTool() {
           </CardContent>
         </Card>
       )}
-      {/* --- SEO 및 정보 섹션 (파일 관리 및 SEO 전문 가이드) --- */}
+      {/* --- 파일 이름 관리 활용 가이드 --- */}
       <section className="mt-16 space-y-12 border-t pt-12 text-slate-700 font-sans">
         {/* 1. 파일 네이밍과 SEO의 상관관계 */}
         <div className="space-y-4">
@@ -210,7 +210,7 @@ export default function FileRenameTool() {
           </div>
         </div>
 
-        {/* 3. 파일 이름 작성 가이드 (전문성 강조) */}
+        {/* 3. 파일 이름 작성 가이드 (구체적 활용 안내) */}
         <div className="space-y-6 bg-slate-900 text-slate-300 p-8 rounded-3xl shadow-xl border border-slate-800">
           <h3 className="text-xl font-bold text-white">구글이 권장하는 파일 이름 작성 팁</h3>
           [Image of SEO friendly file naming conventions showing hyphens vs underscores and keyword placement]
@@ -256,10 +256,9 @@ export default function FileRenameTool() {
               <h3 className="font-bold text-emerald-900 text-xl">서버 전송 없는 로컬 파일 시스템 처리</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 파일 이름을 변경하기 위해 개인의 소중한 사진이나 문서를 서버로 업로드하는 것은 매우 위험합니다.{" "}
-                <strong>WinSam Toolbox</strong>는 브라우저의 <strong>File System API</strong> 및{" "}
-                <strong>Blob 객체</strong> 기술을 사용하여 모든 작업을 사용자의 PC 내부에서 수행합니다. 파일은 단
-                1바이트도 인터넷 망을 통해 전송되지 않으며, 원격 서버에 저장되지도 않습니다. 보안이 생명인 기업 문서나
-                개인 소장용 사진도 100% 안전하게 처리할 수 있습니다.
+                <strong>WinSam Tools</strong>는 브라우저의 <strong>File API</strong> 및{" "}
+                <strong>Blob 객체</strong>를 사용하여 브라우저에서 결과 파일을 만듭니다. 선택한 파일과 새 이름은 변환
+                서버에 저장하지 않습니다. 민감한 파일은 조직의 보안 정책과 브라우저 네트워크 요청을 한 번 더 확인하세요.
               </p>
             </div>
           </div>

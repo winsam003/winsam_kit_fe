@@ -6,8 +6,8 @@ import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { ArrowLeft, Calendar } from "lucide-react";
 import Link from "next/link";
-import AdfitBanner from "@/components/AdfitBanner";
 import { db } from "@/lib/firebase";
+import { isPublishedPost } from "@/lib/published-posts";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 interface Post {
@@ -15,12 +15,15 @@ interface Post {
   nickname: string;
   content: string;
   createdAt?: Timestamp;
+  isAdmin?: string;
 }
 
 const getPost = cache(async (slug: string): Promise<Post | null> => {
   const postQuery = query(collection(db, "posts"), where("slug", "==", slug), limit(1));
   const snapshot = await getDocs(postQuery);
-  return snapshot.empty ? null : (snapshot.docs[0].data() as Post);
+  if (snapshot.empty) return null;
+  const post = snapshot.docs[0].data() as Post;
+  return isPublishedPost({ slug, isAdmin: post.isAdmin }) ? post : null;
 });
 
 function plainText(markdown: string) {
@@ -121,7 +124,9 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
             <div className="w-8 h-8 bg-emerald-100 rounded-full flex items-center justify-center text-emerald-600 font-bold text-xs">
               {post.nickname[0]}
             </div>
-            <span className="text-slate-700 font-semibold">{post.nickname}</span>
+            <Link href="/about" className="text-slate-700 font-semibold hover:text-emerald-600">
+              {post.nickname || "WinSam 운영자"}
+            </Link>
           </div>
           <time className="flex items-center gap-1.5 text-sm" dateTime={publishedAt?.toISOString()}>
             <Calendar className="w-4 h-4" />
@@ -143,15 +148,13 @@ export default async function BlogDetailPage({ params }: { params: Promise<{ slu
         </article>
       </div>
 
-      <div className="flex justify-center my-6">
-        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
-      </div>
       <footer className="max-w-3xl mx-auto px-6 mt-20">
-        <div className="p-10 bg-slate-50 rounded-[2rem] border border-slate-100 text-center">
-          <p className="text-lg md:text-xl font-medium text-slate-700 italic leading-relaxed">
-            Simple can be harder than complex: You have to work hard to get your thinking clean to make it simple.
+        <div className="p-8 bg-slate-50 rounded-[2rem] border border-slate-100">
+          <h2 className="font-bold text-slate-800">작성 및 검토</h2>
+          <p className="text-sm text-slate-500 mt-2 leading-relaxed">
+            이 글은 WinSam Tools 운영자가 직접 작성하고 공개 전에 내용을 검토했습니다. 오류나 보완할 점은 사이트 하단의
+            의견 보내기를 통해 알려주세요.
           </p>
-          <p className="text-sm text-slate-400 mt-4 font-bold tracking-widest uppercase">— Steve Jobs</p>
         </div>
       </footer>
     </div>

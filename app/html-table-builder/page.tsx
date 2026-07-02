@@ -131,7 +131,7 @@ export default function HtmlTableBuilder() {
         </Tabs>
       )}
 
-      {/* --- SEO 및 정보 섹션 (HTML 테이블 빌더 전용) --- */}
+      {/* --- 상세 활용 가이드 (HTML 테이블 빌더 전용) --- */}
       <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
         {/* 1. 핵심 가치 제안 */}
         <div className="space-y-4">

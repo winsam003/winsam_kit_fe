@@ -1,127 +1,77 @@
 import Link from "next/link";
-import { ChevronLeft, ShieldCheck, Lock, EyeOff, Globe } from "lucide-react";
+import { ChevronLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-export default function PrivacyPolicy() {
-  const lastUpdated = "2026년 01월 02일";
+const CONTACT_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSfeaJDRwz5O4Svn77LTWjtAGakGzKDKCITVrNpB4QZdy6gLww/viewform?usp=header";
 
+export default function PrivacyPolicy() {
   return (
-    <div className="max-w-4xl mx-auto p-6 md:p-16 space-y-10 text-slate-700 leading-relaxed bg-white">
-      {/* 뒤로가기 버튼 */}
+    <article className="max-w-4xl mx-auto p-6 md:p-16 space-y-10 text-slate-700 leading-relaxed bg-white">
       <Link href="/">
-        <Button
-          variant="ghost"
-          size="sm"
-          className="gap-2 text-slate-400 hover:text-slate-900 transition-colors"
-        >
+        <Button variant="ghost" size="sm" className="gap-2 text-slate-500">
           <ChevronLeft className="w-4 h-4" /> 메인으로 돌아가기
         </Button>
       </Link>
 
-      {/* 상단 헤더 */}
-      <div className="space-y-4 border-b border-slate-100 pb-10">
-        <div className="flex items-center gap-3 text-blue-600">
-          <div className="p-2 bg-blue-50 rounded-xl">
-            <ShieldCheck className="w-8 h-8" />
-          </div>
-          <h1 className="text-4xl font-black tracking-tight text-slate-900">
-            개인정보처리방침
-          </h1>
-        </div>
-        <p className="text-lg text-slate-500 max-w-2xl">
-          WinSam Toolbox(이하 '본 사이트')는 이용자의 개인정보 보호를 최우선
-          가치로 여기며, 관련 법령을 엄격히 준수합니다.
-        </p>
-        <div className="flex items-center gap-4 text-xs text-slate-400 font-medium">
-          <span>최종 시행일: {lastUpdated}</span>
-        </div>
-      </div>
+      <header className="space-y-4 border-b border-slate-100 pb-10">
+        <h1 className="text-4xl font-black tracking-tight text-slate-900">개인정보처리방침</h1>
+        <p className="text-slate-500">시행일 및 최종 수정일: 2026년 7월 2일</p>
+      </header>
 
-      <div className="grid gap-12 text-sm md:text-base">
-        {/* 1. 수집 항목 및 방법 */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2 text-slate-900 font-bold">
-            <Lock className="w-5 h-5 text-blue-500" />
-            <h2 className="text-xl font-bold">1. 개인정보 수집 및 처리 원칙</h2>
-          </div>
-          <div className="pl-7 space-y-3 text-slate-600">
-            <p>
-              본 사이트는 이용자의 자유로운 도구 사용을 보장하기 위해{" "}
-              <strong>
-                별도의 회원가입 절차를 운영하지 않으며, 성명, 이메일, 전화번호
-                등 어떠한 개인식별정보도 강제로 수집하지 않습니다.
-              </strong>
-            </p>
-            <p className="bg-blue-50 p-4 border-l-4 border-blue-400 font-medium">
-              "중요 고지: 이용자가 도구 사용을 위해 입력하는 모든 데이터(텍스트,
-              코드, 파일 등)는 서버로 전송되지 않고 사용자의 로컬 브라우저
-              내에서만 처리됩니다."
-            </p>
-          </div>
+      <div className="space-y-10">
+        <section className="space-y-3">
+          <h2 className="text-xl font-bold text-slate-900">1. 처리하는 정보</h2>
+          <p>
+            회원가입 기능은 운영하지 않습니다. JSON·텍스트·이미지·PDF 등 변환 도구에 입력한 자료는 별도 안내가 없는 한
+            브라우저 안에서 처리되며 WinSam Tools 서버로 전송하거나 저장하지 않습니다.
+          </p>
+          <p>다음 기능과 외부 서비스에서는 서비스 제공에 필요한 정보가 처리될 수 있습니다.</p>
+          <ul className="list-disc pl-6 space-y-2">
+            <li><strong>IP 확인:</strong> ipapi.co가 IP 주소와 네트워크·대략적 지역 정보를 처리합니다.</li>
+            <li><strong>편집 게시글:</strong> 운영자가 작성한 제목, 본문, 작성자명과 작성 시각을 Firebase에 저장합니다.</li>
+            <li><strong>접속 분석:</strong> Vercel Analytics가 페이지 방문과 기기·브라우저 관련 비식별 통계를 처리할 수 있습니다.</li>
+            <li><strong>문의:</strong> Google Forms를 열어 내용을 제출하면 Google의 정책에 따라 제출 정보가 처리됩니다.</li>
+          </ul>
         </section>
 
-        {/* 2. 쿠키 및 광고 관련 (애드센스 필수 조항) */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2 text-slate-900 font-bold">
-            <Globe className="w-5 h-5 text-blue-500" />
-            <h2 className="text-xl font-bold">
-              2. 쿠키(Cookie) 및 제3자 서비스 이용
-            </h2>
-          </div>
-          <div className="pl-7 space-y-3 text-slate-600">
-            <p>
-              본 사이트는 서비스 최적화 및 광고 게재를 위해 '쿠키'를 사용합니다.
-            </p>
-            <ul className="list-disc ml-5 space-y-2">
-              <li>
-                <strong>Google AdSense:</strong> 구글은 쿠키를 사용하여 사용자의
-                이전 방문 내역을 기반으로 맞춤형 광고를 제공합니다.
-              </li>
-              <li>
-                <strong>Vercel Analytics:</strong> 사이트 방문자 수 및 트래픽
-                분석을 위해 비식별화된 로그 정보를 수집할 수 있습니다.
-              </li>
-              <li>
-                <strong>쿠키 거부:</strong> 이용자는 브라우저 설정을 통해 쿠키
-                저장을 거부할 수 있으나, 이 경우 일부 서비스 이용에 불편이 있을
-                수 있습니다.
-              </li>
-            </ul>
-          </div>
-        </section>
-
-        {/* 3. 개인정보의 제3자 제공 */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2 text-slate-900 font-bold">
-            <EyeOff className="w-5 h-5 text-blue-500" />
-            <h2 className="text-xl font-bold">3. 정보의 보관 및 제3자 제공</h2>
-          </div>
-          <p className="pl-7 text-slate-600">
-            본 사이트는 이용자의 데이터를 서버에 보관하지 않으므로, 원칙적으로
-            제3자에게 제공할 데이터 자체가 존재하지 않습니다. 단, 법령에
-            의거하여 국가기관의 요구가 있는 경우 등 예외적인 상황에 한해 절차에
-            따라 협조할 수 있습니다.
+        <section className="space-y-3">
+          <h2 className="text-xl font-bold text-slate-900">2. 광고와 쿠키</h2>
+          <p>
+            사이트는 Google AdSense 및 Kakao AdFit 광고를 사용할 수 있습니다. 광고 제공자는 쿠키, 웹 비콘, IP 주소 또는
+            기타 식별자를 이용해 광고 제공·빈도 제한·성과 측정·부정 사용 방지를 수행할 수 있습니다.
+          </p>
+          <p>
+            Google의 데이터 처리 방식은{" "}
+            <a className="text-blue-600 underline" href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">
+              파트너 사이트 또는 앱 사용 시 Google의 데이터 사용 안내
+            </a>
+            에서 확인할 수 있습니다. 브라우저 설정에서 쿠키를 차단하거나 삭제할 수 있습니다.
           </p>
         </section>
 
-        {/* 4. 문의처 (고객지원) */}
-        <section className="space-y-4">
-          <div className="flex items-center gap-2 text-slate-900 font-bold">
-            <h2 className="text-xl font-bold ml-7">4. 개인정보 보호 문의</h2>
-          </div>
-          <p className="pl-7 text-slate-600">
-            개인정보 보호와 관련하여 궁금하신 사항이나 제안은 사이트 하단의{" "}
-            <strong>[문의하기]</strong> 링크(또는 운영자 소통 채널)를 통해
-            접수해 주시기 바랍니다.
+        <section className="space-y-3">
+          <h2 className="text-xl font-bold text-slate-900">3. 보관과 제3자 처리</h2>
+          <p>
+            운영자 편집 게시글은 게시 목적이 유지되는 동안 Firebase에 보관하고, 삭제가 필요하면 운영자가 제거합니다.
+            접속 로그·광고·문의 데이터의 보관 기간과 처리 장소는 각 제공자의 정책을 따릅니다. 법령상 의무가 있는 경우를
+            제외하고, 이 방침에 적힌 목적과 무관하게 정보를 판매하지 않습니다.
           </p>
         </section>
-      </div>
 
-      <div className="pt-10 border-t border-slate-100 text-center">
-        <p className="text-xs text-slate-400 uppercase tracking-widest">
-          © 2026 WinSam Toolbox Privacy Policy
-        </p>
+        <section className="space-y-3">
+          <h2 className="text-xl font-bold text-slate-900">4. 문의 및 권리 행사</h2>
+          <p>개인정보 관련 문의, 열람 또는 삭제 요청은 아래 운영자 문의 양식으로 접수할 수 있습니다.</p>
+          <a href={CONTACT_URL} target="_blank" rel="noopener noreferrer" className="inline-flex rounded-xl bg-slate-900 text-white px-5 py-3 text-sm font-semibold">
+            운영자에게 문의하기
+          </a>
+        </section>
+
+        <section className="space-y-3">
+          <h2 className="text-xl font-bold text-slate-900">5. 방침 변경</h2>
+          <p>서비스나 외부 제공자가 변경되면 이 페이지의 내용과 최종 수정일을 함께 갱신합니다.</p>
+        </section>
       </div>
-    </div>
+    </article>
   );
 }

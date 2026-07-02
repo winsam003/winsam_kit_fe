@@ -113,7 +113,7 @@ export default function MyIPChecker() {
         </Card>
       </div>
 
-      {/* --- SEO 및 정보 섹션 (대폭 강화 버전) --- */}
+      {/* --- 상세 활용 가이드 (대폭 강화 버전) --- */}
       <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
         {/* 1. 기본 정의 섹션 */}
         <div className="space-y-4">
@@ -147,7 +147,7 @@ export default function MyIPChecker() {
             <p className="text-sm leading-relaxed">
               현재 가장 널리 쓰이는 <strong>IPv4</strong>는 0.0.0.0 형식을 가지며 약 43억 개의 주소를 생성할 수
               있습니다. 주소 부족 문제를 해결하기 위해 등장한 <strong>IPv6</strong>는 훨씬 긴 16진수 조합을 사용합니다.
-              WinSam Toolbox는 현재 가장 범용적인 IPv4 확인 기능을 우선적으로 제공합니다.
+              WinSam Tools는 현재 가장 범용적인 IPv4 확인 기능을 우선적으로 제공합니다.
             </p>
           </div>
         </div>
@@ -200,11 +200,10 @@ export default function MyIPChecker() {
           <div className="inline-block px-4 py-1.5 bg-slate-200 text-slate-700 text-xs font-bold rounded-full uppercase tracking-widest">
             Privacy First Policy
           </div>
-          <h2 className="text-xl font-bold text-slate-900">WinSam Toolbox는 데이터를 저장하지 않습니다</h2>
+          <h2 className="text-xl font-bold text-slate-900">IP 조회에 외부 서비스를 사용합니다</h2>
           <p className="max-w-2xl mx-auto text-sm text-slate-500 leading-relaxed">
-            많은 IP 조회 사이트들이 이용자의 주소와 방문 기록을 데이터베이스에 저장하지만, 저희는 개인의 프라이버시를
-            존중합니다. 조회된 IP 정보는 오직 여러분의 화면에만 표시되며, 세션을 종료하는 즉시 소멸됩니다. 안심하고
-            사용하세요.
+            IP와 네트워크 정보 확인을 위해 브라우저가 ipapi.co에 직접 요청합니다. WinSam Tools는 조회 결과를 별도 DB에
+            저장하지 않지만, 요청 처리와 로그 보관에는 ipapi.co의 개인정보처리방침이 적용됩니다.
           </p>
         </section>
       </section>

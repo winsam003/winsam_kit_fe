@@ -230,10 +230,10 @@ export default function ImageCompressor() {
 
           <Card className="bg-slate-50 border-none shadow-none">
             <CardContent className="pt-6">
-              <h3 className="font-bold text-lg mb-3 text-orange-600">🔐 완전한 보안</h3>
+              <h3 className="font-bold text-lg mb-3 text-orange-600">🔐 브라우저 내 처리</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 업로드한 이미지는 외부 서버로 전송되지 않습니다. 모든 작업이 <strong>사용자의 기기 내부</strong>에서
-                이뤄지므로 소중한 사진 정보가 유출될 걱정이 전혀 없습니다.
+                이뤄집니다. 민감한 이미지는 조직의 보안 정책과 브라우저 네트워크 요청을 직접 확인하세요.
               </p>
             </CardContent>
           </Card>

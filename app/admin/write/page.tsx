@@ -35,6 +35,7 @@ export default function AdminWritePage() {
         content,
         nickname,
         isAdmin: "Y",
+        status: "draft",
         createdAt: serverTimestamp(),
         slug:
           title
@@ -46,7 +47,7 @@ export default function AdminWritePage() {
           "-" +
           Math.random().toString(36).substring(2, 7),
       });
-      alert("관리자 포스팅이 등록되었습니다!");
+      alert("초안이 저장되었습니다. 내용 검토 후 공개 승인 목록에 추가해야 외부에 노출됩니다.");
       router.push("/admin/blog"); // 등록 후 관리 목록으로 이동
     } catch (error) {
       console.error("등록 실패:", error);
@@ -149,7 +150,7 @@ export default function AdminWritePage() {
         </form>
 
         <p className="text-center text-slate-300 text-xs font-medium">
-          작성된 글은 WinSam Insights 목록 최상단에 OFFICIAL 배지와 함께 노출됩니다.
+          저장된 글은 자동 공개되지 않습니다. 검토 후 공개 승인 목록에 slug를 추가해야 외부에 노출됩니다.
         </p>
       </div>
     </div>

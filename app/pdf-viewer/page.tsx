@@ -185,7 +185,7 @@ export default function PdfSplitter() {
         </Card>
       )}
 
-      {/* --- 설명글 섹션 (구글 애드센스 승인용 전문 텍스트) --- */}
+      {/* --- 설명글 섹션 (PDF 활용 안내) --- */}
       <div className="mt-16 space-y-12 pb-20">
         <section className="space-y-4">
           <h2 className="text-2xl font-bold text-slate-800">온라인 PDF 페이지 추출 도구 활용 가이드</h2>

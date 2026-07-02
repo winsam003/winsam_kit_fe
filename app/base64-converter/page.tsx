@@ -120,8 +120,8 @@ export default function Base64Converter() {
         </CardContent>
       </Card>
 
-      {/* --- 설명글 섹션 (구글 승인용) --- */}
-      {/* --- SEO 및 정보 섹션 (Base64 전문 가이드) --- */}
+      {/* --- 설명글 섹션 (사용자 안내) --- */}
+      {/* --- 상세 활용 가이드 (Base64 전문 가이드) --- */}
       <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
         {/* 1. Base64의 정의와 원리 */}
         <div className="space-y-4">
@@ -135,8 +135,8 @@ export default function Base64Converter() {
             <strong>Base64(베이스 육십사)</strong>는 8비트 이진 데이터(Binary Data)를 ASCII 문자 집합에 속하는 64개의
             안전한 문자만 사용하여 표현하는 인코딩 방식입니다. 웹이나 이메일 환경에서는 텍스트가 아닌 바이너리
             데이터(이미지, 실행 파일 등)를 그대로 전송할 경우 시스템 간의 해석 차이로 데이터가 깨지는 문제가 발생할 수
-            있습니다. Base64는 이러한 데이터를 모든 시스템이 공통으로 인식할 수 있는 문자로 변환하여{" "}
-            <strong>데이터의 무결성을 보장</strong>합니다.
+            있습니다. Base64는 이러한 데이터를 텍스트로 표현할 수 있게 합니다. 다만 변조 여부를 확인하려면 별도의 해시
+            검증이 필요합니다.
           </p>
         </div>
 
@@ -214,7 +214,7 @@ export default function Base64Converter() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <p className="text-sm text-slate-600 leading-relaxed">
               Base64는 암호화(Encryption)가 아닌 <strong>인코딩(Encoding)</strong>입니다. 누구나 디코딩 도구를 통해
-              원본을 볼 수 있으므로 비밀번호와 같은 민감한 정보를 저장하는 용도로 사용해서는 안 됩니다. WinSam Toolbox는
+              원본을 볼 수 있으므로 비밀번호와 같은 민감한 정보를 저장하는 용도로 사용해서는 안 됩니다. WinSam Tools는
               이러한 특성을 고려하여, 사용자가 변환하는 <strong>API 토큰, 인증 헤더 값, 소스코드</strong> 등이 서버에
               로그로 남지 않도록 설계되었습니다.
             </p>
@@ -223,9 +223,8 @@ export default function Base64Converter() {
                 <Lock className="w-4 h-4" /> Client-Side Logic Only
               </div>
               <p className="text-xs text-slate-500 leading-relaxed">
-                여러분의 데이터는 저희 서버를 스치지도 않습니다. 모든 변환 과정은 브라우저 내 자바스크립트 엔진(V8
-                등)에서 즉시 처리됩니다. 네트워크 단절 상태에서도 변환이 가능한 <strong>완전한 로컬 도구</strong>임을
-                보장합니다.
+                입력 내용의 인코딩과 디코딩은 브라우저의 자바스크립트 엔진에서 처리되며 별도 변환 서버로 보내지 않습니다.
+                페이지 로드가 끝난 뒤에는 변환 과정 자체에 네트워크 연결이 필요하지 않습니다.
               </p>
             </div>
           </div>

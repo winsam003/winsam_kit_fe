@@ -1,6 +1,7 @@
 import { collection, getDocs, limit, orderBy, query, Timestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
+import { isPublishedPost } from "@/lib/published-posts";
 
 export const dynamic = "force-dynamic";
 
@@ -10,6 +11,7 @@ interface FeedPost {
   content?: string;
   nickname?: string;
   createdAt?: Timestamp;
+  isAdmin?: string;
 }
 
 function escapeXml(value: string) {
@@ -27,7 +29,10 @@ export async function GET() {
   const snapshot = await getDocs(query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(50)));
   const items = snapshot.docs
     .map((document) => document.data() as FeedPost)
-    .filter((post): post is FeedPost & { title: string; slug: string; content: string } => Boolean(post.title && post.slug && post.content))
+    .filter(
+      (post): post is FeedPost & { title: string; slug: string; content: string } =>
+        isPublishedPost(post) && Boolean(post.title && post.slug && post.content),
+    )
     .map((post) => {
       const url = `${SITE_URL}/blog/${post.slug}`;
       return `<item><title>${escapeXml(post.title)}</title><link>${escapeXml(url)}</link><guid isPermaLink="true">${escapeXml(url)}</guid><description>${cdata(post.content)}</description>${post.nickname ? `<dc:creator>${escapeXml(post.nickname)}</dc:creator>` : ""}${post.createdAt ? `<pubDate>${post.createdAt.toDate().toUTCString()}</pubDate>` : ""}</item>`;

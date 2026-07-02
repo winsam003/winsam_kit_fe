@@ -3,7 +3,7 @@ import { ChevronLeft, FileText, Scale, ShieldAlert, BadgeCheck } from "lucide-re
 import { Button } from "@/components/ui/button";
 
 export default function TermsOfService() {
-  const lastUpdated = "2026년 01월 02일";
+  const lastUpdated = "2026년 07월 02일";
 
   return (
     <div className="max-w-4xl mx-auto p-6 md:p-16 space-y-10 text-slate-700 leading-relaxed bg-white">
@@ -23,7 +23,7 @@ export default function TermsOfService() {
           <h1 className="text-4xl font-black tracking-tight text-slate-900">서비스 이용약관</h1>
         </div>
         <p className="text-lg text-slate-500 max-w-2xl">
-          WinSam Toolbox를 이용해주셔서 감사합니다. 본 약관은 이용자가 본 사이트의 도구 및 서비스를 이용함에 있어 필요한
+          WinSam Tools를 이용해주셔서 감사합니다. 본 약관은 이용자가 본 사이트의 도구 및 서비스를 이용함에 있어 필요한
           권리와 의무를 상세히 규정합니다.
         </p>
         <div className="flex items-center gap-4 text-xs text-slate-400 font-medium">
@@ -42,7 +42,7 @@ export default function TermsOfService() {
             <h2 className="text-xl font-bold">제 1 조 (목적 및 수락)</h2>
           </div>
           <p className="pl-7 text-slate-600">
-            본 약관은 WinSam Toolbox(이하 "서비스")가 제공하는 온라인 데이터 처리 도구, 이미지 압축, 텍스트 편집 등
+            본 약관은 WinSam Tools(이하 "서비스")가 제공하는 온라인 데이터 처리 도구, 이미지 압축, 텍스트 편집 등
             일체의 웹 서비스를 이용함에 있어, 서비스 제공자와 이용자 간의 법률적 관계를 정의합니다. 귀하가 본 사이트의
             도구를 사용하는 것은 본 약관의 모든 내용을 숙지하고 동의한 것으로 간주됩니다.
           </p>
@@ -97,8 +97,8 @@ export default function TermsOfService() {
             <h2 className="text-xl font-bold">제 4 조 (제3자 광고 및 분석 도구)</h2>
           </div>
           <p className="pl-7 text-slate-600">
-            본 사이트는 지속적인 무료 서비스 유지를 위해 <strong>Google AdSense</strong> 광고를 게재합니다. 이 과정에서
-            구글은 이용자의 방문 패턴을 분석하기 위해 쿠키를 활용할 수 있으며, 관련 사항은 본 사이트의{" "}
+            본 사이트는 지속적인 무료 서비스 유지를 위해 <strong>Google AdSense 또는 Kakao AdFit</strong> 광고를 게재할 수 있습니다. 광고 제공자는
+            광고 제공과 성과 측정을 위해 쿠키 등을 활용할 수 있으며, 관련 사항은 본 사이트의{" "}
             <strong>개인정보처리방침</strong>에 상세히 기술되어 있습니다.
           </p>
         </section>
@@ -120,7 +120,7 @@ export default function TermsOfService() {
       {/* 푸터 영역 */}
       <div className="pt-12 border-t border-slate-100 text-center">
         <p className="text-sm text-slate-400 italic">
-          본 이용약관은 대한민국 법령을 준수하며, 2026년 1월 2일부터 시행됩니다.
+          본 이용약관은 2026년 7월 2일부터 시행됩니다.
         </p>
       </div>
     </div>

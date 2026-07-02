@@ -100,7 +100,7 @@ export default function HashGenerator() {
           </div>
         </CardContent>
       </Card>
-      {/* --- SEO 및 정보 섹션 (해시 보안 전문 가이드) --- */}
+      {/* --- 상세 활용 가이드 (해시 보안 전문 가이드) --- */}
       <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
         {/* 1. 해시의 정의와 메커니즘 */}
         <div className="space-y-4">
@@ -143,7 +143,7 @@ export default function HashGenerator() {
           </div>
         </div>
 
-        {/* 3. 해시의 3대 필수 특성 (기술적 전문성 강조) */}
+        {/* 3. 해시의 3대 필수 특성 (기술적 구체적 활용 안내) */}
         <div className="space-y-6 bg-slate-900 text-slate-300 p-8 rounded-3xl shadow-xl">
           <h3 className="text-xl font-bold text-white">암호학적 해시 함수의 주요 특징</h3>
           [Image of cryptographic hash function process showing message to fixed length hash value]
@@ -186,7 +186,7 @@ export default function HashGenerator() {
               <Lock className="w-10 h-10 text-indigo-600" />
             </div>
             <div className="space-y-2 flex-1 text-center md:text-left">
-              <h3 className="font-bold text-indigo-900 text-xl">WinSam의 Zero-Knowledge 아키텍처</h3>
+              <h3 className="font-bold text-indigo-900 text-xl">브라우저 내 해시 계산</h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 비밀번호나 개인 키(Private Key)를 해싱할 때 가장 걱정되는 것은 서버 유출입니다. WinSam 해시 생성기는{" "}
                 <strong>Client-Side Crypto</strong> 기술을 사용하여, 모든 연산을 서버가 아닌 사용자의 브라우저 내부에서

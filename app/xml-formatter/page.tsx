@@ -139,7 +139,7 @@ export default function XmlFormatter() {
       <div className="flex justify-center my-6">
         <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
       </div>
-      {/* --- SEO 및 정보 섹션 (XML 전문 가이드) --- */}
+      {/* --- 상세 활용 가이드 (XML 전문 가이드) --- */}
       <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
         {/* 1. XML의 정의와 중요성 */}
         <div className="space-y-4">
@@ -226,10 +226,8 @@ export default function XmlFormatter() {
               안전한 로컬 클라이언트 사이드 변환
             </h3>
             <p className="text-sm text-slate-600 leading-relaxed">
-              API 인증 키, 개인정보 등이 포함될 수 있는 XML 데이터의 보안을 위해 저희는{" "}
-              <strong>Zero-Server Policy</strong>를 준수합니다. 입력하신 코드는 서버로 전송되지 않으며, 오직 웹 브라우저
-              메모리 내에서만 정렬 로직이 실행됩니다. 대기업의 내부 API 응답이나 금융권 설정 파일도 유출 걱정 없이
-              안심하고 정렬하세요.
+              XML 정렬 로직은 웹 브라우저 메모리에서 실행되며 이 도구는 입력 코드를 변환 서버로 보내지 않습니다. API 인증
+              키나 개인정보가 포함된 자료는 소속 조직의 보안 규정을 먼저 확인하세요.
             </p>
             <div className="flex gap-2">
               <span className="flex items-center gap-1 text-[10px] font-bold text-orange-700 bg-orange-100 px-2 py-1 rounded">

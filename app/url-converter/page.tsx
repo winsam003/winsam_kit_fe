@@ -113,7 +113,7 @@ export default function UrlConverter() {
           </CardContent>
         </Card>
       </div>
-      {/* --- SEO 및 승인용 전문 가이드 섹션 --- */}
+      {/* --- URL 활용 가이드 --- */}
       <div className="mt-12 space-y-10 border-t pt-10 text-slate-700">
         <section className="space-y-4">
           <h2 className="text-2xl font-bold text-slate-900 flex items-center gap-2">

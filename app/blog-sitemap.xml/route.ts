@@ -1,12 +1,14 @@
 import { collection, getDocs, orderBy, query, Timestamp } from "firebase/firestore";
 import { db } from "@/lib/firebase";
 import { SITE_URL } from "@/lib/seo";
+import { isPublishedPost } from "@/lib/published-posts";
 
 export const dynamic = "force-dynamic";
 
 interface SitemapPost {
   slug?: string;
   createdAt?: Timestamp;
+  isAdmin?: string;
 }
 
 function escapeXml(value: string) {
@@ -20,7 +22,7 @@ export async function GET() {
   const snapshot = await getDocs(query(collection(db, "posts"), orderBy("createdAt", "desc")));
   const urls = snapshot.docs
     .map((document) => document.data() as SitemapPost)
-    .filter((post): post is SitemapPost & { slug: string } => Boolean(post.slug))
+    .filter((post): post is SitemapPost & { slug: string } => isPublishedPost(post))
     .map((post) => {
       const loc = escapeXml(`${SITE_URL}/blog/${post.slug}`);
       const lastmod = post.createdAt?.toDate().toISOString();

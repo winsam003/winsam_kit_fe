@@ -2,10 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 import ScrollButtons from "@/components/custom-ui/ScrollButtons";
 import Image from "next/image";
-import Script from "next/script";
 import { Analytics } from "@vercel/analytics/next";
 import Link from "next/link";
-import AdfitBanner from "@/components/AdfitBanner";
+import AdSenseLoader from "@/components/AdSenseLoader";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -47,16 +46,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko">
       <head>
-        <Script
-          id="adsbygoogle-init"
-          strategy="afterInteractive"
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8286025705631064"
-          crossOrigin="anonymous"
-        />
-        <Script src="//t1.daumcdn.net/kas/static/ba.min.js" strategy="lazyOnload" />
         <meta name="google-adsense-account" content="ca-pub-8286025705631064" />
       </head>
       <body className="antialiased bg-stone-50" suppressHydrationWarning={true}>
+        <AdSenseLoader />
         <Analytics />
 
         {/* 톤 다운된 깔끔한 헤더 */}
@@ -78,15 +71,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </p>
           </Link>
         </section>
-        {/* 상단 광고 */}
-        <div className="max-w-[1280px] mx-auto px-4 md:px-6">
-          <div className="flex justify-center pt-2">
-            <AdfitBanner unitId="DAN-1yUAoORabCnnrf2E" width="728" height="90" />
-          </div>
-        </div>
-
         {/* 메인 레이아웃 컨테이너 */}
-        <div className="max-w-[1280px] mx-auto flex flex-col lg:flex-row items-start gap-4 px-4 md:px-6 mt-10">
+        <div className="max-w-[1080px] mx-auto px-4 md:px-6 mt-10">
           <main className="w-full flex-1 min-h-screen">
             {children}
 
@@ -97,8 +83,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 <div className="space-y-2">
                   <h4 className="text-stone-50 font-medium">데이터는 안전한가요?</h4>
                   <p className="text-sm leading-relaxed">
-                    네, 입력하신 텍스트나 이미지는 서버로 전송되지 않고 사용자의 기기(브라우저) 안에서만 처리됩니다.
-                    흔적도 남지 않으니 편하게 작업하세요.
+                    대부분의 변환 도구는 입력 자료를 서버로 보내지 않고 브라우저 안에서 처리합니다. 외부 서비스가 필요한
+                    기능은 개인정보처리방침에 따로 안내합니다.
                   </p>
                 </div>
                 <div className="space-y-2">
@@ -112,10 +98,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </main>
 
-          {/* 오른쪽 사이드바 광고 */}
-          <aside className="hidden lg:block w-[160px] shrink-0 sticky top-24 pt-6">
-            <AdfitBanner unitId="DAN-IgYCG7rmtBGYHMD8" width="160" height="600" />
-          </aside>
         </div>
 
         {/* 푸터 */}
@@ -142,7 +124,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
           {/* 하단 정보 섹션 */}
           <div className="border-t border-stone-100 py-8 text-center space-y-4">
-            <div className="flex justify-center gap-6 text-sm font-medium text-stone-400">
+            <div className="flex flex-wrap justify-center gap-6 text-sm font-medium text-stone-400">
+              <Link href="/about" className="hover:text-stone-600 transition-colors">
+                사이트 소개
+              </Link>
               <Link href="/privacy" className="hover:text-stone-600 transition-colors">
                 개인정보처리방침
               </Link>

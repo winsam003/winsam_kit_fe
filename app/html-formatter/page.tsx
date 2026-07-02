@@ -207,7 +207,7 @@ export default function HtmlFormatter() {
         <section className="mt-16 space-y-8">
           <div className="flex flex-col gap-2">
             <h2 className="text-2xl font-black text-slate-900 tracking-tight">Data Privacy & Security</h2>
-            <p className="text-slate-500">WinSam Toolbox가 데이터를 처리하는 가장 안전한 방식</p>
+            <p className="text-slate-500">WinSam Tools가 데이터를 처리하는 가장 안전한 방식</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -227,15 +227,15 @@ export default function HtmlFormatter() {
               </div>
               <h3 className="font-bold text-slate-800">Memory-Only Processing</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
-                모든 작업은 브라우저의 RAM(메모리) 내에서 휘발성으로 작동합니다. DB나 브라우저의 쿠키, 로컬 스토리지에
-                흔적을 남기지 않아 정렬 후 창을 닫는 즉시 데이터는 완전히 소멸됩니다.
+                정렬할 HTML은 브라우저 메모리에서 처리하며, 이 도구는 입력 내용을 DB·쿠키·로컬 스토리지에 저장하지
+                않습니다. 탭을 닫으면 페이지가 사용하던 메모리는 브라우저가 회수합니다.
               </p>
             </div>
             <div className="p-6 bg-white border border-slate-100 shadow-sm rounded-2xl space-y-3">
               <div className="w-10 h-10 bg-amber-50 text-amber-600 rounded-full flex items-center justify-center">
                 <EyeOff className="w-6 h-6" />
               </div>
-              <h3 className="font-bold text-slate-800">Zero Tracking</h3>
+              <h3 className="font-bold text-slate-800">입력 내용 추적 없음</h3>
               <p className="text-xs text-slate-500 leading-relaxed">
                 우리는 당신이 어떤 내용을 정렬했는지 알 수 없습니다. 민감한 내부 보고서의 HTML 소스나 개인적인 코드를
                 안심하고 붙여넣으세요. 보안은 타협할 수 없는 우리의 철학입니다.
@@ -243,7 +243,7 @@ export default function HtmlFormatter() {
             </div>
           </div>
 
-          {/* 심층 보안 가이드 섹션 (텍스트 볼륨 확보) */}
+          {/* 심층 보안 가이드 섹션 (동작 원리 설명) */}
           <div className="p-8 bg-slate-900 rounded-3xl text-slate-400 space-y-6">
             <div className="space-y-2">
               <h3 className="text-lg font-bold text-white flex items-center gap-2">
@@ -251,10 +251,8 @@ export default function HtmlFormatter() {
                 개발자를 위한 기밀 유지 정책 (Confidentiality)
               </h3>
               <p className="text-sm leading-relaxed">
-                대부분의 웹 기반 도구들은 '편의성'을 명목으로 데이터를 서버로 보내 기록을 남깁니다. 하지만{" "}
-                <strong>WinSam Toolbox</strong>는 클라이언트 사이드 렌더링(CSR) 아키텍처를 100% 활용합니다. 이는 기업
-                환경에서 근무하는 프론트엔드 개발자들이 보안 검토 없이도 사내 소스코드를 정렬하거나 변환할 수 있도록
-                설계된 최적의 방식입니다.
+                <strong>WinSam Tools</strong>의 HTML 정렬 로직은 브라우저에서 실행됩니다. 조직의 보안 정책이 있는
+                환경에서는 사용 전 내부 규정과 브라우저의 네트워크 요청을 직접 확인해야 합니다.
               </p>
             </div>
 
@@ -267,10 +265,10 @@ export default function HtmlFormatter() {
                 </p>
               </div>
               <div className="space-y-2">
-                <h4 className="text-white text-sm font-semibold">완벽한 데이터 파기</h4>
+                <h4 className="text-white text-sm font-semibold">페이지 종료 후 메모리 회수</h4>
                 <p className="text-xs leading-relaxed italic">
-                  작업 완료 후 '새로고침'을 누르거나 탭을 닫으세요. 가비지 컬렉션(Garbage Collection)이 즉시 작동하여
-                  메모리 상의 데이터를 비워내며, 그 어떤 물리적 서버에도 잔상이 남지 않습니다.
+                  작업 완료 후 새로고침하거나 탭을 닫으면 페이지 상태가 초기화되고, 사용하던 메모리는 브라우저 정책에 따라
+                  회수됩니다. 이 도구 자체는 입력 HTML을 원격 저장소에 저장하지 않습니다.
                 </p>
               </div>
             </div>

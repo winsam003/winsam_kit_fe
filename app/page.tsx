@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import Link from "next/link";
@@ -7,49 +5,38 @@ import {
   Laptop,
   Briefcase,
   ChevronRight,
-  ShieldCheck,
-  Zap,
-  Heart,
-  FileCode,
-  Image as ImageIcon,
-  Type,
-  Globe,
-  BookOpen,
   ArrowRight,
 } from "lucide-react";
-import { useEffect, useState } from "react";
 import { db } from "@/lib/firebase";
-import { collection, query, orderBy, limit, getDocs } from "firebase/firestore";
-import AdfitBanner from "@/components/AdfitBanner";
+import { isPublishedPost } from "@/lib/published-posts";
+import { collection, query, orderBy, limit, getDocs, Timestamp } from "firebase/firestore";
 
 interface Post {
   id: string;
   title: string;
   slug: string;
-  createdAt: any;
+  createdAt?: Timestamp;
   isAdmin?: string;
   content?: string;
 }
 
-export default function Home() {
-  const [latestPosts, setLatestPosts] = useState<Post[]>([]);
+export const revalidate = 3600;
 
-  useEffect(() => {
-    const fetchLatestPosts = async () => {
-      try {
-        const q = query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(5));
-        const querySnapshot = await getDocs(q);
-        const posts = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Post[];
-        setLatestPosts(posts);
-      } catch (error) {
-        console.error("Error fetching posts:", error);
-      }
-    };
-    fetchLatestPosts();
-  }, []);
+async function getLatestPosts(): Promise<Post[]> {
+  try {
+    const snapshot = await getDocs(query(collection(db, "posts"), orderBy("createdAt", "desc"), limit(20)));
+    return snapshot.docs
+      .map((document) => ({ id: document.id, ...document.data() }) as Post)
+      .filter(isPublishedPost)
+      .slice(0, 5);
+  } catch (error) {
+    console.error("Error fetching posts:", error);
+    return [];
+  }
+}
+
+export default async function Home() {
+  const latestPosts = await getLatestPosts();
 
   return (
     <div className="p-6 md:p-10 space-y-12 flex flex-col items-center bg-slate-50/30 min-h-screen">
@@ -95,10 +82,6 @@ export default function Home() {
             />
           </div>
         </section>
-        {/* 2. 메인 하단 광고 (본문 너비에 맞춤) */}
-        <div className="flex justify-center py-12">
-          <AdfitBanner unitId="DAN-UEfYymEu5Dbb6VvG" width="728" height="90" />
-        </div>
         {/* 2. 직장인 & 일상 도구 (단일 툴 위주로 정리) */}
         <section className="space-y-6">
           <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
@@ -115,41 +98,31 @@ export default function Home() {
           </div>
         </section>
 
-        {/* 3. WinSam 패밀리 서비스 (새로 만든 사이트들) */}
-        <section className="space-y-6">
-          <div className="flex items-center gap-2 border-b border-slate-200 pb-3">
-            <Zap className="w-6 h-6 text-amber-500" />
-            <h2 className="text-2xl font-bold text-slate-800">WinSam 패밀리 서비스</h2>
+        <section className="rounded-3xl border border-slate-200 bg-white p-8 md:p-10 space-y-6">
+          <div className="space-y-2">
+            <h2 className="text-2xl font-bold text-slate-900">도구를 만들고 운영하는 기준</h2>
+            <p className="text-slate-500 leading-relaxed">
+              기능 수를 늘리는 것보다 입력 자료가 어디서 처리되는지, 결과를 다시 확인할 수 있는지, 실패했을 때 원인을
+              이해할 수 있는지를 우선합니다.
+            </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <ToolCard
-              title="리그오브레전드 팀분석"
-              desc="소환사 전적 및 팀 시너지 분석 플랫폼"
-              href="https://lol.winsam.xyz"
-              target="_blank"
-            />
-            <ToolCard
-              title="로또 명당 찾기"
-              desc="전국 1등 배출 점포 기반 로또 명당 지도"
-              href="https://lotto-good-place.winsam.xyz"
-              target="_blank"
-            />
-            <ToolCard
-              title="뜨개질 도안 찾기"
-              desc="코바늘/대바늘 무료 도안 검색 및 커뮤니티"
-              href="https://crochet.winsam.xyz"
-              target="_blank"
-            />
-            <ToolCard
-              title="Yes or Yes"
-              desc="하나만 선택해 어서 yes or yes"
-              href="https://yesoryes.winsam.xyz/make"
-              target="_blank"
-            />
+          <div className="grid md:grid-cols-3 gap-6 text-sm">
+            <div className="space-y-2">
+              <h3 className="font-bold text-slate-800">브라우저 내 처리</h3>
+              <p className="text-slate-500 leading-relaxed">파일·텍스트 변환은 가능한 한 브라우저 메모리에서 수행합니다. 외부 요청이 필요한 기능은 별도로 표시합니다.</p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-bold text-slate-800">입력과 결과를 함께 확인</h3>
+              <p className="text-slate-500 leading-relaxed">정렬·인코딩·비교 결과를 바로 복사하거나 내려받기 전에 화면에서 검토할 수 있도록 구성합니다.</p>
+            </div>
+            <div className="space-y-2">
+              <h3 className="font-bold text-slate-800">지원 범위 공개</h3>
+              <p className="text-slate-500 leading-relaxed">브라우저와 파일 형식에 따른 제한을 숨기지 않고 각 도구의 안내와 활용 가이드에 기록합니다.</p>
+            </div>
           </div>
         </section>
         {/* 4. 블로그 인사이트 리스트 (세로형 정렬) */}
-        <section className="space-y-8">
+        {latestPosts.length > 0 && <section className="space-y-8">
           <div className="flex items-center justify-between border-b border-slate-100 pb-4">
             <div className="flex items-center gap-2">
               <div className="w-1.5 h-6 bg-blue-600 rounded-full" />
@@ -160,8 +133,7 @@ export default function Home() {
             </Link>
           </div>
           <div className="flex flex-col gap-4">
-            {latestPosts.length > 0 ? (
-              latestPosts.map((post) => (
+            {latestPosts.map((post) => (
                 <Link
                   key={post.id}
                   href={`/blog/${post.slug}`}
@@ -170,12 +142,12 @@ export default function Home() {
                   <div className="flex flex-col md:flex-row md:items-center gap-4 flex-1">
                     <div className="hidden md:flex flex-col items-center justify-center min-w-[70px] py-2 bg-slate-50 rounded-xl group-hover:bg-blue-50 transition-colors">
                       <span className="text-[10px] font-bold text-slate-400 group-hover:text-blue-400">
-                        {post.createdAt?.toDate
+                        {post.createdAt
                           ? post.createdAt.toDate().toLocaleString("en-US", { month: "short" })
                           : "NEW"}
                       </span>
                       <span className="text-xl font-black text-slate-700 group-hover:text-blue-600">
-                        {post.createdAt?.toDate ? post.createdAt.toDate().getDate() : "!!"}
+                        {post.createdAt ? post.createdAt.toDate().getDate() : "--"}
                       </span>
                     </div>
                     <div className="space-y-1">
@@ -198,119 +170,11 @@ export default function Home() {
                     <ChevronRight className="w-5 h-5" />
                   </div>
                 </Link>
-              ))
-            ) : (
-              <div className="py-20 text-center bg-white rounded-[2rem] border border-dashed border-slate-200">
-                <p className="text-slate-400 font-medium">등록된 글이 아직 없습니다.</p>
-              </div>
-            )}
+              ))}
           </div>
-        </section>
+        </section>}
       </div>
 
-      {/* --- [중단 광고 영역] --- */}
-      <div className="flex justify-center my-6">
-        <AdfitBanner unitId="DAN-Uw7zDuBqUecrzcna" width="300" height="250" />
-      </div>
-
-      {/* 5. SEO 전문 가이드 (애드센스용 텍스트 전체 복구) */}
-      {/* <section className="max-w-5xl w-full mt-20 mb-20 space-y-16">
-        <div className="text-center space-y-6">
-          <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">
-            WinSam Toolbox: 디지털 생산성을 극대화하는 올인원 플랫폼
-          </h2>
-          <p className="text-lg text-slate-500 max-w-3xl mx-auto leading-relaxed">
-            복잡한 설치 과정이나 번거로운 회원가입 없이, 웹 브라우저만 있다면 누구나 즉시 사용할 수 있는
-            <br />
-            <strong>무료 온라인 도구 모음</strong>입니다. 개발, 디자인, 사무 행정 등 다양한 분야에서 반복되는 단순
-            작업을 효율적으로 개선하기 위해 탄생했습니다.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="space-y-4">
-            <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-2xl flex items-center justify-center">
-              <ShieldCheck className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-bold text-slate-800">보안 중심의 로컬 처리</h3>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              WinSam Toolbox의 모든 도구는 <strong>클라이언트 사이드 렌더링(CSR)</strong> 기술을 기반으로 작동합니다.
-              사용자가 입력하는 텍스트, 코드, 이미지는 외부 서버로 절대 전송되지 않으며 오직 사용자의 컴퓨터 내에서만
-              처리됩니다. 이러한 '서버리스' 방식은 데이터 유출 가능성을 원천 차단하여 기업용 보안 문서도 안심하고 처리할
-              수 있게 합니다.
-            </p>
-          </div>
-          <div className="space-y-4">
-            <div className="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center">
-              <Zap className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-bold text-slate-800">압도적인 처리 속도</h3>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              불필요한 네트워크 통신을 최소화하고 최신 JavaScript 엔진의 성능을 100% 활용합니다. 대용량 파일 이름 변경,
-              이미지 포맷 변환, 복잡한 JSON 데이터 정렬 등 무거운 작업도 지연 시간 없이 즉각적인 피드백을 제공하여
-              최상의 사용자 경험을 보장합니다.
-            </p>
-          </div>
-          <div className="space-y-4">
-            <div className="w-12 h-12 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center">
-              <Heart className="w-6 h-6" />
-            </div>
-            <h3 className="text-xl font-bold text-slate-800">완전 무료 및 접근성</h3>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              우리는 도구가 필요한 모든 사람에게 평등한 기회를 제공해야 한다고 믿습니다. WinSam의 모든 기능은 기부나
-              유료 결제 없이 영구적으로 무료로 제공됩니다. 또한 웹 표준(Web Standards)을 준수하여 다양한 디바이스와
-              브라우저 환경에서 동일한 성능을 발휘합니다.
-            </p>
-          </div>
-        </div>
-
-        <div className="p-10 bg-slate-50 rounded-[2.5rem] border border-slate-100 space-y-10">
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-slate-900">주요 서비스 카테고리</h3>
-            <p className="text-sm text-slate-500">
-              각 분야의 전문가들이 가장 많이 필요로 하는 도구들을 엄선하여 제공합니다.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-12 gap-y-8">
-            <div className="space-y-2">
-              <h4 className="font-bold text-slate-800 flex items-center gap-2">
-                <FileCode className="w-4 h-4 text-indigo-500" /> 개발 및 데이터 최적화
-              </h4>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                JSON, XML, HTML 소스코드 정렬기와 Base64 인코더, SHA-256 해시 생성기 등 백엔드 및 프론트엔드 개발 시
-                필수적인 데이터 변환 도구를 지원합니다.
-              </p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="font-bold text-slate-800 flex items-center gap-2">
-                <ImageIcon className="w-4 h-4 text-emerald-500" /> 이미지 및 미디어 관리
-              </h4>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                파일 이름 일괄 변경부터 차세대 이미지 포맷 WebP 변환까지, 웹 성능 최적화와 파일 정리를 위한 고성능
-                미디어 처리 툴을 제공합니다.
-              </p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="font-bold text-slate-800 flex items-center gap-2">
-                <Type className="w-4 h-4 text-amber-500" /> 텍스트 및 콘텐츠 제작
-              </h4>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                글자수 세기, 로렘 입숨 생성기, URL 인코딩 등 블로그 운영자나 마케터, 취업 준비생들을 위한 실질적인
-                글쓰기 보조 도구들을 활용할 수 있습니다.
-              </p>
-            </div>
-            <div className="space-y-2">
-              <h4 className="font-bold text-slate-800 flex items-center gap-2">
-                <Globe className="w-4 h-4 text-blue-500" /> 네트워크 및 유틸리티
-              </h4>
-              <p className="text-xs text-slate-500 leading-relaxed">
-                자신의 공인 IP 주소 확인, PDF 페이지 관리 등 일상적인 웹 서핑과 PC 관리 과정에서 빈번하게 발생하는
-                문제들을 빠르게 해결합니다.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section> */}
     </div>
   );
 }

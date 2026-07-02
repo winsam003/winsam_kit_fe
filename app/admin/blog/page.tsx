@@ -240,7 +240,7 @@ export default function BlogListPage() {
                 <br />
                 당신의 유용한 팁을 가장 먼저 공유해보세요!
               </p>
-              <Link href="/write">
+              <Link href="/admin/write">
                 <Button className="bg-emerald-600 hover:bg-emerald-700 text-white px-10 py-7 rounded-2xl font-black shadow-xl shadow-emerald-100 transition-all active:scale-95 text-lg">
                   지금 바로 작성하기
                 </Button>

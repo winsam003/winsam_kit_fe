@@ -109,7 +109,7 @@ export default function LoremIpsumGenerator() {
         </Card>
       )}
 
-      {/* --- SEO 및 정보 섹션 (로렘 입숨 전문 가이드) --- */}
+      {/* --- 상세 활용 가이드 (로렘 입숨 전문 가이드) --- */}
       <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
         {/* 1. 개념 정의 및 역사 */}
         <div className="space-y-4">
@@ -147,13 +147,13 @@ export default function LoremIpsumGenerator() {
             </div>
             <p className="text-sm leading-relaxed text-slate-500">
               한글은 영문과 달리 글자의 밀도가 높고 복잡한 획을 가지고 있습니다. 따라서 국내 웹 서비스 개발 시에는 한글
-              전용 더미 데이터가 반드시 필요합니다. WinSam Toolbox는 대한민국 헌법 등을 활용하여 한글 폰트의 가독성과
+              전용 더미 데이터가 반드시 필요합니다. WinSam Tools는 대한민국 헌법 등을 활용하여 한글 폰트의 가독성과
               자간, 행간을 정확히 테스트할 수 있는 텍스트를 생성합니다.
             </p>
           </div>
         </div>
 
-        {/* 3. 디자인 활용 팁 (전문성 강조) */}
+        {/* 3. 디자인 활용 팁 (구체적 활용 안내) */}
         <div className="space-y-6 bg-slate-100 p-8 rounded-3xl border border-slate-200">
           <h3 className="text-xl font-bold text-slate-900">UI/UX 프로토타이핑 활용 팁</h3>
 

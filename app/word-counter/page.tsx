@@ -100,7 +100,7 @@ export default function WordCounter() {
         </CardContent>
       </Card>
 
-      {/* --- SEO 및 정보 섹션 (글자수 세기 전문 가이드) --- */}
+      {/* --- 상세 활용 가이드 (글자수 세기 전문 가이드) --- */}
       <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
         {/* 1. 글자수 세기의 중요성 */}
         <div className="space-y-4">
@@ -146,7 +146,7 @@ export default function WordCounter() {
           </div>
         </div>
 
-        {/* 3. 플랫폼별 가이드 (전문성 강조) */}
+        {/* 3. 플랫폼별 가이드 (구체적 활용 안내) */}
         <div className="space-y-6 bg-slate-900 text-slate-300 p-8 rounded-3xl shadow-xl">
           <h3 className="text-xl font-bold text-white">플랫폼별 최적 글자수 가이드</h3>
           [Image of character count limitations for different social media platforms like Twitter, Instagram, and Blog
@@ -196,8 +196,8 @@ export default function WordCounter() {
               <p className="text-sm text-slate-600 leading-relaxed">
                 자기소개서나 기밀 문서의 초안을 온라인 도구에 붙여넣는 것은 보안상 위험할 수 있습니다. WinSam 글자수
                 세기는 <strong>모든 텍스트 데이터를 서버로 전송하지 않습니다.</strong>
-                모든 분석 작업은 사용자의 웹 브라우저 내에서 즉시 처리되며, 페이지를 벗어나는 즉시 흔적 없이 파기됩니다.
-                중요한 문서의 분량을 보안 걱정 없이 안전하게 확인하세요.
+                분석 작업은 사용자의 웹 브라우저 내에서 처리되며 이 도구가 입력 텍스트를 DB나 로컬 스토리지에 저장하지
+                않습니다. 민감한 문서는 소속 조직의 보안 규정을 확인한 뒤 사용하세요.
               </p>
             </div>
           </div>

@@ -155,7 +155,7 @@ export default function DiffCheckerPage() {
         </Card>
       </section>
 
-      {/* --- SEO 및 정보 섹션 (텍스트 비교 전문 가이드) --- */}
+      {/* --- 상세 활용 가이드 (텍스트 비교 전문 가이드) --- */}
       <section className="mt-24 space-y-16 border-t border-slate-100 pt-16 text-slate-700 pb-20">
         {/* 1. 텍스트 비교 도구의 필요성 */}
         <div className="space-y-6 max-w-4xl">
@@ -227,15 +227,15 @@ export default function DiffCheckerPage() {
                   <ShieldCheck className="w-4 h-4 text-blue-400" /> SSL 보안 암호화 환경 제공
                 </div>
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-blue-400" /> 분석 즉시 메모리 데이터 파기
+                  <ShieldCheck className="w-4 h-4 text-blue-400" /> 페이지 상태에만 비교 내용 유지
                 </div>
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-blue-400" /> 제3자 데이터 접근 원천 차단
+                  <ShieldCheck className="w-4 h-4 text-blue-400" /> 별도 비교 API 호출 없음
                 </div>
               </div>
               <p className="text-slate-500 text-xs leading-relaxed">
-                WinSam Toolbox의 텍스트 비교 도구는 클라이언트 사이드 기술을 사용하여 모든 연산이 사용자의 기기에서만
-                이루어집니다. 중요한 기업 기밀 문서나 개인정보가 포함된 텍스트도 안심하고 비교하세요.
+                WinSam Tools의 텍스트 비교 도구는 클라이언트 사이드 기술을 사용하여 모든 연산이 사용자의 기기에서만
+                이루어집니다. 민감한 문서는 소속 조직의 보안 규정을 확인한 뒤 사용하세요.
               </p>
             </div>
             <div className="hidden md:block">

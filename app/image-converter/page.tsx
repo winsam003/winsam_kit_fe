@@ -217,7 +217,7 @@ export default function ImageConverter() {
           </div>
         </div>
       )}
-      {/* --- SEO 및 정보 섹션 (이미지 최적화 전문 가이드) --- */}
+      {/* --- 상세 활용 가이드 (이미지 최적화 전문 가이드) --- */}
       <section className="mt-16 space-y-12 border-t pt-12 text-slate-700">
         {/* 1. 이미지 포맷 변환의 필요성 */}
         <div className="space-y-4">
@@ -265,7 +265,7 @@ export default function ImageConverter() {
 
         {/* 3. 기술 상세 섹션 (구조화된 데이터용) */}
         <div className="space-y-6 bg-slate-900 text-slate-300 p-8 rounded-3xl shadow-xl border border-slate-800">
-          <h3 className="text-xl font-bold text-white">WinSam Toolbox의 이미지 처리 아키텍처</h3>
+          <h3 className="text-xl font-bold text-white">WinSam Tools의 이미지 처리 아키텍처</h3>
           [Image of web image format comparison showing JPG vs PNG vs WebP file sizes and quality]
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-sm">
             <div className="flex items-start gap-3">
@@ -299,7 +299,7 @@ export default function ImageConverter() {
           </div>
         </div>
 
-        {/* 4. 보안 및 로컬 처리 가이드 (신뢰도 극대화) */}
+        {/* 4. 보안 및 로컬 처리 가이드 (처리 방식 안내) */}
         <div className="p-8 bg-emerald-50/50 rounded-2xl border border-emerald-100 space-y-6">
           <div className="flex flex-col md:flex-row gap-8 items-center">
             <div className="p-4 bg-white rounded-full border border-emerald-200 shadow-inner">
@@ -307,14 +307,13 @@ export default function ImageConverter() {
             </div>
             <div className="space-y-2 flex-1 text-center md:text-left">
               <h3 className="font-bold text-emerald-900 text-xl flex items-center gap-2 justify-center md:justify-start">
-                개인정보 보호를 위한 100% 로컬 렌더링
+                변환 서버를 거치지 않는 브라우저 처리
               </h3>
               <p className="text-sm text-slate-600 leading-relaxed">
                 사용자의 사진은 귀중한 자산이며 개인정보입니다.{" "}
-                <strong>WinSam Toolbox는 업로드하신 어떠한 이미지도 서버로 전송하지 않습니다.</strong>
-                브라우저의 <strong>HTML5 Canvas API</strong>와 <strong>WebAssembly</strong> 기술을 사용하여 모든 변환
-                작업을 사용자의 PC 내부에서 수행합니다. 가족사진, 신분증 스캔본, 기업 보안 문서 등을 변환할 때도 유출
-                걱정 없이 가장 안전하게 이용하실 수 있습니다.
+                <strong>WinSam Tools는 업로드하신 어떠한 이미지도 서버로 전송하지 않습니다.</strong>
+                브라우저의 <strong>HTML5 Canvas API</strong> 등을 사용하여 변환 작업을 수행합니다. 민감한 이미지는 조직의
+                보안 정책을 확인하고, 필요하면 개발자 도구의 네트워크 탭에서 파일 전송 요청이 없는지 직접 검증하세요.
               </p>
             </div>
           </div>
