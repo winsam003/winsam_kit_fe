@@ -38,8 +38,8 @@ export default function PrivacyPolicy() {
         <section className="space-y-3">
           <h2 className="text-xl font-bold text-slate-900">2. 광고와 쿠키</h2>
           <p>
-            사이트는 Google AdSense 및 Kakao AdFit 광고를 사용할 수 있습니다. 광고 제공자는 쿠키, 웹 비콘, IP 주소 또는
-            기타 식별자를 이용해 광고 제공·빈도 제한·성과 측정·부정 사용 방지를 수행할 수 있습니다.
+            사이트는 Kakao AdFit 광고를 사용할 수 있습니다. 광고 제공자는 쿠키, 웹 비콘, IP 주소 또는 기타 식별자를
+            이용해 광고 제공·빈도 제한·성과 측정·부정 사용 방지를 수행할 수 있습니다.
           </p>
           <p>
             Google의 데이터 처리 방식은{" "}

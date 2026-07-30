@@ -4,7 +4,7 @@ import ScrollButtons from "@/components/custom-ui/ScrollButtons";
 import Image from "next/image";
 import { Analytics } from "@vercel/analytics/next";
 import Link from "next/link";
-import AdSenseLoader from "@/components/AdSenseLoader";
+import AdfitLayout from "@/components/AdfitLayout";
 import { SITE_NAME, SITE_URL } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -45,11 +45,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko">
-      <head>
-        <meta name="google-adsense-account" content="ca-pub-8286025705631064" />
-      </head>
       <body className="antialiased bg-stone-50" suppressHydrationWarning={true}>
-        <AdSenseLoader />
         <Analytics />
 
         {/* 톤 다운된 깔끔한 헤더 */}
@@ -72,8 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </Link>
         </section>
         {/* 메인 레이아웃 컨테이너 */}
-        <div className="max-w-[1080px] mx-auto px-4 md:px-6 mt-10">
-          <main className="w-full flex-1 min-h-screen">
+        <AdfitLayout>
             {children}
 
             {/* 안내 섹션: FAQ 대신 부드러운 '소소한 안내'로 변경. 쨍한 파란색 버림 */}
@@ -96,9 +91,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 </div>
               </div>
             </div>
-          </main>
-
-        </div>
+        </AdfitLayout>
 
         {/* 푸터 */}
         <footer className="mt-20 border-t border-stone-200 bg-white">

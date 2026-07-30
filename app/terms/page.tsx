@@ -97,7 +97,7 @@ export default function TermsOfService() {
             <h2 className="text-xl font-bold">제 4 조 (제3자 광고 및 분석 도구)</h2>
           </div>
           <p className="pl-7 text-slate-600">
-            본 사이트는 지속적인 무료 서비스 유지를 위해 <strong>Google AdSense 또는 Kakao AdFit</strong> 광고를 게재할 수 있습니다. 광고 제공자는
+            본 사이트는 지속적인 무료 서비스 유지를 위해 <strong>Kakao AdFit</strong> 광고를 게재할 수 있습니다. 광고 제공자는
             광고 제공과 성과 측정을 위해 쿠키 등을 활용할 수 있으며, 관련 사항은 본 사이트의{" "}
             <strong>개인정보처리방침</strong>에 상세히 기술되어 있습니다.
           </p>
