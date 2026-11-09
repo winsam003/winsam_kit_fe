@@ -1,44 +1,41 @@
 "use client";
 
-// useEffect를 추가로 import 합니다.
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { ChevronLeft, Copy, Check, Trash2, Maximize2, Minimize2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import AdfitBanner from "@/components/AdfitBanner";
+import { getJsonHighlightLines } from "@/lib/json-highlight";
+
+const groupColors = [
+  "border-blue-400 bg-blue-50 text-blue-800",
+  "border-violet-400 bg-violet-50 text-violet-800",
+  "border-emerald-400 bg-emerald-50 text-emerald-800",
+  "border-amber-400 bg-amber-50 text-amber-800",
+  "border-rose-400 bg-rose-50 text-rose-800",
+  "border-cyan-400 bg-cyan-50 text-cyan-800",
+  "border-fuchsia-400 bg-fuchsia-50 text-fuchsia-800",
+  "border-lime-400 bg-lime-50 text-lime-800",
+];
 
 export default function JsonFormatter() {
   const [input, setInput] = useState("");
-  const [output, setOutput] = useState("");
-  const [error, setError] = useState("");
   const [copied, setCopied] = useState(false);
+  const { output, error } = useMemo(() => {
+    if (!input.trim()) return { output: "", error: "" };
+    try {
+      return { output: JSON.stringify(JSON.parse(input), null, 2), error: "" };
+    } catch {
+      return { output: "", error: "올바른 JSON 형식이 아닙니다." };
+    }
+  }, [input]);
+  const highlightedLines = useMemo(() => (output ? getJsonHighlightLines(output) : []), [output]);
 
   // 크게보기(전체화면) 상태 관리
   const [isInputFull, setIsInputFull] = useState(false);
   const [isOutputFull, setIsOutputFull] = useState(false);
-
-  // --- [💡 실시간 JSON 정렬 로직 추가] ---
-  useEffect(() => {
-    // 인풋 창이 비어있으면 아웃풋과 에러도 깔끔하게 비워줌
-    if (!input.trim()) {
-      setOutput("");
-      setError("");
-      return;
-    }
-
-    try {
-      const jsonObj = JSON.parse(input);
-      const formatted = JSON.stringify(jsonObj, null, 2);
-      setOutput(formatted);
-      setError(""); // 파싱 성공 시 에러 초기화
-    } catch (e) {
-      setError("올바른 JSON 형식이 아닙니다.");
-      setOutput(""); // 파싱 실패 시 이전 결과물 비움
-    }
-  }, [input]); // input 값이 변경될 때마다 자동 실행
-  // ------------------------------------
 
   // --- [ESC 키 입력 감지 로직] ---
   useEffect(() => {
@@ -165,13 +162,25 @@ export default function JsonFormatter() {
             )}
           </CardHeader>
           <CardContent className={isOutputFull ? "flex-1 p-4 pt-0" : ""}>
-            <Textarea
-              className={`font-mono bg-slate-50 resize-none overflow-y-auto p-4 cursor-default text-blue-600 ${
+            <pre
+              aria-label="정렬된 JSON 결과"
+              tabIndex={0}
+              className={`font-mono rounded-md border bg-slate-50 overflow-auto p-4 text-sm leading-6 text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
                 isOutputFull ? "w-full h-[calc(100vh-120px)]" : "h-[600px]"
               }`}
-              readOnly
-              value={output}
-            />
+            ><code className="block min-w-max">{highlightedLines.map((line, index) => {
+              const indent = line.text.length - line.text.trimStart().length;
+              return (
+                <span
+                  key={index}
+                  className={`block border-l-2 px-2 ${line.color === undefined ? "border-transparent" : groupColors[line.color % groupColors.length]}`}
+                >
+                  {line.keyLength ? <>{line.text.slice(0, indent)}<span className="font-semibold">{line.text.slice(indent, indent + line.keyLength)}</span>{line.text.slice(indent + line.keyLength)}</> : line.text}
+                  {index < highlightedLines.length - 1 ? "\n" : ""}
+                </span>
+              );
+            })}</code></pre>
+            <p className="mt-2 text-xs text-slate-500">객체·배열 및 DTO별로 색상을 구분합니다. 복사하면 순수 JSON으로 복사됩니다.</p>
           </CardContent>
         </Card>
       </div>
@@ -201,7 +210,7 @@ export default function JsonFormatter() {
               매우 어렵습니다.
             </p>
             <p>
-              본 도구는 그렇게 읽기 힘든 '민감한' 데이터를 <strong>Pretty Print</strong> 형식으로 변환하여, 데이터
+              본 도구는 그렇게 읽기 힘든 &apos;민감한&apos; 데이터를 <strong>Pretty Print</strong> 형식으로 변환하여, 데이터
               구조를 한눈에 파악할 수 있도록 돕습니다. 개발자, 데이터 분석가, 그리고 API 테스트를 진행하는 모든 분들에게
               필수적인 도구입니다.
             </p>
@@ -239,7 +248,7 @@ export default function JsonFormatter() {
             <div>
               <h4 className="font-semibold text-slate-700">Q: 올바른 형식인데 왜 에러가 나나요?</h4>
               <p className="text-sm text-slate-600">
-                A: JSON은 작은따옴표(') 대신 반드시 큰따옴표(")를 사용해야 하며, 마지막 요소 뒤에 콤마(,)가 찍혀있지
+                A: JSON은 작은따옴표(&apos;) 대신 반드시 큰따옴표(&quot;)를 사용해야 하며, 마지막 요소 뒤에 콤마(,)가 찍혀있지
                 않은지 확인해 보세요.
               </p>
             </div>
