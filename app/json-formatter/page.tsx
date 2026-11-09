@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
-import { ChevronLeft, Copy, Check, Trash2, Maximize2, Minimize2 } from "lucide-react";
+import { ChevronLeft, Copy, Check, Trash2, Maximize2, Minimize2, Minus, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -20,9 +20,36 @@ const groupColors = [
   "border-lime-400 bg-lime-50 text-lime-800",
 ];
 
+const MIN_FONT_SIZE = 10;
+const MAX_FONT_SIZE = 24;
+const DEFAULT_FONT_SIZE = 14;
+
+function FontSizeControls({ fontSize, onChange }: { fontSize: number; onChange: (size: number) => void }) {
+  return (
+    <div role="group" aria-label="JSON 글자 크기" className="flex items-center gap-2">
+      <span className="text-xs text-slate-500">글자 크기</span>
+      <Button type="button" variant="outline" size="icon-sm" aria-label="글자 크기 줄이기"
+        disabled={fontSize <= MIN_FONT_SIZE} onClick={() => onChange(Math.max(MIN_FONT_SIZE, fontSize - 1))}>
+        <Minus />
+      </Button>
+      <span className="w-10 text-center text-xs tabular-nums" aria-live="polite">{fontSize}px</span>
+      <Button type="button" variant="outline" size="icon-sm" aria-label="글자 크기 키우기"
+        disabled={fontSize >= MAX_FONT_SIZE} onClick={() => onChange(Math.min(MAX_FONT_SIZE, fontSize + 1))}>
+        <Plus />
+      </Button>
+      <Button type="button" variant="ghost" size="sm" className="text-xs"
+        disabled={fontSize === DEFAULT_FONT_SIZE} onClick={() => onChange(DEFAULT_FONT_SIZE)}>
+        기본
+      </Button>
+    </div>
+  );
+}
+
 export default function JsonFormatter() {
   const [input, setInput] = useState("");
   const [copied, setCopied] = useState(false);
+  const [fontSize, setFontSize] = useState(DEFAULT_FONT_SIZE);
+  const editorStyle = { fontSize: `${fontSize}px`, lineHeight: 1.5 };
   const { output, error } = useMemo(() => {
     if (!input.trim()) return { output: "", error: "" };
     try {
@@ -111,10 +138,12 @@ export default function JsonFormatter() {
               <Trash2 className="w-4 h-4 mr-1" /> 비우기
             </Button>
           </CardHeader>
-          <CardContent className={isInputFull ? "flex-1 p-4 pt-0" : ""}>
+          <CardContent className={`flex flex-col gap-3 ${isInputFull ? "flex-1 min-h-0 p-4 pt-0" : ""}`}>
+            <FontSizeControls fontSize={fontSize} onChange={setFontSize} />
             <Textarea
+              style={editorStyle}
               className={`font-mono resize-none overflow-y-auto p-4 ${
-                isInputFull ? "w-full h-[calc(100vh-120px)]" : "h-[600px]"
+                isInputFull ? "w-full flex-1 min-h-0" : "h-[600px]"
               }`}
               placeholder="여기에 JSON을 붙여넣으세요..."
               value={input}
@@ -161,12 +190,14 @@ export default function JsonFormatter() {
               </Button>
             )}
           </CardHeader>
-          <CardContent className={isOutputFull ? "flex-1 p-4 pt-0" : ""}>
+          <CardContent className={`flex flex-col gap-3 ${isOutputFull ? "flex-1 min-h-0 p-4 pt-0" : ""}`}>
+            <FontSizeControls fontSize={fontSize} onChange={setFontSize} />
             <pre
+              style={editorStyle}
               aria-label="정렬된 JSON 결과"
               tabIndex={0}
-              className={`font-mono rounded-md border bg-slate-50 overflow-auto p-4 text-sm leading-6 text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
-                isOutputFull ? "w-full h-[calc(100vh-120px)]" : "h-[600px]"
+              className={`font-mono rounded-md border bg-slate-50 overflow-auto p-4 text-slate-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring ${
+                isOutputFull ? "w-full flex-1 min-h-0" : "h-[600px]"
               }`}
             ><code className="block min-w-max">{highlightedLines.map((line, index) => {
               const indent = line.text.length - line.text.trimStart().length;
